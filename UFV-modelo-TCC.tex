@@ -2,9 +2,9 @@
 %% Modelo de TCC para o curso de Sistemas de Informação
 %% da Universidade Federal de Viçosa - Campus de Rio Paranaíba
 %% Autor: Rodrigo Smarzaro (smarzaro@ufv.br)
-%% Última versão Outubro/2014
+%% Última versão Setembro/2019
 %% Arquivo em formato UTF-8
-%% Compilar com pdftex
+%% Compilar com pdftex e biber
 %% Precisa do arquivo abntex2-UFV.sty
 %%==============================================================
 
@@ -32,8 +32,21 @@
 \usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{booktabs}           % \toprule, \midrule e \bottomrule para tabelas
+\usepackage{csquotes}
+
 % Sistema autor-data com títulos nas referências em negrito
-\usepackage[alf,abnt-emphasize=bf]{abntex2cite}	
+%\usepackage{url}
+
+%\usepackage[alf,abnt-emphasize=bf]{abntex2cite}	
+\usepackage[backend=biber,style=abnt,uniquename=init,giveninits,repeatfields]{biblatex}
+\addbibresource{referencias.bib}
+\usepackage{url}
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\makeatother
+
+\setlength\bibparsep{10pt}
+
 
 
 % ---
@@ -202,18 +215,18 @@
 \chapter{Introdução}\label{sec:introducao}
 Alguns links interessantes para se trabalhar com a classe abn\TeX\ e \LaTeX\ em geral\footnote{E também para usar alguns comandos de citação como exemplo}:
 \begin{alineas}
-  \item Informações da classe Abn\TeX : \citeonline{abntex2classe}
-  \item Ajustes nas citações e referências: \citeonline{abntex2cite} e \citeonline{abntex2cite-alf}
-  \item Classe memoir (base do Abn\TeX\ ): \apudonline{memoir}{abntex2classe}
+  \item Informações da classe Abn\TeX : \textcite{abntex2classe,manualUFV}
+  \item Ajustes nas citações e referências: \textcite{abntex2cite} e \textcite{abntex2cite-alf}
+  \item Classe memoir (base do Abn\TeX\ ): \textapud{memoir}{abntex2classe}
   \item Livros interessantes sobre \LaTeX: \cite{Dongen2012,LeslieLamport90,FrankMittelbach111,Dongen2012}
   \item Distribuição \LaTeX\ para windows: \url{http://miktex.org/}
   \item Editor \LaTeX\ gratuito: \url{http://texstudio.sourceforge.net/}
   \item Gerenciador de arquivos \texttt{.bib}: \url{http://jabref.sourceforge.net/}
   \item Gerenciador de artigos: \url{http://www.mendeley.com/}
   \item Exemplo de Tabela: Veja \autoref{tab:cronograma}
-  \item Manual de Normas da UFV: \citeonline{manualUFV}
-
+  \item Manual de Normas da UFV: \textcite{manualUFV}
 \end{alineas}
+
 \chapter{Objetivos}\label{sec:objetivos}abntex2cite
 
 \section{Objetivos Específicos}\label{sec:ObjetivosEspec}
@@ -225,7 +238,7 @@ Alguns links interessantes para se trabalhar com a classe abn\TeX\ e \LaTeX\ em 
 \chapter{Métodos}\label{sec:metodos}
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.5\linewidth]{logoufv}\\
+  \includegraphics[width=.5\linewidth]{LogoUFV}\\
   \end{center}
   \caption[Exemplo de Figura]{Exemplo de inserção de figura no \LaTeX. A legenda deve vir abaixo da figura. Pode usar o comando \texttt{\textbackslash legend} ou \texttt{\textbackslash fonte} para inserir a fonte da figura. Observe que na lista de ilustrações foi utilizado o nome curto fornecido como parâmetro do caption da figura (veja o arquivo fonte .tex) ao invés dessa legenda estupidamente extensa feita de forma proposital}
   \label{fig:logo}
@@ -288,8 +301,9 @@ O abn\TeX\ introduziu o comando \texttt{IBGEtab} para formatação de tabelas. U
 
 % Referências bibliográficas
 
-\bibliography{referencias}
-
+%\bibliography{referencias}
+\linespread{1}
+\printbibliography
 % Caso sejam necessários apêndices ou anexos em seu documento
 % Use os ambientes abaixo
 

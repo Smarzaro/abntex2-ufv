@@ -2,7 +2,7 @@
 %% Modelo de TCC para o curso de Sistemas de Informação
 %% da Universidade Federal de Viçosa - Campus de Rio Paranaíba
 %% Autor: Rodrigo Smarzaro (smarzaro@ufv.br)
-%% Última versão Setembro/2019
+%% Última versão Agosto/2021
 %% Arquivo em formato UTF-8
 %% Compilar com pdftex e biber
 %% Precisa do arquivo abntex2-UFV.sty
@@ -31,17 +31,36 @@
 \usepackage{graphicx}            % Inclusão de gráficos
 \usepackage{booktabs}           % \toprule, \midrule e \bottomrule para tabelas
 \usepackage{csquotes}
+\usepackage[final]{microtype} 			% para melhorias de justificação
+\usepackage{hyphenat}
+
+
+
 
 % Sistema autor-data com títulos nas referências em negrito
-%\usepackage{url}
-
 %\usepackage[alf,abnt-emphasize=bf]{abntex2cite}
-\usepackage[backend=biber,style=abnt,uniquename=init,giveninits,repeatfields]{biblatex}
+
+% uso do biblatex, mais flexível e moderno
+\usepackage[backend=biber,
+            style=abnt,
+            uniquename=init,
+            giveninits,
+            repeatfields,
+            justify,
+            noslsn]{biblatex}
+
+\usepackage{xurl}
+\urlstyle{same}
+
 \addbibresource{referencias.bib}
-\usepackage{url}
-\makeatletter
-\g@addto@macro{\UrlBreaks}{\UrlOrds}
-\makeatother
+
+
+%\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+%\usepackage{url}
+% permitir quebra de linha em URLs
+%\makeatletter
+%\g@addto@macro{\UrlBreaks}{\UrlOrds}
+%\makeatother
 
 \setlength\bibparsep{10pt}
 
@@ -58,10 +77,10 @@
 %\coorientador{Nome do Coorientador}
 \instituicao{Universidade Federal de Viçosa}
 
-\campus{\emph{Campus} de Rio Paranaíba}      % pacote abntex2-UFV
+\campus{\emph{Campus} Rio Paranaíba}      % pacote abntex2-UFV
 \curso{Sistemas de Informação}               % pacote abntex2-UFV
 \membrobancaA{Membro da Banca A}             % pacote abntex2-UFV default = UFV-CRP
-\membrobancaB[UFMG]{Membro da Banca B}       % pacote abntex2-UFV default = UFV-CRP
+\membrobancaB{Membro da Banca B}       % pacote abntex2-UFV default = UFV-CRP
 \databanca{\today}                           % pacote abntex2-UFV
 
 % O preambulo deve conter o tipo do trabalho, o objetivo,
@@ -207,7 +226,7 @@
 Alguns links interessantes para se trabalhar com a classe abn\TeX\ e \LaTeX\ em geral\footnote{E também para usar alguns comandos de citação como exemplo}:
 \begin{alineas}
   \item Informações da classe Abn\TeX : \textcite{abntex2classe,manualUFV}
-  \item Ajustes nas citações e referências: \textcite{abntex2cite} e \textcite{abntex2cite-alf}
+  \item Ajustes nas citações e referências: \textcite{biblatex}
   \item Classe memoir (base do Abn\TeX\ ): \textapud{memoir}{abntex2classe}
   \item Livros interessantes sobre \LaTeX: \cite{Dongen2012,LeslieLamport90,FrankMittelbach111,Dongen2012}
   \item Distribuição \LaTeX\ para windows: \url{https://miktex.org/}
@@ -218,7 +237,7 @@ Alguns links interessantes para se trabalhar com a classe abn\TeX\ e \LaTeX\ em 
   \item Manual de Normas da UFV: \textcite{manualUFV}
 \end{alineas}
 
-\chapter{Objetivos}\label{sec:objetivos}abntex2cite
+\chapter{Objetivos}\label{sec:objetivos}
 
 \section{Objetivos Específicos}\label{sec:ObjetivosEspec}
 
@@ -239,7 +258,7 @@ Alguns links interessantes para se trabalhar com a classe abn\TeX\ e \LaTeX\ em 
 \chapter{Resultados Esperados}\label{sec:resultEsperados}
 
 \chapter{Cronograma}\label{sec:cronograma}
-O abn\TeX\ introduziu o comando \texttt{IBGEtab} para formatação de tabelas. Um exemplo de tabela convencional do \LaTeX\ pode ser observado na \autoref{tab:cronograma} enquanto um exemplo usando o \texttt{IBGEtab} é mostrado na Tabela \ref{tab:cronogramaIBGE}.
+O abn\TeX\ introduziu o comando \texttt{IBGEtab} para formatação de tabelas. Um exemplo de tabela convencional do \LaTeX\ pode ser observado na \autoref{tab:cronograma}.
 
 \begin{table}[htbp]
   \centering
@@ -260,26 +279,6 @@ O abn\TeX\ introduziu o comando \texttt{IBGEtab} para formatação de tabelas. U
     \fonte{Próprio Autor}
 \end{table}%
 
-\begin{table}[htbp]
-    \IBGEtab{
-    \caption[Cronograma (IBGE)]{Cronograma do Projeto em Meses usando o comando IBGEtab para a formatação da tabela}
-    \label{tab:cronogramaIBGE}
-    }{
-    \begin{tabular}{lcccccccccccc} %|c|c|c|c|c|c|c|c|c|c|c|c
-    \toprule
-    \textbf{Atividade} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\
-    \midrule
-        Revisão Bibliográfica & $\bullet$ & $\bullet$ & & & & & & & & & & \\
-        Métodos & & & $\bullet$ & $\bullet$ & & & & & & & & \\
-        Testes & & & & $\bullet$ & $\bullet$ & $\bullet$ & & & & & & \\
-        Resultados & & & & & & & $\bullet$ & $\bullet$ & & & & \\
-        Conclusão & & & & & & & $\bullet$ & $\bullet$ & $\bullet$ & & & \\
-        Banca & & & & & & &&&& $\bullet$ & $\bullet$ & $\bullet$ \\
-    \bottomrule
-    \end{tabular}%
-    }{
-    \fonte{Próprio Autor}}
-\end{table}%
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS

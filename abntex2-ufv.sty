@@ -24,12 +24,12 @@
 % INICIO DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DE VIÇOSA
 % ---
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{abntex2-UFV}[2026/10/12 v2.0 AbnTeX2-UFV]
+\ProvidesPackage{abntex2-ufv}[2026/10/13 v2.0 abnTeX2-UFV]
 
 % Este pacote só faz sentido sobre a classe abntex2
 \@ifclassloaded{abntex2}{}{%
-  \PackageError{abntex2-UFV}{Este pacote requer a classe abntex2}{%
-    Use \string\documentclass{abntex2} antes de carregar abntex2-UFV.}%
+  \PackageError{abntex2-ufv}{Este pacote requer a classe abntex2}{%
+    Use \string\documentclass{abntex2} antes de carregar abntex2-ufv.}%
 }
 
 \RequirePackage{etoolbox}
@@ -144,7 +144,7 @@
   \ifcsname ufv@nota@#1\endcsname
     \preambulo{\csname ufv@nota@#1\endcsname{#2}}%
   \else
-    \PackageError{abntex2-UFV}{Tipo de trabalho desconhecido: #1}{%
+    \PackageError{abntex2-ufv}{Tipo de trabalho desconhecido: #1}{%
       Use tcc, bacharelado ou licenciatura, ou defina \string\preambulo{...} manualmente.}%
   \fi}
 

@@ -133,3 +133,6 @@ build/
 *.synctex
 texput.log
 .vscode/
+
+## Gerado por scripts/make-ctan-zip.sh
+dist/

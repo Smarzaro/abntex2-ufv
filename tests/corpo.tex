@@ -1,0 +1,54 @@
+% Corpo comum dos testes: exercita capa, folhas, resumo, listas, siglas, ambientes e referências
+\begin{document}
+\pretextual
+\imprimircapa
+\imprimirfolhaderosto
+\imprimirfolhadeaprovacao
+\begin{resumo}
+ \noindent Texto do resumo.
+
+ \palavraschave{teste, classe, abntex2}
+\end{resumo}
+\begin{resumo}[Abstract]
+\begin{otherlanguage*}{english}
+   \noindent Abstract text.
+
+   \keywords{test, class, abntex2}
+ \end{otherlanguage*}
+\end{resumo}
+\listoffigures*
+\cleardoublepage
+\listoftables*
+\cleardoublepage
+\listadesiglas
+\tableofcontents*
+\textual
+\chapter{Introdução}\label{cap:intro}
+Texto com sigla (\ac{abnt}) e novamente \ac{abnt}; e \ac{api}. Veja a \autoref{fig:teste} e a
+\autoref{tab:teste}.
+\ifdefined\printbibliography Citação: \cite{teste}.\fi
+
+\begin{figure}[htbp]
+\begin{ilustracao}{\caption{Figura de teste}\label{fig:teste}}{\elaboracaopropria}
+  \rule{4cm}{2cm}
+\end{ilustracao}
+\end{figure}
+
+\begin{table}[htbp]
+\begin{tabela}{\caption{Tabela de teste}\label{tab:teste}}{\fonte{Elaborada pelo autor.}}
+  \begin{tabular}{lr}
+    \toprule
+    Item & Valor \\
+    \midrule
+    A & 1,0 \\
+    B & 2,5 \\
+    \bottomrule
+  \end{tabular}
+\end{tabela}
+\end{table}
+
+\ifdefined\printbibliography
+\postextual
+\printbibliography
+\fi
+\end{document}

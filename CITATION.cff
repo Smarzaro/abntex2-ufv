@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "Se você usar este pacote no seu trabalho ou em uma publicação, cite-o como abaixo. / If you use this package, please cite it as below."
+type: software
+title: "abntex2-ufv: classe LaTeX para trabalhos de conclusão de curso de Sistemas de Informação da UFV (Campus Rio Paranaíba)"
+abstract: >-
+  Classe LaTeX, baseada no abnTeX2, para os trabalhos de conclusão de curso (TCC) de
+  Sistemas de Informação da Universidade Federal de Viçosa (Campus Rio Paranaíba), de
+  acordo com o Manual de Normalização de Trabalhos Acadêmicos da UFV (edição 2026-2;
+  ABNT NBR 14724/2025, NBR 6023/2025 e NBR 10520/2023). Inclui um modelo vazio e um guia
+  com um trabalho de exemplo completo. / LaTeX class, built on abnTeX2, for undergraduate
+  theses of the Information Systems program at the Federal University of Viçosa (UFV),
+  Rio Paranaíba campus, Brazil, following the UFV normalization manual.
+authors:
+  - family-names: Smarzaro
+    given-names: Rodrigo
+    email: smarzaro@ufv.br
+    affiliation: "Universidade Federal de Viçosa, Campus Rio Paranaíba"
+    orcid: "https://orcid.org/0000-0002-4783-8383"
+date-released: "2026-10-13"   # atualize a cada release
+license: LPPL-1.3c
+repository-code: "https://github.com/Smarzaro/abntex2-ufv"
+url: "https://github.com/Smarzaro/abntex2-ufv"
+# doi: "10.5281/zenodo.XXXXXXX"   # preencha depois da primeira release arquivada no Zenodo
+keywords:
+  - LaTeX
+  - abnTeX2
+  - ABNT
+  - UFV
+  - TCC
+  - biblatex-abnt
+language: por

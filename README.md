@@ -140,6 +140,11 @@ pdfLaTeX, `biber` e os pacotes `abntex2`, `biblatex-abnt`, `acro`,
 completo). O guia usa ainda `tikz`, `pgfplots`, `listings`,
 `tcolorbox`, `siunitx`, `longtable` e `colortbl`.
 
+## Como citar
+
+Use o botão **Cite this repository** do GitHub (arquivo
+[`CITATION.cff`](CITATION.cff)).
+
 ## Autor
 
 Rodrigo Smarzaro ([Universidade Federal de Viçosa](https://www.ufv.br))

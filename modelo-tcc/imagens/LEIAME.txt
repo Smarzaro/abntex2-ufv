@@ -1,0 +1,8 @@
+Coloque aqui as imagens do trabalho (PDF, PNG, JPG).
+
+A classe abntex2-ufv já configura o \graphicspath para esta pasta; use apenas o nome
+do arquivo, sem o nome da pasta:
+
+    \includegraphics[width=.8\linewidth]{minha-figura}
+
+Este arquivo pode ser apagado depois que você adicionar suas imagens.

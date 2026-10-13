@@ -136,3 +136,6 @@ texput.log
 
 ## Gerado por scripts/make-ctan-zip.sh
 dist/
+
+## Material de divulgação (local, não vai para o remoto)
+divulgacao/

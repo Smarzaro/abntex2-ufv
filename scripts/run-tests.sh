@@ -1,14 +1,14 @@
 #!/bin/sh
 # Compila os documentos de teste em tests/ e falha se algum tiver erro, referência
 # indefinida ou citação indefinida. Uso (na raiz do repositório):  scripts/run-tests.sh
-# O abntex2-ufv.cls e o .sty são procurados na raiz do repositório.
+# O abntex2-ufv.cls e o .sty são procurados em tex/ (na raiz do repositório).
 set -u
 raiz="$(cd "$(dirname "$0")/.." && pwd)"
 case "$(uname -s)" in
   MINGW*|MSYS*|CYGWIN*) sep=';'; raiz="$(cd "$raiz" && pwd -W)" ;; # caminho no formato do Windows
   *) sep=':' ;;
 esac
-export TEXINPUTS="${raiz}//${sep}"
+export TEXINPUTS="${raiz}/tex//${sep}"
 cd "$raiz/tests" || exit 1
 rm -rf build   # evita resíduos de execuções anteriores
 falhas=0

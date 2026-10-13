@@ -1,6 +1,7 @@
 name: build
 
-# Compila o guia (docs/) e o modelo (modelo-tcc/) e roda os testes em tests/.
+# Confere a versão, compila a documentação (doc/) e o template (doc/template/) e roda os
+# testes em tests/.
 on:
   pull_request:
   push:
@@ -12,19 +13,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compilar guia, modelo e testes
+      - name: Conferir a versão nos arquivos
+        run: sh scripts/check-version.sh
+
+      - name: Compilar documentação, template e testes
         uses: xu-cheng/texlive-action@v2
         with:
           scheme: full
           run: |
-            (cd docs && latexmk)
-            (cd modelo-tcc && latexmk)
+            (cd doc && latexmk)
+            (cd doc/template && latexmk)
             sh scripts/run-tests.sh
 
-      - name: Verificar logs do guia e do modelo
+      - name: Verificar logs da documentação e do template
         run: |
           if grep -E "^!|There were undefined references|Citation .* undefined|Please \(re\)run" \
-               docs/build/*.log modelo-tcc/build/*.log; then
+               doc/build/*.log doc/template/build/*.log; then
             echo "Problemas encontrados nos logs"; exit 1
           fi
 
@@ -32,5 +36,5 @@ jobs:
         with:
           name: pdfs
           path: |
-            docs/guia-abntex2-ufv.pdf
-            modelo-tcc/modelo-tcc.pdf
+            doc/abntex2-ufv.pdf
+            doc/template/template.pdf

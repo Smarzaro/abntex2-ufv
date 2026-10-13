@@ -1,7 +1,7 @@
 % Apêndice do modelo: guia de tabelas e quadros. Apague-o no seu trabalho
 % (e a pasta apendices/exemplos).
 
-% Mostra o código de apendices/exemplos/#1.tex e o resultado (o mesmo arquivo, incluído).
+% Mostra o código de example/snippets/#1.tex e o resultado (o mesmo arquivo, incluído).
 % Para que o resultado fique junto do código (e não flutue para outra página), aqui os
 % ambientes figure, table, quadro, grafico e codigo são redefinidos localmente como blocos
 % fixos (não flutuantes); \caption, \label e \autoref continuam funcionando.
@@ -14,18 +14,18 @@
   \ufv@semfloat{grafico}\ufv@semfloat{codigo}}
 \newcommand{\codexemplo}[1]{%
   \par\medskip\noindent\textit{Código:}\par\nopagebreak\smallskip
-  \lstinputlisting[style=exemplo, language={[LaTeX]TeX}]{apendices/exemplos/#1.tex}%
+  \lstinputlisting[style=exemplo, language={[LaTeX]TeX}]{example/snippets/#1.tex}%
   \par\medskip
   \noindent\begin{minipage}{\linewidth}\textit{Resultado:}\par\nopagebreak\smallskip
-  \begingroup\ufv@modofixo\input{apendices/exemplos/#1}\endgroup
+  \begingroup\ufv@modofixo\input{example/snippets/#1}\endgroup
   \end{minipage}\par}
 % variante para tabelas longas (longtable precisa quebrar página): mostra só as primeiras
 % linhas do código (#2 = última linha exibida) e não coloca o resultado em bloco
 \newcommand{\codexemplolongo}[2]{%
   \par\medskip\noindent\textit{Código (primeiras linhas; as demais seguem o mesmo padrão):}\par\nopagebreak\smallskip
-  \lstinputlisting[style=exemplo, language={[LaTeX]TeX}, lastline=#2]{apendices/exemplos/#1.tex}%
+  \lstinputlisting[style=exemplo, language={[LaTeX]TeX}, lastline=#2]{example/snippets/#1.tex}%
   \par\medskip\noindent\textit{Resultado:}\par\nopagebreak\smallskip
-  \input{apendices/exemplos/#1}}
+  \input{example/snippets/#1}}
 \makeatother
 
 \chapter{Guia de tabelas e quadros}\label{ap:tabelas}

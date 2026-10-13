@@ -25,7 +25,7 @@
 %% (margens, fonte, capa, listas, siglas etc.) está em abntex2-ufv.sty.
 %%
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesClass{abntex2-ufv}[2026/10/13 v1.5 Classe abntex2-ufv (TCC SI UFV-CRP)]
+\ProvidesClass{abntex2-ufv}[2026/10/13 v1.6 Classe abntex2-ufv (TCC SI UFV-CRP)]
 
 % A classe abntex2 carrega o babel com o nome obsoleto "brazil"; o aviso é inofensivo
 \RequirePackage{silence}

@@ -1,0 +1,9 @@
+# Arquivos de texto sempre com LF (a CTAN pede só LF); o git converte na entrada e na saída.
+* text=auto eol=lf
+
+# Binários: nunca converter
+*.pdf  binary
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.zip  binary

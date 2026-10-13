@@ -1,12 +1,13 @@
 name: release
 
-# Ao criar uma tag de versão (por exemplo 1.5 ou v1.5): compila, roda os testes, gera os
-# pacotes de download e os anexa a uma GitHub Release:
-#   abntex2-ufv-modelo.zip   projeto vazio, pronto para enviar ao Overleaf
-#   abntex2-ufv-guia.zip     guia com o trabalho de exemplo, pronto para o Overleaf
-#   abntex2-ufv.zip          pacote no formato da CTAN (o envio à CTAN continua manual)
+# Ao criar uma tag de versão (por exemplo 1.6 ou v1.6): confere a versão, compila, roda os
+# testes, gera os pacotes de download e os anexa a uma GitHub Release:
+#   abntex2-ufv-template.zip  projeto vazio (template), pronto para enviar ao Overleaf
+#   abntex2-ufv-example.zip   documentação com o trabalho de exemplo, pronta para o Overleaf
+#   abntex2-ufv.zip           pacote no formato da CTAN (o envio à CTAN continua manual;
+#                             envie este zip, gerado em Linux com fins de linha LF)
 # Os nomes dos arquivos são fixos: o link
-#   https://github.com/Smarzaro/abntex2-ufv/releases/latest/download/abntex2-ufv-modelo.zip
+#   https://github.com/Smarzaro/abntex2-ufv/releases/latest/download/abntex2-ufv-template.zip
 # sempre baixa a versão mais recente.
 # Também pode ser executado manualmente (Actions > release > Run workflow): nesse caso os
 # zips ficam como artefato do workflow, sem criar release.
@@ -26,13 +27,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compilar guia, modelo e testes
+      - name: Conferir a versão (e a tag, quando houver)
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            sh scripts/check-version.sh "${GITHUB_REF_NAME#v}"
+          else
+            sh scripts/check-version.sh
+          fi
+
+      - name: Compilar documentação, template e testes
         uses: xu-cheng/texlive-action@v2
         with:
           scheme: full
           run: |
-            (cd docs && latexmk)
-            (cd modelo-tcc && latexmk)
+            (cd doc && latexmk)
+            (cd doc/template && latexmk)
             sh scripts/run-tests.sh
 
       - name: Gerar os pacotes de download
@@ -46,8 +55,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/abntex2-ufv-modelo.zip
-            dist/abntex2-ufv-guia.zip
+            dist/abntex2-ufv-template.zip
+            dist/abntex2-ufv-example.zip
             dist/abntex2-ufv.zip
           generate_release_notes: true
 

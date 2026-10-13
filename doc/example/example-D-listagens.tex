@@ -1,13 +1,13 @@
 % Apêndice do guia: listagens de código com o pacote listings. Apague-o no seu trabalho.
 
 % definição da linguagem json, usada nos exemplos (arquivo exibido na Seção D.4)
-\input{apendices/exemplos/lang-json}
+\input{example/snippets/lang-json}
 
 \chapter{Guia de listagens de código}\label{ap:listagens}
 
 Este apêndice reúne a configuração e as instruções básicas do pacote \texttt{listings},
 usado para apresentar código-fonte no trabalho. A configuração do guia (no preâmbulo do
-arquivo \texttt{guia-abntex2-ufv.tex}; uma cópia comentada está no \texttt{modelo-tcc})
+arquivo \texttt{abntex2-ufv.tex}; uma cópia comentada está em \texttt{template/template.tex})
 define uma fonte de largura fixa legível, a numeração das linhas e a sintaxe colorida. As
 listagens são ilustrações do tipo ``Código'': ficam dentro dos ambientes \texttt{codigo} e
 \texttt{ilustracao}, com título, fonte e, se preciso, legenda e nota
@@ -119,7 +119,7 @@ O \texttt{listings} reconhece, entre outras, \texttt{Python}, \texttt{SQL}, \tex
 como \texttt{JSON}, defina-a uma vez com \texttt{\textbackslash lstdefinelanguage}, listando
 as palavras-chave, os comentários e as cadeias:
 
-\lstinputlisting[style=exemplo, language={[LaTeX]TeX}]{apendices/exemplos/lang-json.tex}
+\lstinputlisting[style=exemplo, language={[LaTeX]TeX}]{example/snippets/lang-json.tex}
 
 e use-a como qualquer outra (\autoref{cod:guia-json}):
 

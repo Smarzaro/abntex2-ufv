@@ -1,0 +1,76 @@
+\chapter{Referencial Teórico}\label{sec:RefTeorico}
+
+\begin{dica}[Dica de metodologia científica: o que escrever no Referencial Teórico]
+O referencial teórico apresenta os conceitos e os resultados anteriores de que o
+trabalho depende. Não é um resumo de livros: organize por \emph{temas} (e não por
+autor), explique só o que o leitor precisa para acompanhar o restante do texto e faça
+\emph{síntese crítica} (compare, aponte concordâncias, divergências e lacunas).
+\begin{itemize}
+  \item Prefira fontes primárias e revisadas por pares: periódicos, anais de eventos
+        (\ac{sbc} OpenLib, \ac{acm} Digital Library, \ac{ieee} Xplore), teses e
+        dissertações (\ac{bdtd}), livros-texto e normas. Use sites e blogs com critério.
+  \item Registre a \emph{busca}: bases consultadas, cadeias de busca, período e
+        critérios de inclusão e exclusão. Isso dá transparência e permite repetir a pesquisa.
+  \item Parafrasear exige citar a fonte; copiar trecho exige aspas ou recuo e citação.
+        Texto de terceiros sem indicação é plágio.
+  \item Em \emph{Trabalhos relacionados}, compare os estudos com os \emph{mesmos
+        critérios} e termine explicitando o que o seu trabalho acrescenta.
+\end{itemize}
+\end{dica}
+
+\section{Fundamentação}\label{sec:fundamentacao}
+
+\begin{dica}[Dica de uso da classe: como citar]
+\begin{itemize}
+  \item \emph{citação indireta} (paráfrase): \texttt{texto \textbackslash cite\{autor2020\}} $\to$ (Autor, 2020);
+  \item \emph{no fluxo da frase}: \texttt{\textbackslash textcite\{autor2020\}} $\to$ Autor (2020);
+  \item \emph{citação direta curta} (até três linhas): entre aspas, com a página:
+        \texttt{\textbackslash enquote\{texto\} \textbackslash cite[p.~12]\{autor2020\}};
+  \item \emph{citação direta longa} (mais de três linhas): ambiente \texttt{citacao},
+        com recuo de 4 cm, fonte menor e sem aspas;
+  \item \emph{citação de citação}: \texttt{\textbackslash textapud\{original\}\{consultado\}};
+  \item várias fontes na mesma chamada: \texttt{\textbackslash cite\{a,b,c\}}.
+\end{itemize}
+O Apêndice~\ref{ap:referencias} mostra o resultado de cada forma de citação.
+\end{dica}
+
+Exemplos de citação, em ordem: uma citação indireta, em que se parafraseia a ideia
+do autor \cite{autor2020}; uma citação no fluxo da frase, como em \textcite{autor2020};
+e uma citação direta curta: segundo o autor, \enquote{o texto transcrito deve vir entre
+aspas duplas, seguido da indicação da fonte e da página} \cite[p.~12]{autor2020}.
+
+Quando a citação direta tem mais de três linhas, ela é destacada do texto:
+
+\begin{citacao}
+Este é um exemplo de citação direta longa, que tem mais de três linhas. Ela deve ser
+destacada com recuo de quatro centímetros em relação à margem esquerda, em letra
+menor, em espaço simples e sem aspas. O ponto final encerra a frase e não a citação,
+e a indicação da fonte, com a página, vem ao final do trecho \cite[p.~35]{autor2020}.
+\end{citacao}
+
+Se for preciso citar uma obra a que não se teve acesso, cite o original por meio da
+obra consultada, como em \textapud{memoir}{abntex2classe}; na lista de referências
+entra apenas a obra consultada.
+
+\section{Trabalhos Relacionados}\label{sec:TrabRel}
+
+Compare os trabalhos relacionados em um quadro (\autoref{qua:relacionados}). Quadros,
+diferentemente de tabelas, têm bordas laterais fechadas e conteúdo predominantemente
+textual (Apêndice~\ref{ap:tabelas}).
+
+\begin{quadro}[htbp]
+\begin{ilustracao}{\caption{Comparação entre trabalhos relacionados}\label{qua:relacionados}}{\elaboracaopropria}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|X|X|}
+    \hline
+    \textbf{Trabalho} & \textbf{Contribuição} & \textbf{Limitação} \\
+    \hline
+    \textcite{autor2020} & Descreva o que o trabalho propõe & Descreva o que ficou em aberto \\
+    \hline
+    Autor (ano) & Descreva o que o trabalho propõe & Descreva o que ficou em aberto \\
+    \hline
+    Este trabalho & Descreva a contribuição do seu trabalho & Descreva as limitações do seu trabalho \\
+    \hline
+  \end{tabularx}
+\end{ilustracao}
+\end{quadro}

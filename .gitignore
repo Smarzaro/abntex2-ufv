@@ -111,3 +111,25 @@ sympy-plots-for-*.tex/
 
 # MAC files
 .DS_Store
+
+## abntex2-UFV: listas de quadros, graficos e codigos
+*.loq
+*.lgr
+*.loc
+*.bbl-SAVE-ERROR
+*.acn
+*.acr
+*.alg
+*.synctex(busy)
+
+## Pasta de auxiliares do latexmk (veja latexmkrc) e arquivos de editores
+build/
+*.xdv
+*.bak
+*.sav
+*.tmp
+*.thm
+*.txss*
+*.synctex
+texput.log
+.vscode/

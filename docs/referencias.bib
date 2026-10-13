@@ -94,13 +94,13 @@
 }
 
 @Manual{manualUFV,
-  Title                    = {Manual de Normalização de Trabalhos Acadêmicos: atualizada conforme NBR 14724/2011 e NBR 6023/2018},
+  Title                    = {Normalização de trabalhos acadêmicos: atualizada conforme ABNTs NBR 14724/2024, NBR 6023/2018 e NBR 10520/2023},
   Address                  = {Viçosa, MG},
-  Author                   = {Alice Regina Pinto Pires and Bruna Silva and Izabel Cristina de Oliveira and Juliana Ottoni da Silva Pereira},
+  Author                   = {Alice Regina Pinto Pires and Bruna Silva},
   Organization             = {Universidade Federal de Viçosa},
-  Year                     = {2019},
-  url                      = {http://www.bbt.ufv.br/wp-content/uploads/ManualtrabalhosAcademicos.pdf},
-  urlaccessdate            = {2019-09-09}
+  Year                     = {2025},
+  url                      = {https://www.bbt.ufv.br/manual-de-normalizacao-de-trabalhos-academicos/},
+  urlaccessdate            = {2025-01-28}
 }
 
 @Manual{memoir,
@@ -119,4 +119,65 @@
 	title = {biblatex-abnt 3.4},
 	url = {https://raw.githubusercontent.com/abntex/biblatex-abnt/master/doc/biblatex-abnt.pdf},
 	  Urlaccessdate = {2021-08-10}
+}
+
+
+% ---------------------------------------------------------------------------
+% EXEMPLOS DE ENTRADAS conforme o Manual de Normalização da UFV (2025)
+% Copie e adapte. Convenções para o biblatex-abnt:
+%  - TCC/dissertação/tese: use @thesis e informe a data da defesa em eventdate
+%    (ela é impressa ao final: "... Universidade X, Cidade, UF, ano.");
+%  - documento online (livro, relatório, site): use @book (ou @report) com url
+%    e urldate; @online não imprime local e editora;
+%  - intervalo de meses: date = {2003-11/2003-12} gera "nov./dez. 2003";
+%  - obra sem autoria: omita author; se o título começar por artigo ou
+%    monossílabo, preencha shorttitle (ex.: shorttitle = {A flor}) para que a
+%    citação saia "(A flor [...], 1995)"; na lista, escreva em maiúsculas o
+%    artigo e a palavra seguinte no próprio title ({A FLOR prometida}).
+% ---------------------------------------------------------------------------
+
+@thesis{exemplo-tcc,
+  author      = {Alves, D. P.},
+  title       = {Implementação de conceitos de manufatura colaborativa},
+  subtitle    = {um projeto virtual},
+  type        = {Trabalho de Conclusão de Curso (Bacharelado em Sistemas de Informação)},
+  institution = {Universidade Federal de Viçosa},
+  location    = {Rio Paranaíba, MG},
+  year        = {2008},
+  eventdate   = {2008},
+}
+
+@article{exemplo-artigo,
+  author       = {Nardelli, A. M. B. and Griffith, J. J.},
+  title        = {Modelo teórico para compreensão do ambientalismo empresarial do setor florestal brasileiro},
+  journaltitle = {Revista Árvore},
+  location     = {Viçosa, MG},
+  volume       = {27},
+  number       = {6},
+  pages        = {855--869},
+  date         = {2003-11/2003-12},
+  doi          = {10.1590/S0100-67622003000600010},
+  url          = {http://www.scielo.br/pdf/rarv/v27n6/a12v27n6.pdf},
+  urldate      = {2004-10-11},
+}
+
+@book{exemplo-site,
+  author    = {Pires, Alice Regina Pinto and Silva, Bruna},
+  title     = {Normalização de trabalhos acadêmicos},
+  subtitle  = {atualizada conforme ABNTs NBR 14724/2024, NBR 6023/2018 e NBR 10520/2023},
+  location  = {Viçosa, MG},
+  publisher = {UFV, Biblioteca Central},
+  year      = {2025},
+  pagetotal = {144},
+  url       = {https://www.bbt.ufv.br/manual-de-normalizacao-de-trabalhos-academicos/},
+  urldate   = {2025-01-28},
+}
+
+@book{autor2020,
+  author    = {Autor, Nome},
+  title     = {Título da obra (entrada fictícia usada nos exemplos de citação)},
+  edition   = {1},
+  location  = {Cidade},
+  publisher = {Editora},
+  year      = {2020},
 }

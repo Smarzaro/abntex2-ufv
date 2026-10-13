@@ -1,0 +1,16 @@
+# Configuração do latexmk para o guia (pasta docs/)
+#
+# Uso (nesta pasta):   latexmk        compila guia-abntex2-ufv.pdf
+#                      latexmk -c     apaga os auxiliares (mantém o PDF)
+#                      latexmk -C     apaga auxiliares e PDF
+#
+# O PDF fica nesta pasta; os arquivos auxiliares (.aux, .bbl, .toc, .loq etc.) ficam em
+# build/, ignorada pelo git. O abntex2-UFV.sty é procurado na pasta pai (..).
+
+$pdf_mode   = 1;            # gera PDF com pdflatex
+$aux_dir    = 'build';      # arquivos auxiliares
+$out_dir    = '.';          # PDF final
+$bibtex_use = 2;            # executa o biber quando necessário
+$pdflatex   = 'pdflatex -synctex=1 -interaction=nonstopmode %O %S';
+$max_repeat = 6;            # número máximo de passagens do pdflatex
+ensure_path('TEXINPUTS', '..');

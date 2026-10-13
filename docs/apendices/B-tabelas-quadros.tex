@@ -1,0 +1,248 @@
+% Apêndice do modelo: guia de tabelas e quadros. Apague-o no seu trabalho
+% (e a pasta apendices/exemplos).
+
+% Mostra o código de apendices/exemplos/#1.tex e o resultado (o mesmo arquivo, incluído).
+% Para que o resultado fique junto do código (e não flutue para outra página), aqui os
+% ambientes figure, table, quadro, grafico e codigo são redefinidos localmente como blocos
+% fixos (não flutuantes); \caption, \label e \autoref continuam funcionando.
+% Em um trabalho real use os floats normais ([htbp]), como mostram os códigos exibidos.
+\makeatletter
+\newcommand{\ufv@semfloat}[1]{%
+  \renewenvironment{#1}[1][]{\par\medskip\begin{minipage}{\linewidth}\def\@captype{#1}}%
+    {\end{minipage}\par\medskip}}
+\newcommand{\ufv@modofixo}{\ufv@semfloat{table}\ufv@semfloat{figure}\ufv@semfloat{quadro}%
+  \ufv@semfloat{grafico}\ufv@semfloat{codigo}}
+\newcommand{\codexemplo}[1]{%
+  \par\medskip\noindent\textit{Código:}\par\nopagebreak\smallskip
+  \lstinputlisting[style=exemplo, language={[LaTeX]TeX}]{apendices/exemplos/#1.tex}%
+  \par\medskip
+  \noindent\begin{minipage}{\linewidth}\textit{Resultado:}\par\nopagebreak\smallskip
+  \begingroup\ufv@modofixo\input{apendices/exemplos/#1}\endgroup
+  \end{minipage}\par}
+% variante para tabelas longas (longtable precisa quebrar página): mostra só as primeiras
+% linhas do código (#2 = última linha exibida) e não coloca o resultado em bloco
+\newcommand{\codexemplolongo}[2]{%
+  \par\medskip\noindent\textit{Código (primeiras linhas; as demais seguem o mesmo padrão):}\par\nopagebreak\smallskip
+  \lstinputlisting[style=exemplo, language={[LaTeX]TeX}, lastline=#2]{apendices/exemplos/#1.tex}%
+  \par\medskip\noindent\textit{Resultado:}\par\nopagebreak\smallskip
+  \input{apendices/exemplos/#1}}
+\makeatother
+
+\chapter{Guia de tabelas e quadros}\label{ap:tabelas}
+
+\emph{Observação}: nos exemplos deste apêndice, o código aparece primeiro e o resultado
+logo abaixo, no mesmo lugar. Para isso, aqui os ambientes \texttt{table}, \texttt{figure},
+\texttt{quadro}, \texttt{grafico} e \texttt{codigo} são exibidos como blocos fixos (sem
+flutuar). Em um trabalho real, use-os normalmente, com \texttt{[htbp]}: o \LaTeX\ posiciona
+o objeto perto do ponto em que ele é citado, e a referência no texto, feita com
+\texttt{\textbackslash autoref\{rótulo\}}, continua correta mesmo que o objeto vá para outra
+página, pois não depende da posição.
+
+\section{Tabela ou quadro?}
+
+Qualquer conteúdo organizado em linhas e colunas \emph{parece} uma tabela, mas as normas
+distinguem os dois (NBR 14724; normas de apresentação tabular do \ac{ibge}). Classificar
+tudo como tabela é um erro formal comum: as listas ficam erradas (itens textuais na
+``Lista de tabelas'', por exemplo) e a apresentação foge do padrão. Isso não impede a
+compilação nem a leitura, mas é o tipo de ajuste que a biblioteca ou a banca pode
+exigir antes da versão final. Use o \autoref{qua:tabquadro} para decidir.
+
+\begin{quadro}[htbp]
+\begin{ilustracao}{\caption{Diferenças entre tabela e quadro}\label{qua:tabquadro}}{\fonte{Elaborado pelo próprio autor com base no manual da UFV}}
+  \renewcommand{\arraystretch}{1.25}
+  \small
+  \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.8cm}|X|X|}
+    \hline
+    & \textbf{Tabela} & \textbf{Quadro} \\
+    \hline
+    Conteúdo & Dados numéricos; o número é a informação central (medidas, contagens, percentuais) & Informação textual ou mista: definições, requisitos, comparações, cronogramas, tecnologias \\
+    \hline
+    Bordas & Abertas nos lados: sem linhas verticais; linhas horizontais no topo, sob o cabeçalho e na base & Fechadas: linhas em todos os lados e entre as linhas e colunas \\
+    \hline
+    Ambientes & \texttt{table} com \texttt{tabela} (título à esquerda; equivale ao \texttt{\textbackslash IBGEtab}) & \texttt{quadro} com \texttt{ilustracao} (título centralizado) \\
+    \hline
+    Numeração e lista & ``Tabela N''; Lista de tabelas & ``Quadro N''; Lista de quadros \\
+    \hline
+    Rodapé & Abaixo, à esquerda: \texttt{\textbackslash fonte}, \texttt{\textbackslash legenda} e \texttt{\textbackslash nota} & O mesmo \\
+    \hline
+  \end{tabularx}
+\end{ilustracao}
+\end{quadro}
+
+Regra prática: se você pode somar, comparar ou calcular com o conteúdo das células,
+é tabela; se as células contêm frases, é quadro. Toda tabela e todo quadro devem ser
+citados no texto (\texttt{\textbackslash autoref\{rótulo\}}) e ficar o mais perto possível
+da citação.
+
+\section{Título, fonte, legenda e nota}
+
+Toda ilustração e toda tabela têm quatro elementos, nesta ordem (NBR 14724; manual UFV 4.9):
+\begin{description}
+  \item[Título] identifica o objeto, vem \emph{acima}, com a palavra designativa, o número,
+        um travessão e o texto (``Figura 3 -- Arquitetura do sistema''); é o
+        \texttt{\textbackslash caption}.
+  \item[Fonte] indica de onde vem a informação e é \emph{obrigatória}, mesmo para obra do
+        próprio autor (``Elaborado pelo próprio autor''); é o \texttt{\textbackslash fonte\{...\}}
+        ou o atalho \texttt{\textbackslash elaboracaopropria}.
+  \item[Legenda] explica símbolos, siglas, cores ou partes da ilustração (por exemplo,
+        ``As células sombreadas indicam o período de execução''); é o \texttt{\textbackslash legenda\{...\}}
+        e só é usada quando há algo a explicar.
+  \item[Nota] traz observações e informações complementares (data da coleta, ressalvas,
+        método); é o \texttt{\textbackslash nota\{...\}}.
+\end{description}
+Fonte, legenda e nota formam o \emph{rodapé}: ficam abaixo, em linhas seguidas, em espaço
+simples, tamanho 10 e alinhadas à esquerda do objeto. A diferença para a tabela é só
+o alinhamento do título: centralizado nas ilustrações e à esquerda nas tabelas (padrão do
+\ac{ibge}).
+
+\section{Os ambientes \texttt{ilustracao} e \texttt{tabela}}
+
+Os dois ambientes têm a mesma sintaxe, parecida com a do \texttt{\textbackslash IBGEtab} do abn\TeX2:
+título, conteúdo e rodapé, nessa ordem. Eles medem o conteúdo e montam título e rodapé na
+largura dele:
+\begin{lstlisting}[style=exemplo, language={[LaTeX]TeX}]
+\begin{figure}[htbp]   % ou quadro, grafico, codigo
+\begin{ilustracao}{\caption{Título}\label{fig:x}}{\fonte{...}\legenda{...}\nota{...}}
+  \includegraphics[width=.8\linewidth]{figura}     % ou tikzpicture, tabularx, lstlisting
+\end{ilustracao}
+\end{figure}
+
+\begin{table}[htbp]
+\begin{tabela}{\caption{Título}\label{tab:x}}{\elaboracaopropria\nota{...}}
+  \begin{tabular}{...} ... \end{tabular}
+\end{tabela}
+\end{table}
+\end{lstlisting}
+O \texttt{tabela} também reduz o conteúdo ao tamanho 10, como o \texttt{\textbackslash IBGEtab}
+(para outro tamanho, redefina \texttt{\textbackslash IBGEtabfontsize}). O \texttt{\textbackslash IBGEtab}
+do abn\TeX2 continua funcionando, mas não tem o espaçamento simples entre fonte e nota
+nem aceita \texttt{\textbackslash legenda}.
+
+\section{Tabela bem formatada}
+
+Uma tabela no padrão \ac{ibge} usa o ambiente \texttt{tabela} dentro do \texttt{table}:
+o título e o rodapé (fonte, legenda e notas) assumem a largura da tabela. As linhas
+horizontais vêm do pacote \texttt{booktabs}
+(\texttt{\textbackslash toprule}, \texttt{\textbackslash midrule},
+\texttt{\textbackslash bottomrule}) e o alinhamento decimal da coluna \texttt{S} do
+\texttt{siunitx}, configurada neste modelo para a vírgula decimal e o ponto
+como separador de milhar. Entre as chaves \texttt{\{...\}}, os cabeçalhos das colunas
+\texttt{S} protegem o texto da formatação numérica.
+
+\codexemplo{tabela-simples}
+
+Os principais ajustes:
+\begin{itemize}
+  \item \textbf{Alinhamento}: \sloppy texto à esquerda (\texttt{l}), números pela vírgula decimal
+        (\texttt{S\allowbreak[table-format=3.1]}, em que o formato indica o máximo de dígitos antes e
+        depois da vírgula), colunas centralizadas (\texttt{c}) só para códigos e marcas.
+  \item \textbf{Unidades}: coloque a unidade no cabeçalho (``Tempo (ms)''), não em cada célula.
+  \item \textbf{Largura}: se a tabela passa das margens, reduza a fonte com
+        \texttt{\textbackslash small} ou \texttt{\textbackslash footnotesize} antes do
+        \texttt{tabular} (o tamanho deve ser uniforme em todas as tabelas),
+        diminua o espaço entre colunas com \texttt{\textbackslash setlength\{\textbackslash tabcolsep\}\{3pt\}}
+        ou use \texttt{tabularx} com colunas \texttt{X}, que se ajustam à largura do texto.
+        \texttt{\textbackslash resizebox\{\textbackslash textwidth\}\{!\}\{...\}} resolve, mas
+        encolhe a letra de modo irregular: deixe como último recurso.
+  \item \textbf{Altura das linhas}: \texttt{\textbackslash renewcommand\{\textbackslash arraystretch\}\{1.2\}}
+        dá mais respiro às linhas (use dentro do ambiente, para não afetar o documento todo).
+  \item \textbf{Células mescladas}: \texttt{\textbackslash multicolumn\allowbreak\{n\}\allowbreak\{c\}\allowbreak\{texto\}}
+        (colunas) e \texttt{\textbackslash multirow\allowbreak\{n\}\allowbreak\{*\}\allowbreak\{texto\}} (linhas, pacote
+        \texttt{multirow}); \texttt{\textbackslash cmidrule(lr)\{a-b\}} traça filetes parciais.
+  \item \textbf{Sinais convencionais} (\ac{ibge}): hífen (--) para zero absoluto; três pontos
+        (\ldots) para dado não disponível; \texttt{x} para dado omitido (consulte
+        \cite{ibge1993} para a lista completa). Não deixe células vazias sem explicação.
+  \item \textbf{Notas}: \texttt{\textbackslash nota\{...\}} explica a tabela como um todo;
+        para notas de células específicas, use letras sobrescritas
+        (\texttt{\textbackslash textsuperscript\{a\}}) e explique-as no rodapé.
+  \item \textbf{Posição}: \texttt{[htbp]} deixa o \LaTeX\ escolher; não force posições
+        (\texttt{[H]}), pois isso gera grandes espaços em branco.
+\end{itemize}
+
+\subsection{Células mescladas e cabeçalhos agrupados}
+
+No exemplo a seguir comparam-se discos rígidos (\ac{hdd}) e unidades de estado sólido
+(\ac{ssd}), com o cabeçalho ``Tempo (ms)'' agrupando as três colunas de medidas.
+
+\codexemplo{tabela-mesclada}
+
+\subsection{Tabela longa (mais de uma página)}
+
+O ambiente \texttt{longtable} repete o cabeçalho em cada página e permite indicar a
+continuação, como pedem as normas de apresentação tabular (``Continua'', ``Continuação''
+e ``Conclusão'', conforme a posição). Use-o apenas quando a tabela realmente não couber
+em uma página; tabelas longas e de consulta costumam ficar melhor em apêndice.
+
+O \texttt{longtable} não é um float e não cabe dentro dos ambientes \texttt{table} e
+\texttt{tabela}, por isso o título e o rodapé são tratados à parte:
+\begin{itemize}
+  \item o \textbf{título} é o \texttt{\textbackslash caption} da primeira linha da tabela. Para
+        que fique à esquerda e use a largura do texto, coloque o \texttt{longtable} dentro de
+        um grupo com
+        \texttt{\textbackslash captionstyle\allowbreak[\textbackslash raggedright]\allowbreak\{\textbackslash raggedright\}} e
+        \texttt{\textbackslash setlength\allowbreak\{\textbackslash LTcapwidth\}\allowbreak\{\textbackslash linewidth\}} (sem isso o
+        título é limitado a 4 polegadas);
+  \item para que o \textbf{rodapé} (\texttt{\textbackslash fonte}, \texttt{\textbackslash legenda} e
+        \texttt{\textbackslash nota}) fique alinhado com a tabela, faça a tabela ocupar a largura do
+        texto: \texttt{\textbackslash setlength\{\textbackslash LTleft\}\{0pt\}},
+        \texttt{\textbackslash setlength\{\textbackslash LTright\}\{0pt\}} e, na coluna
+        \texttt{@\{\textbackslash extracolsep\{\textbackslash fill\}\}} antes da primeira
+        coluna. O rodapé vem logo após o \texttt{\textbackslash end\{longtable\}}, em espaço simples e à
+        esquerda, e o \texttt{\textbackslash nopagebreak} evita que ele fique sozinho em outra página.
+\end{itemize}
+A tabela abaixo tem 60 linhas para mostrar a quebra de página, a repetição do cabeçalho com
+``continuação'' e a indicação ``Continua'' no pé de cada página.
+
+\codexemplolongo{tabela-longa}{18}
+
+\section{Quadro bem formatado}
+
+O quadro tem bordas fechadas, e as células quase sempre contêm texto. O ambiente
+\texttt{tabularx} com colunas \texttt{X} distribui o texto na largura da página, e as
+colunas \texttt{p\{largura\}} com
+\texttt{>\{\textbackslash raggedright\textbackslash arraybackslash\}} evitam o
+espaçamento irregular de palavras em colunas estreitas. Aumentar o
+\texttt{\textbackslash arraystretch} para 1,2 ou 1,3 melhora muito a leitura.
+
+No exemplo, o relatório é exportável em \ac{csv} (e em \ac{pdf}), e a prioridade de cada
+requisito fica numa coluna estreita e centralizada.
+
+\codexemplo{quadro-requisitos}
+
+Os cabeçalhos de um quadro com texto à esquerda podem ser centralizados com um
+\texttt{\textbackslash multicolumn} de uma só coluna, como no \autoref{qua:guia-tecnologias}.
+Para reduzir a letra de um quadro denso, use \texttt{\textbackslash small} dentro do
+ambiente. Siglas continuam valendo (\texttt{\textbackslash ac\{...\}}) dentro de quadros.
+
+O quadro seguinte justifica as tecnologias escolhidas, entre elas um \ac{sgbd} com suporte
+a \ac{json}. \emph{Observação}: dentro de \texttt{tabularx}, \texttt{longtable} e
+\texttt{\textbackslash IBGEtab} o conteúdo das células pode ser composto mais de uma vez,
+o que confunde a expansão de siglas; faça a primeira ocorrência de cada sigla no texto
+corrido e use a sigla pura nas células.
+
+\codexemplo{quadro-tecnologias}
+
+\section{Cabeçalho e rodapé das ilustrações}
+
+Para figuras, diagramas, gráficos, quadros e códigos, o manual (seção 4.9, conforme a
+NBR 14724/2025) recomenda \textbf{centralizar o cabeçalho} (tipo, número e título) e
+\textbf{alinhar à esquerda o rodapé} (fonte, legenda e notas), respeitando as margens da
+ilustração. É o que o ambiente \texttt{ilustracao} faz, inclusive quando a figura é mais
+estreita que o texto: título e rodapé passam a ter a largura da figura. \texttt{\textbackslash fonte},
+\texttt{\textbackslash legenda} e \texttt{\textbackslash nota} saem em linhas seguidas, sem
+linha em branco entre elas.
+
+\codexemplo{figura-ilustracao}
+
+\section{Lista de conferência}
+
+\begin{itemize}
+  \item o conteúdo é numérico (tabela) ou textual (quadro)?
+  \item o título está acima, com ``Tabela N'' ou ``Quadro N'', e a fonte (e, se houver, a
+        legenda e a nota) abaixo, à esquerda e em espaço simples?
+  \item a ilustração é citada e comentada no texto?
+  \item a tabela não tem linhas verticais e o quadro tem as bordas fechadas?
+  \item números estão alinhados pela vírgula e as unidades estão no cabeçalho?
+  \item o tamanho de letra e o espaçamento são uniformes entre as ilustrações?
+  \item as listas de tabelas e de quadros estão no pré-textual?
+\end{itemize}

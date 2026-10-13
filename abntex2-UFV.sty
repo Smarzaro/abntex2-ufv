@@ -1,5 +1,9 @@
 %%
-%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para a Universidade Federal de Viçosa
+%% Customizações do abnTeX2 (https://github.com/abntex/abntex2) para a Universidade Federal de Viçosa
+%%
+%% Baseado no "Manual de Normalização de Trabalhos Acadêmicos" da Biblioteca
+%% Central da UFV (edição 2026-2), conforme ABNT NBR 14724/2025, NBR 6023/2025 e
+%% NBR 10520/2023.
 %%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -13,163 +17,448 @@
 %%
 %% The Current Maintainer of this work is Rodrigo Smarzaro (smarzaro@ufv.br)
 %%
-%% Further information about abnTeX2 are available on http://abntex2.googlecode.com/
+%% Further information about abnTeX2 are available on https://github.com/abntex/abntex2/
 %%
-%
+
 % ---
 % INICIO DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DE VIÇOSA
 % ---
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{abntex2-UFV}[2019/09/09 v1.4 AbnTeX2-UFV]
+\ProvidesPackage{abntex2-UFV}[2026/10/12 v2.0 AbnTeX2-UFV]
 
-% Ajusta as margens
+% Este pacote só faz sentido sobre a classe abntex2
+\@ifclassloaded{abntex2}{}{%
+  \PackageError{abntex2-UFV}{Este pacote requer a classe abntex2}{%
+    Use \string\documentclass{abntex2} antes de carregar abntex2-UFV.}%
+}
+
+\RequirePackage{etoolbox}
+\RequirePackage{kvoptions}
+
+% ---
+% Opções do pacote
+%   fonte=times  (padrão) Times 12 (TeX Gyre Termes)
+%   fonte=arial  Arial 12 (TeX Gyre Heros, métrica compatível com Helvetica/Arial)
+%   fonte=cm     mantém a fonte do documento (Computer Modern ou a definida pelo usuário)
+%   capacampus   imprime campus e curso na capa (não são exigidos pelo manual)
+% ---
+\SetupKeyvalOptions{family=ufv, prefix=ufv@}
+\DeclareStringOption[times]{fonte}
+\DeclareBoolOption{capacampus}
+\ProcessKeyvalOptions*
+
+% ---
+% Fonte (manual UFV 4.1: Arial ou Times, tamanho 12, cor preta)
+% ---
+\ifdefstring{\ufv@fonte}{times}{%
+  \RequirePackage{tgtermes}%
+}{%
+  \ifdefstring{\ufv@fonte}{arial}{%
+    \RequirePackage{tgheros}%
+    \renewcommand{\familydefault}{\sfdefault}%
+  }{}%
+}
+
+% ---
+% Títulos das seções (NBR 6024; manual UFV 4.3.2 e 4.5): todos no tamanho do
+% texto e na mesma família da fonte, diferenciados por caixa, negrito e itálico.
+%   primária (\chapter): negrito, caixa alta | secundária: negrito
+%   terciária: normal | quaternária e quinária: itálico
+% ---
+\renewcommand{\ABNTEXchapterfont}{\normalfont\bfseries}
+\renewcommand{\ABNTEXchapterfontsize}{\normalsize}
+\renewcommand{\ABNTEXsectionfont}{\normalfont\bfseries}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfont}{\normalfont}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsubsectionfont}{\normalfont\itshape}
+\renewcommand{\ABNTEXsubsubsubsectionfont}{\normalfont\itshape}
+\setboolean{ABNTEXupperchapter}{true}
+
+% ---
+% Margens (manual UFV 4.2): esquerda e superior 3 cm; direita e inferior 2 cm.
+% Em impressão frente e verso (twoside) o memoir espelha as margens.
+% ---
 \setlrmarginsandblock{3cm}{2cm}{*}
 \setulmarginsandblock{3cm}{2cm}{*}
 \checkandfixthelayout
 
-% Ajusta identação do parágrafo
-\setlength{\parindent}{1.3cm}
+% Parágrafo: recuo de 1,25 cm e sem espaço extra entre parágrafos
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
 
-% Ajusta o espaçamento entre um parágrafo e outro
-\setlength{\parskip}{0.2cm}  % tente também \onelineskip
-
+% ---
+% Dados do trabalho
+% ---
 \providecommand{\imprimircampus}{}
 \newcommand{\campus}[1]{\renewcommand{\imprimircampus}{#1}}
 
 \providecommand{\imprimircurso}{}
 \newcommand{\curso}[1]{\renewcommand{\imprimircurso}{#1}}
 
+% sigla da instituição de origem dos membros da banca (padrão UFV-CRP)
+\newcommand{\ufv@siglapadrao}{UFV-CRP}
+\newcommand{\siglainstituicaopadrao}[1]{\renewcommand{\ufv@siglapadrao}{#1}}
 
-% alterando a capa
+% Orientador(a): \orientador[sigla]{Nome} ou \orientadora[sigla]{Nome}
+\providecommand{\imprimirorientadorsiglainst}{}
+\newcommand{\ufv@papelorientador}{Orientador}
+\renewcommand{\orientador}[2][\ufv@siglapadrao]{%
+  \renewcommand{\imprimirorientador}{#2}%
+  \renewcommand{\imprimirorientadorsiglainst}{#1}%
+  \renewcommand{\imprimirorientadorRotulo}{\orientadorname}%
+  \renewcommand{\ufv@papelorientador}{Orientador}}
+\newcommand{\orientadora}[2][\ufv@siglapadrao]{%
+  \renewcommand{\imprimirorientador}{#2}%
+  \renewcommand{\imprimirorientadorsiglainst}{#1}%
+  \renewcommand{\imprimirorientadorRotulo}{Orientadora:}%
+  \renewcommand{\ufv@papelorientador}{Orientadora}}
+\newcommand{\coorientadora}[1]{\coorientador[Coorientadora:]{#1}}
+\renewcommand{\imprimirorientadorRotulo}{\orientadorname}
+
+% Banca: \membrobanca[sigla]{Titulação Nome}, repetível quantas vezes for preciso.
+% A ordem de declaração é a ordem de impressão; o orientador é impresso por último.
+\newcommand{\ufv@bancacorpo}{}
+\newcommand{\membrobanca}[2][\ufv@siglapadrao]{%
+  \gappto\ufv@bancacorpo{\assinatura{#2\\(#1)}}}
+% compatibilidade com a versão 1.x
+\newcommand{\membrobancaA}[2][\ufv@siglapadrao]{\membrobanca[#1]{#2}}
+\newcommand{\membrobancaB}[2][\ufv@siglapadrao]{\membrobanca[#1]{#2}}
+
+% Data da defesa. Se omitida, a folha de aprovação traz espaço para preenchimento manual.
+\providecommand{\imprimirdatabanca}{}
+\newcommand{\databanca}[1]{\renewcommand{\imprimirdatabanca}{#1}}
+
+% ---
+% Natureza do trabalho (nota descritiva da folha de rosto), manual UFV 3.1.2.2.
+% Uso: \preambuloUFV{tcc|bacharelado|licenciatura}{Nome do curso/título}
+%   tcc           relatório final de TCC
+%   bacharelado   monografia de graduação (bacharelado)
+%   licenciatura  monografia de graduação (licenciatura)
+% Para outro tipo de trabalho, use diretamente \preambulo{...}.
+% ---
+\newcommand{\ufv@nota@tcc}[1]{Relat\'orio final, apresentado \`a \imprimirinstituicao, como parte das exig\^encias para a obten\c{c}\~ao do t\'itulo de #1.}
+\newcommand{\ufv@nota@bacharelado}[1]{Monografia apresentada ao Curso de \imprimircurso\ da \imprimirinstituicao\ como requisito para obten\c{c}\~ao do t\'itulo de bacharel em #1.}
+\newcommand{\ufv@nota@licenciatura}[1]{Monografia apresentada ao Curso de \imprimircurso\ da \imprimirinstituicao\ como requisito para obten\c{c}\~ao do t\'itulo de licenciatura em #1.}
+\newcommand{\preambuloUFV}[2]{%
+  \ifcsname ufv@nota@#1\endcsname
+    \preambulo{\csname ufv@nota@#1\endcsname{#2}}%
+  \else
+    \PackageError{abntex2-UFV}{Tipo de trabalho desconhecido: #1}{%
+      Use tcc, bacharelado ou licenciatura, ou defina \string\preambulo{...} manualmente.}%
+  \fi}
+
+% ---
+% Capa (manual UFV 3.1.1): instituição (opcional), autor, título, local e ano.
+% ---
 \renewcommand{\imprimircapa}{%
   \begin{capa}%
     \center
-    {\large \MakeUppercase{\imprimirinstituicao}}
-    \par
-    {\large \MakeUppercase{\imprimircampus}}
-    \par
-    \abntex@ifnotempty{\imprimircurso}{%
-       {\large \MakeUppercase{\imprimircurso}}
-    }%
+    {\bfseries\large \MakeUppercase{\imprimirinstituicao}}\par
+    \ifufv@capacampus
+      \abntex@ifnotempty{\imprimircampus}{{\bfseries\large \MakeUppercase{\imprimircampus}}\par}%
+      \abntex@ifnotempty{\imprimircurso}{{\bfseries\large \MakeUppercase{\imprimircurso}}\par}%
+    \fi
     \vspace*{3cm}
 
-    {\large \MakeUppercase{\imprimirautor}}
+    {\bfseries\large \MakeUppercase{\imprimirautor}}
 
     \vspace*{\fill}
     {\bfseries\large \MakeUppercase{\imprimirtitulo}}
     \vspace*{\fill}
     \par
-    {\large\MakeUppercase{\imprimirlocal}}
+    {\bfseries\large\MakeUppercase{\imprimirlocal}}
     \par
-    {\large\imprimirdata}
+    {\bfseries\large\imprimirdata}
     \vspace*{1cm}
   \end{capa}
 }
 
-
-% folha de rosto
-
-\makeatletter
-
-\renewcommand{\folhaderostocontent}{
-\begin{center}
-{\large\MakeUppercase{\imprimirautor}}
-\vspace*{1cm}
-
-\vspace*{\fill}\vspace*{\fill}
-
-{\large\MakeUppercase{\imprimirtitulo}}
-
-\vspace*{\fill}
-
-\abntex@ifnotempty{\imprimirpreambulo}{%
-  \hspace{.45\textwidth}
-  \begin{minipage}{.5\textwidth}
-  \SingleSpacing
-  \imprimirpreambulo
-
-  \smallskip
-  {\imprimirorientadorRotulo~\imprimirorientador\par}
-
-  \smallskip
-  \abntex@ifnotempty{\imprimircoorientador}{%
-    {\imprimircoorientadorRotulo~\imprimircoorientador}%
-  }%
-
-  \end{minipage}%
-  \vspace*{\fill}
-}%
-    \vspace*{\fill}
-    \par
-    {\large\MakeUppercase{\imprimirlocal}}
-    \par
-    {\large\imprimirdata}
-    \vspace*{1cm}
-\end{center}
-}
-
-\makeatother
-
-
-\providecommand{\imprimirorientadorsiglainst}{}
-\renewcommand{\orientador}[2][UFV-CRP]{\renewcommand{\imprimirorientador}{#2}\renewcommand{\imprimirorientadorsiglainst}{#1}}
-\renewcommand{\imprimirorientadorRotulo}{\orientadorname}
-
-
-\providecommand{\imprimirmembrobancaA}{}
-\providecommand{\imprimirmembrobancaAsiglainst}{}
-\newcommand{\membrobancaA}[2][UFV-CRP]{
-   \renewcommand{\imprimirmembrobancaA}{#2}
-   \renewcommand{\imprimirmembrobancaAsiglainst}{#1}
-}
-
-
-\providecommand{\imprimirmembrobancaB}{}
-\providecommand{\imprimirmembrobancaBsiglainst}{}
-\newcommand{\membrobancaB}[2][UFV-CRP]{\renewcommand{\imprimirmembrobancaB}{#2}\renewcommand{\imprimirmembrobancaBsiglainst}{#1}}
-
-\providecommand{\imprimirdatabanca}{}
-\newcommand{\databanca}[1]{\renewcommand{\imprimirdatabanca}{#1}}
-
-
-\makeatletter
-\newcommand{\imprimirfolhadeaprovacao}{
-\begin{folhadeaprovacao}
-
+% ---
+% Folha de rosto (manual UFV 3.1.2): autor, título, natureza, orientador,
+% coorientador, local e ano. A natureza fica alinhada do meio da mancha
+% gráfica para a margem direita, em espaço simples.
+% ---
+\renewcommand{\folhaderostocontent}{%
   \begin{center}
-    {\large\MakeUppercase{\imprimirautor}}
+    {\bfseries\large\MakeUppercase{\imprimirautor}}\par
 
     \vspace*{\fill}\vspace*{\fill}
-    {\bfseries\large\MakeUppercase{\imprimirtitulo}}
+
+    {\bfseries\large\MakeUppercase{\imprimirtitulo}}\par
+
     \vspace*{\fill}
 
-    \hspace{.45\textwidth}
-    \begin{minipage}{.5\textwidth}
-        \imprimirpreambulo
-    \end{minipage}%
-    \vspace*{\fill}
-   \end{center}
-   APROVADA EM: \imprimirdatabanca
+    \abntex@ifnotempty{\imprimirpreambulo}{%
+      \hspace{.45\textwidth}%
+      \begin{minipage}{.5\textwidth}
+        \SingleSpacing\small\raggedright
+        \imprimirpreambulo\par
+        \smallskip
+        \abntex@ifnotempty{\imprimirorientador}{%
+          \imprimirorientadorRotulo~\imprimirorientador\par}%
+        \abntex@ifnotempty{\imprimircoorientador}{%
+          \imprimircoorientadorRotulo~\imprimircoorientador\par}%
+      \end{minipage}%
+    }%
 
-   \assinatura{\textbf{\imprimirorientador} \\ Orientador \\ \imprimirorientadorsiglainst}
-
-   \abntex@ifnotempty{\imprimirmembrobancaA}{%
-   \assinatura{\textbf{\imprimirmembrobancaA} \\ \imprimirmembrobancaAsiglainst}
-   }%
-   \abntex@ifnotempty{\imprimirmembrobancaB}{%
-   \assinatura{\textbf{\imprimirmembrobancaB} \\ \imprimirmembrobancaBsiglainst}
-   }%
-   \begin{center}
     \vspace*{\fill}
     \par
-    {\large\MakeUppercase{\imprimirlocal}}
-    \par
-    {\large\imprimirdata}
+    {\bfseries\large\MakeUppercase{\imprimirlocal}}\par
+    {\bfseries\large\imprimirdata}\par
     \vspace*{1cm}
   \end{center}
-\end{folhadeaprovacao}
 }
-\makeatother
+
+% ---
+% Folha de aprovação (manual UFV 3.1.5.1): autor, título, natureza,
+% "APROVADA:" com a data, banca (titulação e instituição) e, por último,
+% o orientador. Data e assinaturas são colocadas após a aprovação.
+% ---
+\newcommand{\imprimirfolhadeaprovacao}{%
+  \begin{folhadeaprovacao}
+    \begin{center}
+      {\bfseries\large\MakeUppercase{\imprimirautor}}\par
+
+      \vspace*{\fill}\vspace*{\fill}
+      {\bfseries\large\MakeUppercase{\imprimirtitulo}}\par
+      \vspace*{\fill}
+
+      \abntex@ifnotempty{\imprimirpreambulo}{%
+        \hspace{.45\textwidth}%
+        \begin{minipage}{.5\textwidth}
+          \SingleSpacing\small\raggedright
+          \imprimirpreambulo
+        \end{minipage}%
+      }%
+      \vspace*{\fill}
+    \end{center}
+
+    \noindent APROVADA:
+    \ifdefempty{\imprimirdatabanca}{%
+      \rule{1cm}{0.4pt}\ de \rule{3cm}{0.4pt}\ de \rule{1.6cm}{0.4pt}}{%
+      \imprimirdatabanca}.
+
+    \vspace*{\fill}
+
+    \ufv@bancacorpo
+    \assinatura{\imprimirorientador\\(\ufv@papelorientador)\\(\imprimirorientadorsiglainst)}
+
+    \vspace*{\fill}
+  \end{folhadeaprovacao}
+}
+
+% ---
+% Dedicatória e epígrafe (manual UFV 3.1.6 e 3.1.8): sem título, texto na
+% parte inferior da folha, alinhado à direita.
+% ---
+\renewenvironment{dedicatoria}[1][]{%
+  \ifthenelse{\equal{#1}{}}{%
+    \PRIVATEbookmarkthis{\dedicatorianame}}{\pretextualchapter{#1}}%
+  \vspace*{\fill}%
+  \begin{flushright}\begin{minipage}{.5\textwidth}\raggedleft\SingleSpacing\itshape
+}{%
+  \end{minipage}\end{flushright}\PRIVATEclearpageifneeded}
+
+\renewenvironment{epigrafe}[1][]{%
+  \ifthenelse{\equal{#1}{}}{%
+    \PRIVATEbookmarkthis{\epigraphname}}{\pretextualchapter{#1}}%
+  \vspace*{\fill}%
+  \begin{flushright}\begin{minipage}{.5\textwidth}\raggedleft\SingleSpacing\itshape
+}{%
+  \end{minipage}\end{flushright}\PRIVATEclearpageifneeded}
+
+% ---
+% Palavras-chave (NBR 6028/2021 e manual UFV 3.1.9): "Palavras-chave:" seguida
+% dos termos separados por ponto e vírgula e finalizados por ponto.
+% Uso: \palavraschave{termo um, termo dois, termo três}
+% ---
+\newcommand{\ufv@sepchave}{}
+\newcommand{\ufv@itemchave}[1]{\ufv@sepchave #1\renewcommand{\ufv@sepchave}{; }}
+\newcommand{\ufv@listachave}[2]{%
+  \par\vspace{\onelineskip}\noindent #1~%
+  \renewcommand{\ufv@sepchave}{}%
+  \docsvlist{#2}.\par}
+\newcommand{\palavraschave}[1]{\begingroup
+  \let\do\ufv@itemchave\ufv@listachave{Palavras-chave:}{#1}\endgroup}
+\newcommand{\keywords}[1]{\begingroup
+  \let\do\ufv@itemchave\ufv@listachave{Keywords:}{#1}\endgroup}
+
+% ---
+% Quadros, gráficos e códigos: ilustrações com lista própria
+% (manual UFV 3.1.11; NBR 14724/2025)
+% ---
+\newcommand{\ufv@ilustracao}[4]{%
+  \newfloat{#1}{#2}{#3}%
+  \newlistentry{#1}{#2}{0}%
+  \expandafter\def\csname cft#1name\endcsname{#3\space}%
+  \expandafter\def\csname cft#1aftersnum\endcsname{\hfill\textendash\hfill}%
+  \expandafter\setlength\csname cft#1numwidth\endcsname{\cftfigurenumwidth}%
+  \expandafter\def\csname listof#1sname\endcsname{#4}%
+  \newlistof{listof#1s}{#2}{#4}}
+\newcommand{\quadroname}{Quadro}
+\newcommand{\graficoname}{Gr\'afico}
+\newcommand{\codigoname}{C\'odigo}
+\ufv@ilustracao{quadro}{loq}{\quadroname}{Lista de quadros}
+\ufv@ilustracao{grafico}{lgr}{\graficoname}{Lista de gr\'aficos}
+\ufv@ilustracao{codigo}{loc}{\codigoname}{Lista de c\'odigos}
+
+% ---
+% Listas de siglas e de abreviaturas (manual UFV 3.1.13 e 4.7): recomenda-se uma
+% lista própria para cada tipo. A primeira ocorrência de uma sigla vem por
+% extenso, seguida da sigla entre parênteses.
+%   \DeclareAcronym{api}{short = API, long = Interface de Programação de Aplicações}
+%   \ac{api}  (1ª vez: "Interface ... (API)"; depois: "API")    \acp{api}  (plural)
+%   \listadesiglas  imprime a Lista de siglas (só as efetivamente usadas)
+% Abreviaturas (p., ed., art. ...) usam a etiqueta "abreviatura" e \acs{...}:
+%   \DeclareAcronym{art}{short = art., long = artigo, tag = abreviatura}
+%   \listadeabreviaturas  imprime a Lista de abreviaturas
+% ---
+\RequirePackage{acro}
+\NewAcroTemplate[heading]{ufv}{\pretextualchapter{\acrolistname}}
+% Lista em duas colunas alinhadas: sigla à esquerda e significado alinhado verticalmente
+% (a NBR 14724 só exige a ordem alfabética e o significado por extenso; o formato é livre).
+% Nomes em outro idioma ficam em itálico: long = \textit{Institute of ...}
+\acsetup{list/name = {Lista de siglas}, list/heading = ufv, list/template = tabular,
+  templates/colspec = {@{}l@{\hspace{1.5em}}p{.8\linewidth}@{}}}
+\newcommand{\listadesiglas}{{\renewcommand{\arraystretch}{1.5}%
+  \printacronyms[exclude = abreviatura]}\PRIVATEclearpageifneeded}
+\newcommand{\listadeabreviaturas}{{\renewcommand{\arraystretch}{1.5}%
+  \printacronyms[name = {Lista de abreviaturas}, include = abreviatura]}%
+  \PRIVATEclearpageifneeded}
+
+% ---
+% Glossário (opcional, pós-textual; manual UFV 3.3.2): termos técnicos com
+% definições. Uso: \begin{glossario} \termo{Termo}{definição} ... \end{glossario}
+% ---
+\newcommand{\glossarioname}{Gloss\'ario}
+\newcommand{\termo}[2]{\par\noindent\textbf{#1:} #2\par\medskip}
+\newenvironment{glossario}{%
+  \pretextualchapter{\texorpdfstring{\MakeTextUppercase{\glossarioname}}{\glossarioname}}%
+  \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{\glossarioname}}{\glossarioname}}%
+  \begin{SingleSpacing}}{\end{SingleSpacing}\clearpage}
+
+% ---
+% Fonte e notas (manual UFV 4.9, NBR 14724/2025): o cabeçalho da ilustração
+% (tipo, número e título) é centralizado e o rodapé (fonte, legenda e notas) é
+% alinhado à margem esquerda da ilustração, na mesma largura dela.
+% ---
+% (\newcommand com argumento opcional guarda o corpo em \\fonte; copiamos esse corpo)
+\expandafter\let\expandafter\ufv@fonte@orig\csname\string\fonte\endcsname
+\renewcommand{\fonte}[2][\fontename]{%
+  \begingroup\normalcaption\captionstyle[\raggedright]{\raggedright}%
+  \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0pt}%
+  \def\baselinestretch{1}%
+  \ufv@fonte@orig[#1]{#2}\endgroup}
+
+% Título, fonte, legenda e nota (NBR 14724): o título identifica a ilustração (acima);
+% abaixo vêm, nesta ordem, a fonte (obrigatória, mesmo para obra do autor), a legenda
+% (explica símbolos, siglas, cores ou partes da ilustração) e as notas (observações e
+% informações complementares). \fonte, \legenda e \nota imprimem "Fonte:", "Legenda:" e
+% "Nota:" em linhas seguidas, em espaço simples e tamanho 10.
+\newcommand{\legenda}[1]{\fonte[Legenda]{#1}}
+
+% Ambientes ilustracao e tabela: medem o conteúdo e montam, na largura dele,
+%   título (acima) + conteúdo + rodapé (fonte, legenda e notas, alinhado à esquerda).
+% Mesma ordem de argumentos do \IBGEtab do abntex2: título, [conteúdo], rodapé.
+%   \begin{ilustracao}{\caption{Título}\label{rótulo}}{\fonte{...}\legenda{...}\nota{...}}
+%      \includegraphics{...}   (figura, diagrama, gráfico, quadro, código)
+%   \end{ilustracao}
+%   \begin{tabela}{\caption{Título}\label{rótulo}}{\fonte{...}\nota{...}}  \begin{tabular}...
+%   \end{tabela}
+% Use dentro do float correspondente (figure, quadro, grafico, codigo, table).
+% ilustracao: título centralizado (manual UFV 4.9). tabela: título à esquerda e
+% conteúdo em tamanho 10 (normas de apresentação tabular do IBGE, como o \IBGEtab).
+\newsavebox{\ufv@ilbox}
+\newcommand{\ufv@ilestilocentro}{\normalcaption\captionstyle[\centering]{\centering}}
+\newcommand{\ufv@ilestiloesquerda}{\hangcaption\captionstyle[\raggedright]{\raggedright}}
+\newlength{\ufv@ilw}
+\newlength{\ufv@ilminw}
+\newenvironment{ufv@ilcaixa}[4]{%
+  \def\ufv@ilestilo{#1}\setlength{\ufv@ilminw}{#2}\def\ufv@iltitulo{#3}\def\ufv@ilrodape{#4}%
+  \begin{lrbox}{\ufv@ilbox}}{%
+  \end{lrbox}\par\noindent\hfil
+  \setlength{\ufv@ilw}{\wd\ufv@ilbox}%
+  \ifdim\ufv@ilw<\ufv@ilminw\setlength{\ufv@ilw}{\ufv@ilminw}\fi
+  \begin{minipage}{\ufv@ilw}%
+    \begingroup\def\baselinestretch{1}\selectfont\ufv@ilestilo
+    \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0.5\onelineskip}%
+    \ufv@iltitulo\par\endgroup
+    \usebox{\ufv@ilbox}\par\nointerlineskip\vskip 0.3\onelineskip
+    \ufv@ilrodape
+  \end{minipage}\hfil\par}
+\newenvironment{ilustracao}[3][0pt]{%
+  \begin{ufv@ilcaixa}{\ufv@ilestilocentro}{#1}{#2}{#3}}{\end{ufv@ilcaixa}}
+\newenvironment{tabela}[3][0pt]{%
+  \begin{ufv@ilcaixa}{\ufv@ilestiloesquerda}{#1}{#2}{#3}\IBGEtabfontsize}{\end{ufv@ilcaixa}}
+% O argumento opcional [<largura>] dá a largura mínima do título e do rodapé; use
+% \begin{ilustracao}[\linewidth] para códigos (lstlisting com moldura) e outros
+% conteúdos cuja largura natural é menor que a da página.
+
+% Fonte de ilustração produzida pelo próprio autor (manual UFV 4.9)
+\newcommand{\elaboracaopropria}{\fonte{Elaborado pelo pr\'oprio autor}}
+
+% ---
+% O manual pede que o trabalho seja dividido em seções, não em capítulos:
+% \autoref{} de um \chapter imprime "Seção N".
+% ---
+\newcommand{\ufv@autorefsecao}{%
+  \def\chapterautorefname{Se\c{c}\~ao}%
+  \def\sectionautorefname{Se\c{c}\~ao}%
+  \def\subsectionautorefname{Se\c{c}\~ao}%
+  \def\subsubsectionautorefname{Se\c{c}\~ao}}
+\AtBeginDocument{\ufv@autorefsecao}
+\@ifundefined{extrasbrazil}{}{\addto\extrasbrazil{\ufv@autorefsecao}}
+\@ifundefined{extrasbrazilian}{}{\addto\extrasbrazilian{\ufv@autorefsecao}}
+
+% ---
+% Ajustes do biblatex (manual UFV, cap. 5 e 6), aplicados quando o pacote
+% estiver carregado (o biblatex é carregado depois deste pacote).
+% ---
+\AtEndPreamble{%
+  \@ifpackageloaded{listings}{%
+    % \end{lstlisting} indentado não gera linha em branco no fim da listagem.
+    % (1) sem keepspaces: descarta o espaço pendente ao fechar o ambiente
+    \let\ufv@lstDeInit\lst@DeInit
+    \def\lst@DeInit{\global\lst@token{}\global\lst@length\z@\ufv@lstDeInit}%
+    % (2) com keepspaces=true: os espaços iniciais de cada linha só são
+    % impressos quando surge o primeiro caractere visível da linha
+    \newcount\ufv@lstsp
+    \newif\ifufv@lstcont
+    \lst@AddToHook{InitVarsBOL}{\global\ufv@lstsp\z@\global\ufv@lstcontfalse}%
+    \let\ufv@lstPS\lst@ProcessSpace
+    \def\lst@ProcessSpace{\lst@ifkeepspaces
+      \ifufv@lstcont\expandafter\ufv@lstPS\else\expandafter\ufv@lstdefer\fi
+      \else\expandafter\ufv@lstPS\fi}%
+    \def\ufv@lstdefer{\global\advance\ufv@lstsp\@ne}%
+    \def\ufv@lstflush{\ifufv@lstcont\else\global\ufv@lstconttrue
+      \ifnum\ufv@lstsp>\z@
+        \@tempcnta\ufv@lstsp \global\ufv@lstsp\z@
+        \lst@PrintToken \lst@whitespacetrue
+        \@whilenum\@tempcnta>\z@\do{\lst@AppendOther\lst@outputspace
+          \advance\@tempcnta\m@ne}%
+        \lst@PrintToken
+      \fi\fi}%
+    \let\ufv@lstWF\lst@whitespacefalse
+    \def\lst@whitespacefalse{\ufv@lstflush\ufv@lstWF}%
+  }{}%
+  \@ifpackageloaded{biblatex}{%
+    % referências em espaço simples
+    \AtBeginBibliography{\SingleSpacing}%
+    % intervalos: páginas com hífen (p. 855-869) e meses com barra (nov./dez. 2003)
+    \DefineBibliographyExtras{brazilian}{\protected\def\bibrangedash{-}}%
+    \renewcommand*{\bibdaterangesep}{/}%
+    % citação de obra sem autoria: "Pequena [...]" (primeira palavra) ou, se o
+    % campo shorttitle estiver preenchido, "A flor [...]" (título curto completo)
+    \DeclareFieldFormat{firstword}{%
+      \normalfont
+      \iffieldundef{shorttitle}{\FirstWord{#1}}{#1}\space[...]\isdot}%
+    % título "REFERÊNCIAS" centralizado, sem indicativo numérico, como nos demais elementos
+    \defbibheading{bibliography}[Refer\^encias]{%
+      \pretextualchapter{\texorpdfstring{\MakeTextUppercase{#1}}{#1}}%
+      \addcontentsline{toc}{chapter}{\texorpdfstring{\MakeTextUppercase{#1}}{#1}}}%
+  }{}%
+}
 
 % ---
 % FIM DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DE VIÇOSA

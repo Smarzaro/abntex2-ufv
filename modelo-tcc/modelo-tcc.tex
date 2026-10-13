@@ -1,0 +1,284 @@
+%%==============================================================
+%% MODELO DE TRABALHO DE CONCLUSÃO DE CURSO (VAZIO)
+%% Curso de Sistemas de Informação - Universidade Federal de Viçosa
+%% Campus de Rio Paranaíba
+%% Baseado no Manual de Normalização de Trabalhos Acadêmicos da UFV
+%% (edição 2026-2; NBR 14724/2025, 6023/2025, 10520/2023)
+%%
+%% Arquivo em formato UTF-8. Compilar com pdflatex + biber (nesta pasta: latexmk).
+%% Precisa do arquivo abntex2-UFV.sty (pasta pai; se copiar este modelo para outro
+%% lugar, copie o .sty para a mesma pasta e apague a linha ensure_path do latexmkrc).
+%%
+%% COMO USAR
+%%  1. Preencha os dados do trabalho (seção "DADOS DO TRABALHO", logo abaixo).
+%%  2. Escreva o texto nos arquivos da pasta capitulos/ (um por seção primária).
+%%  3. Cadastre as referências em referencias.bib e cite com \cite{chave} e
+%%     \textcite{chave}.
+%%  4. Descomente as listas, pacotes e elementos opcionais de que precisar.
+%%
+%% Todos os recursos, com exemplos, dicas de metodologia científica e de uso da
+%% classe, estão documentados no guia da pasta ../docs (guia-abntex2-ufv.pdf).
+%%==============================================================
+
+% A classe abntex2 carrega o babel com o nome obsoleto "brazil"; o aviso é inofensivo
+\RequirePackage{silence}
+\WarningFilter{babel}{Name 'brazil' is deprecated}
+\documentclass[
+    12pt,                   % tamanho da fonte
+    openright,              % seções primárias começam em página ímpar (em oneside equivale a nova página)
+    oneside,                % impressão só no anverso (twoside para frente e verso)
+    a4paper,                % tamanho do papel
+    english,                % idioma adicional (hifenização)
+    brazilian,              % idioma principal do documento
+    ]{abntex2}
+
+% ---
+% PACOTES
+% ---
+\usepackage{abntex2-UFV}        % Personalização UFV (opções: fonte=times|arial|cm, capacampus)
+\usepackage[T1]{fontenc}        % Seleção de códigos de fonte de saída
+\usepackage{indentfirst}        % Indenta o primeiro parágrafo de cada seção
+\usepackage{graphicx}           % Inclusão de figuras
+\usepackage{csquotes}           % Aspas (\enquote) e citações no padrão do idioma
+\usepackage[final]{microtype}   % Melhorias de justificação
+
+% Tabelas e quadros
+\usepackage{booktabs}           % \toprule, \midrule e \bottomrule
+\usepackage{tabularx}           % colunas X de largura automática
+\usepackage{multirow}           % células mescladas em linhas
+%\usepackage{longtable}         % tabelas que ocupam mais de uma página
+%\usepackage{pdflscape}         % página em paisagem (ambiente landscape)
+%\usepackage{colortbl}          % células sombreadas (\cellcolor)
+%\usepackage{siunitx}           % alinhamento decimal e unidades
+%\sisetup{output-decimal-marker = {,}, group-separator = {.}}
+
+% Diagramas, gráficos e cronograma (descomente o que usar)
+%\usepackage{tikz}
+%\usetikzlibrary{arrows.meta, positioning}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=newest}
+
+% Código-fonte (use dentro dos ambientes codigo e ilustracao). Para ativar, descomente o
+% bloco inteiro; as opções estão explicadas no Apêndice D do guia (docs/guia-abntex2-ufv.pdf).
+%\usepackage[scaled=0.88]{FiraMono}   % fonte de largura fixa legível
+%\usepackage{xcolor}
+%\usepackage{listings}
+%\definecolor{ufvcodebg}{gray}{0.96}
+%\definecolor{ufvkw}{RGB}{0,51,153}      % palavras-chave
+%\definecolor{ufvcom}{RGB}{0,110,50}     % comentários
+%\definecolor{ufvstr}{RGB}{163,21,21}    % cadeias de caracteres
+%\lstdefinestyle{ufvcodigo}{
+%  basicstyle=\ttfamily\footnotesize, columns=fixed, keepspaces=true, tabsize=4,
+%  keywordstyle=\bfseries\color{ufvkw}, commentstyle=\itshape\color{ufvcom},
+%  stringstyle=\color{ufvstr}, showstringspaces=false,
+%  numbers=left, numberstyle=\tiny\color{black!55}, numbersep=7pt,
+%  backgroundcolor=\color{ufvcodebg}, frame=single, rulecolor=\color{black!25},
+%  breaklines=true, postbreak={\mbox{\textcolor{ufvcom}{$\hookrightarrow$}\space}},
+%  extendedchars=true,
+%  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+%           {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+%           {â}{{\^a}}1 {ê}{{\^e}}1 {ô}{{\^o}}1 {ã}{{\~a}}1 {õ}{{\~o}}1
+%           {Ã}{{\~A}}1 {Õ}{{\~O}}1 {ç}{{\c c}}1 {Ç}{{\c C}}1 {à}{{\`a}}1
+%           {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1,
+%}
+% versão em preto e branco do mesmo estilo (para impressão sem cores)
+%\lstdefinestyle{ufvcodigopb}{style=ufvcodigo, keywordstyle=\bfseries,
+%  commentstyle=\itshape, stringstyle=\relax, backgroundcolor=\color{white},
+%  rulecolor=\color{black}, numberstyle=\tiny}
+%\lstset{style=ufvcodigo}
+
+% ---
+% REFERÊNCIAS: biblatex com o estilo abnt (ajustes UFV no abntex2-UFV.sty)
+% ---
+\usepackage[backend=biber,
+            style=abnt,
+            uniquename=init,
+            giveninits,
+            repeatfields,
+            justify,
+            noslsn]{biblatex}
+
+\usepackage{xurl}               % quebra de linha em URLs longas
+\urlstyle{same}
+
+\addbibresource{referencias.bib}
+\setlength\bibparsep{10pt}
+\setlength{\emergencystretch}{3em}
+
+% ---
+% SIGLAS (pacote acro, carregado pelo abntex2-UFV)
+% Declare cada sigla aqui e use \ac{chave} na primeira ocorrência no texto (a sigla sai por
+% extenso, seguida da sigla entre parênteses) e nas seguintes (só a sigla). Não use \ac em
+% resumos, títulos e legendas. Nomes em outro idioma ficam em itálico (\textit{...}).
+% ---
+%\DeclareAcronym{abnt}{short = ABNT, long = Associação Brasileira de Normas Técnicas}
+%\DeclareAcronym{api}{short = API, long = Interface de Programação de Aplicações}
+% Abreviaturas (lista própria): use tag = abreviatura e \acs{chave}
+%\DeclareAcronym{art}{short = art., long = artigo, tag = abreviatura}
+
+% ---
+% DADOS DO TRABALHO (capa, folha de rosto e folha de aprovação)
+% ---
+\titulo{Título do trabalho}
+\autor{Nome do Autor}
+\local{Rio Paranaíba}
+\data{\the\year}
+\orientador{Nome do Orientador}      % \orientadora{...} no feminino; instituição padrão: UFV-CRP
+%\coorientador{Nome do Coorientador} % \coorientadora{...} no feminino
+\instituicao{Universidade Federal de Viçosa}
+
+\campus{\emph{Campus} Rio Paranaíba}   % aparece na capa só com a opção capacampus
+\curso{Sistemas de Informação}
+\membrobanca{Dr. Nome do Membro da Banca}       % instituição padrão: UFV-CRP
+\membrobanca[UFV]{Dra. Nome do Membro da Banca} % ou informe a instituição entre colchetes
+%\databanca{14 de janeiro de 2026}              % se omitida, a folha de aprovação traz espaço em branco
+
+% Natureza do trabalho (nota descritiva da folha de rosto), conforme o manual da UFV:
+% \preambuloUFV{tcc|bacharelado|licenciatura}{título}   ou   \preambulo{texto livre}
+\preambuloUFV{bacharelado}{Sistemas de Informação}
+
+% ---
+% Configurações de aparência do PDF final (para impressão, troque as cores dos links por black)
+\makeatletter
+\hypersetup{
+        pdftitle={\@title},
+        pdfauthor={\@author},
+        pdfsubject={\imprimirpreambulo},
+        pdfcreator={LaTeX with abnTeX2},
+        colorlinks=true,
+        linkcolor=black,
+        citecolor=blue,
+        filecolor=magenta,
+        urlcolor=blue,
+        bookmarksdepth=4
+}
+\makeatother
+% ---
+
+\begin{document}
+\frenchspacing
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+\pretextual
+
+\imprimircapa
+
+% Folha de rosto (a ficha catalográfica só é obrigatória em teses e dissertações)
+\imprimirfolhaderosto
+
+\imprimirfolhadeaprovacao
+
+% Dedicatória (opcional; sem título, texto na parte inferior à direita)
+%\begin{dedicatoria}
+%   Texto da dedicatória
+%\end{dedicatoria}
+
+% Agradecimentos (opcional em TCC)
+\begin{agradecimentos}
+% Escreva os agradecimentos aqui.
+\end{agradecimentos}
+
+% Epígrafe (opcional; sem título, texto na parte inferior à direita)
+%\begin{epigrafe}
+%    ``Texto da epígrafe.''\\
+%    (Autor)
+%\end{epigrafe}
+
+% RESUMO em português (obrigatório): parágrafo único, 150 a 500 palavras, verbo na voz
+% ativa e na terceira pessoa, com objetivo, método, resultados e conclusões.
+\begin{resumo}
+ \noindent
+ % Escreva o resumo aqui.
+
+ \palavraschave{palavra um, palavra dois, palavra três}
+\end{resumo}
+
+% RESUMO em inglês (obrigatório)
+\begin{resumo}[Abstract]
+\begin{otherlanguage*}{english}
+   \noindent
+   % Write the abstract here.
+
+   \keywords{keyword one, keyword two, keyword three}
+ \end{otherlanguage*}
+\end{resumo}
+
+% Listas de ilustrações: uma lista própria para cada tipo. Descomente as dos tipos que
+% existem no seu trabalho (e remova as demais).
+%\pdfbookmark[0]{\listfigurename}{lof}
+%\listoffigures*
+%\cleardoublepage
+
+%\pdfbookmark[0]{\listofquadrosname}{loq}
+%\listofquadros*
+%\cleardoublepage
+
+%\pdfbookmark[0]{\listofgraficosname}{lgr}
+%\listofgraficos*
+%\cleardoublepage
+
+%\pdfbookmark[0]{\listofcodigosname}{loc}
+%\listofcodigos*
+%\cleardoublepage
+
+%\pdfbookmark[0]{\listtablename}{lot}
+%\listoftables*
+%\cleardoublepage
+
+% Lista de siglas e lista de abreviaturas (opcionais): geradas pelo acro com as siglas e
+% abreviaturas declaradas e usadas no texto.
+%\listadesiglas
+%\listadeabreviaturas
+
+% Lista de símbolos (opcional)
+%\begin{simbolos}
+%\item[$\infty$ ] Infinito
+%\end{simbolos}
+
+% Sumário
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% Cada seção primária fica em um arquivo da pasta capitulos/.
+% Adicione, remova ou renomeie conforme a estrutura do seu trabalho.
+\input{capitulos/01-introducao}
+\input{capitulos/02-referencial-teorico}
+\input{capitulos/03-metodologia}
+\input{capitulos/04-resultados}
+\input{capitulos/05-conclusao}
+%\input{capitulos/06-cronograma}   % apenas no projeto (TCC I)
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+% Lista de referências (o aviso "Empty bibliography" é normal enquanto não houver citações)
+\printbibliography
+
+% Glossário (opcional): relação de termos técnicos com suas definições
+%\begin{glossario}
+%\termo{Termo}{definição do termo.}
+%\end{glossario}
+
+% Apêndices (texto elaborado pelo autor)
+%\begin{apendicesenv}
+%\partapendices
+%\chapter{Primeiro apêndice}
+%\end{apendicesenv}
+
+% Anexos (documentos de terceiros)
+%\begin{anexosenv}
+%\partanexos
+%\chapter{Primeiro anexo}
+%\end{anexosenv}
+
+\end{document}

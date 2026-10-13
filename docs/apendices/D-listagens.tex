@@ -1,0 +1,170 @@
+% Apêndice do guia: listagens de código com o pacote listings. Apague-o no seu trabalho.
+
+% definição da linguagem json, usada nos exemplos (arquivo exibido na Seção D.4)
+\input{apendices/exemplos/lang-json}
+
+\chapter{Guia de listagens de código}\label{ap:listagens}
+
+Este apêndice reúne a configuração e as instruções básicas do pacote \texttt{listings},
+usado para apresentar código-fonte no trabalho. A configuração do guia (no preâmbulo do
+arquivo \texttt{guia-abntex2-ufv.tex}; uma cópia comentada está no \texttt{modelo-tcc})
+define uma fonte de largura fixa legível, a numeração das linhas e a sintaxe colorida. As
+listagens são ilustrações do tipo ``Código'': ficam dentro dos ambientes \texttt{codigo} e
+\texttt{ilustracao}, com título, fonte e, se preciso, legenda e nota
+(Apêndice~\ref{ap:tabelas}).
+
+\section{Configuração recomendada}\label{sec:lst-config}
+
+O trecho abaixo, do preâmbulo, escolhe a fonte, define as cores e cria o estilo
+\texttt{ufvcodigo}, aplicado a todas as listagens com \texttt{\textbackslash lstset}:
+
+\begin{lstlisting}[style=exemplo, language={[LaTeX]TeX}]
+\usepackage[scaled=0.88]{FiraMono}   % fonte de largura fixa legível
+\usepackage{xcolor}
+\usepackage{listings}
+\definecolor{ufvkw}{RGB}{0,51,153}      % palavras-chave
+\definecolor{ufvcom}{RGB}{0,110,50}     % comentários
+\definecolor{ufvstr}{RGB}{163,21,21}    % cadeias de caracteres
+\lstdefinestyle{ufvcodigo}{
+  basicstyle=\ttfamily\footnotesize, columns=fixed, keepspaces=true, tabsize=4,
+  keywordstyle=\bfseries\color{ufvkw}, commentstyle=\itshape\color{ufvcom},
+  stringstyle=\color{ufvstr}, showstringspaces=false,
+  numbers=left, numberstyle=\tiny\color{black!55}, numbersep=7pt,
+  backgroundcolor=\color{black!4}, frame=single, rulecolor=\color{black!25},
+  breaklines=true, extendedchars=true,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {ã}{{\~a}}1 {ç}{{\c c}}1 ...}   % acentos
+\lstset{style=ufvcodigo}
+\end{lstlisting}
+
+\begin{itemize}
+  \item \textbf{Fonte}: \texttt{FiraMono} distingue bem 0/O e 1/l/I e mantém a largura fixa.
+        Alternativas já instaladas no MiKTeX e no TeX Live: \texttt{sourcecodepro},
+        \texttt{zi4} (Inconsolata, mais leve) e \texttt{beramono}. Como o pacote muda o
+        \texttt{\textbackslash ttdefault}, vale também para o \texttt{\textbackslash texttt} do texto.
+        A opção \texttt{scaled} ajusta o tamanho relativo da fonte.
+  \item \textbf{Largura fixa}: use \texttt{columns=fixed} (e não \texttt{flexible}), senão o
+        alinhamento das colunas do código se perde.
+  \item \textbf{Cores}: as ilustrações podem ser coloridas (manual UFV 4.1), mas escolha
+        cores que continuem legíveis em escala de cinza; palavras-chave em negrito e
+        comentários em itálico ajudam. Para quem imprime em preto e branco, o estilo
+        \texttt{ufvcodigopb} (Seção~\ref{sec:cod-pb}) desliga as cores.
+\end{itemize}
+
+\section{Uso básico}
+
+O código vai dentro do ambiente \texttt{lstlisting}, com a linguagem em
+\texttt{[language=...]}. O resultado do \autoref{cod:guia-python} usa o estilo padrão:
+
+\codexemplo{codigo-python}
+
+Para listar parte de um arquivo, em vez de copiar o código, use \texttt{\textbackslash lstinputlisting}
+com \texttt{firstline} e \texttt{lastline} (ou \texttt{linerange}); assim o código do texto
+nunca fica diferente do arquivo (\autoref{cod:guia-arquivo}):
+
+\codexemplo{codigo-arquivo}
+
+Para um trecho curto no meio de uma frase, use \texttt{\textbackslash lstinline}: por
+exemplo, \lstinline[language=Python]{total += v} soma o valor ao acumulador. Como o código
+vem entre delimitadores (aqui, chaves), evite o delimitador dentro do trecho.
+
+\section{Opções mais usadas}
+
+O \autoref{qua:lst-opcoes} resume as opções mais úteis. Elas podem ser dadas no
+\texttt{\textbackslash lstset} (para todas as listagens) ou entre colchetes em uma listagem
+(só para ela).
+
+\begin{quadro}[htbp]
+\begin{ilustracao}[\linewidth]{\caption[Opções mais usadas do pacote listings]{Opções mais usadas do pacote \texttt{listings}}\label{qua:lst-opcoes}}{\elaboracaopropria}
+  \renewcommand{\arraystretch}{1.2}
+  \small
+  \begin{tabularx}{\linewidth}{|>{\ttfamily\raggedright\arraybackslash}p{4.2cm}|X|}
+    \hline
+    \textnormal{\textbf{Opção}} & \textbf{Efeito} \\
+    \hline
+    language=Python & Linguagem da listagem (veja a Seção~\ref{sec:lst-linguagens}) \\
+    \hline
+    numbers=none & Remove a numeração das linhas (\texttt{left} a coloca à esquerda) \\
+    \hline
+    firstnumber=10 & Começa a numeração na linha 10 (útil para trechos de arquivos) \\
+    \hline
+    firstline=4, lastline=11 & Em \texttt{\textbackslash lstinputlisting}, mostra só as linhas 4 a 11 \\
+    \hline
+    frame=single & Moldura (\texttt{none}, \texttt{tb}, \texttt{lines} etc.) \\
+    \hline
+    backgroundcolor & Cor de fundo da listagem, por exemplo \texttt{\textbackslash color\{black!4\}} \\
+    \hline
+    breaklines=true & Quebra linhas longas (e \texttt{postbreak} marca a continuação) \\
+    \hline
+    basicstyle & Fonte e tamanho do código, por exemplo \texttt{\textbackslash ttfamily\textbackslash footnotesize} (tamanho 10); \texttt{\textbackslash small} dá letra um pouco maior \\
+    \hline
+    keywordstyle, commentstyle, stringstyle & Estilo de palavras-chave, comentários e cadeias (cor, negrito, itálico) \\
+    \hline
+    morekeywords=\{foo,\allowbreak bar\} & Acrescenta palavras-chave à linguagem \\
+    \hline
+    escapechar=\% & Permite comandos \LaTeX\ dentro do código, depois do caractere (por exemplo, \texttt{\textbackslash textbf}) \\
+    \hline
+    tabsize=4 & Largura do caractere de tabulação, em espaços \\
+    \hline
+    linerange=\{3-5,9-12\} & Em \texttt{\textbackslash lstinputlisting}, mostra intervalos de linhas \\
+    \hline
+  \end{tabularx}
+\end{ilustracao}
+\end{quadro}
+
+\section{Linguagens}\label{sec:lst-linguagens}
+
+O \texttt{listings} reconhece, entre outras, \texttt{Python}, \texttt{SQL}, \texttt{Java},
+\texttt{C}, \texttt{C++}, \texttt{HTML}, \texttt{XML}, \texttt{PHP}, \texttt{Bash}
+(\texttt{bash}), \texttt{Matlab} e \texttt{TeX}. Para uma linguagem que o pacote não conhece,
+como \texttt{JSON}, defina-a uma vez com \texttt{\textbackslash lstdefinelanguage}, listando
+as palavras-chave, os comentários e as cadeias:
+
+\lstinputlisting[style=exemplo, language={[LaTeX]TeX}]{apendices/exemplos/lang-json.tex}
+
+e use-a como qualquer outra (\autoref{cod:guia-json}):
+
+\codexemplo{codigo-json}
+
+Se a linguagem tiver variantes (dialetos), escolha-a com a sintaxe
+\texttt{[language=[ANSI]C]}. A lista completa está no manual do pacote (\texttt{texdoc listings}).
+
+\section{Acentos e caracteres especiais}
+
+Com o arquivo em UTF-8 e \texttt{pdflatex}, o \texttt{listings} não reconhece os
+caracteres acentuados por si só; a opção \texttt{literate}, na configuração da
+Seção~\ref{sec:lst-config}, converte cada letra acentuada na sua versão correta (é preciso listar as letras
+que aparecem no código, em maiúsculas e minúsculas). Sem ela, o PDF mostra caracteres
+estranhos ou o \LaTeX\ acusa erro. Se o código tiver símbolos como \texttt{<}, \texttt{>} ou
+\texttt{|} que saiam errados em algumas fontes, use fonte \texttt{T1} (\texttt{\textbackslash usepackage[T1]\{fontenc\}}),
+já carregada neste modelo.
+
+\section{Cores, impressão em preto e branco e alternativas}\label{sec:cod-pb}
+
+O estilo \texttt{ufvcodigopb} é o mesmo \texttt{ufvcodigo} sem cores (palavras-chave em
+negrito, comentários em itálico, fundo branco). Escolha-o em uma listagem com
+\texttt{[style=ufvcodigopb]} ou para todas com \texttt{\textbackslash lstset\{style=ufvcodigopb\}}
+(\autoref{cod:guia-pb}):
+
+\codexemplo{codigo-pb}
+
+Outra opção é o pacote \texttt{minted}, que usa o \emph{Pygments} (Python) e produz uma
+coloração mais fiel à de editores de código, para muitas linguagens. Ele exige o Python
+instalado e a compilação com \texttt{-shell-escape}; o Overleaf suporta, mas em máquinas
+locais isso complica a instalação e a segurança. O \texttt{listings} dispensa tudo isso e é
+a escolha deste modelo.
+
+\section{Dicas}
+
+\begin{itemize}
+  \item Código longo (mais de uma página) vai para apêndice ou repositório; no texto, mostre
+        só o essencial e cite o repositório nas referências.
+  \item Nunca use imagem (\emph{print}) de código: não pode ser copiado nem lido por leitores
+        de tela, e perde nitidez.
+  \item Em \texttt{ilustracao}, use o argumento opcional \texttt{[\textbackslash linewidth]} para que
+        o título e o rodapé tenham a largura da página e acompanhem a moldura da listagem.
+  \item Cuide da indentação e da largura: com \texttt{\textbackslash footnotesize} cabem cerca de
+        85 colunas de código na largura do texto; linhas mais longas são quebradas
+        (\texttt{breaklines=true}).
+  \item Sempre cite a listagem no texto, com \texttt{\textbackslash autoref}, e explique o que
+        ela faz.
+\end{itemize}

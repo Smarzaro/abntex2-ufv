@@ -1,0 +1,327 @@
+% Encoding: UTF-8
+%
+% EXEMPLOS DE ENTRADAS BIBLATEX conforme o Manual de Normalização de Trabalhos
+% Acadêmicos da UFV (2025; NBR 6023/2018 e NBR 10520/2023).
+%
+% Este arquivo alimenta o Apêndice A do modelo (apendices/A-guia-referencias.tex),
+% que mostra, para cada entrada, o código e o resultado impresso. Os trechos entre
+% as marcas "BEGIN:" e "END:" são exibidos no apêndice; não remova as marcas.
+% Todas as entradas têm keywords = {guia}, de modo que NÃO aparecem na lista de
+% Referências do trabalho (\printbibliography[notkeyword=guia]).
+%
+% Alguns dados são ilustrativos (autores e títulos fictícios, indicados no campo
+% note do apêndice); os demais reproduzem exemplos do manual da UFV.
+%
+% Para usar um modelo no seu trabalho: copie a entrada para o arquivo
+% referencias.bib, troque a chave (ex-livro -> sobrenome2025) e os dados, e
+% remova a linha keywords = {guia}.
+
+@comment{BEGIN:livro}
+@book{ex-livro,
+  author    = {Huberman, Leo},
+  title     = {História da riqueza do homem},
+  edition   = {21},
+  location  = {Rio de Janeiro},
+  publisher = {LTC},
+  year      = {1986},
+  keywords  = {guia},
+}
+@comment{END:livro}
+
+@comment{BEGIN:livro_3}
+@book{ex-livro-3,
+  author    = {Passos, L. M. M. and Fonseca, A. and Chaves, M.},
+  title     = {Alegria de saber},
+  subtitle  = {matemática, segunda série, 2, primeiro grau: livro do professor},
+  location  = {São Paulo},
+  publisher = {Scipione},
+  year      = {1995},
+  pagetotal = {136},
+  keywords  = {guia},
+}
+@comment{END:livro_3}
+
+@comment{BEGIN:livro_4}
+@book{ex-livro-4,
+  author    = {Gamma, Erich and Helm, Richard and Johnson, Ralph and Vlissides, John},
+  title     = {Padrões de projeto},
+  subtitle  = {soluções reutilizáveis de software orientado a objetos},
+  location  = {Porto Alegre},
+  publisher = {Bookman},
+  year      = {2000},
+  keywords  = {guia},
+}
+@comment{END:livro_4}
+
+@comment{BEGIN:livro_org}
+@book{ex-livro-org,
+  editor    = {Ferreira, Léslie Piccolotto},
+  editortype = {organizer},
+  title     = {O fonoaudiólogo e a escola},
+  location  = {São Paulo},
+  publisher = {Summus},
+  year      = {1991},
+  keywords  = {guia},
+}
+@comment{END:livro_org}
+
+@comment{BEGIN:livro_trad}
+@book{ex-livro-trad,
+  author     = {Huberman, Leo},
+  title      = {História da riqueza do homem},
+  translator = {Dutra, Waltensir},
+  edition    = {21},
+  location   = {Rio de Janeiro},
+  publisher  = {LTC},
+  year       = {1986},
+  pagetotal  = {286},
+  isbn       = {85-216-1306-7},
+  keywords   = {guia},
+}
+@comment{END:livro_trad}
+
+@comment{BEGIN:capitulo}
+@inbook{ex-capitulo,
+  author     = {Santos, F. R.},
+  bookauthor = {Santos, F. R.},
+  title      = {A colonização da terra do Tucujús},
+  booktitle  = {História do Amapá, 1º grau},
+  edition    = {2},
+  location   = {Macapá},
+  publisher  = {Valcan},
+  year       = {1994},
+  pages      = {15--24},
+  keywords   = {guia},
+}
+@comment{END:capitulo}
+
+@comment{BEGIN:capitulo_org}
+@incollection{ex-capitulo-org,
+  author     = {Lobo, A. M.},
+  title      = {Moléculas da vida},
+  booktitle  = {Química e sociedade},
+  booksubtitle = {a presença da química na actividade humana},
+  editor     = {Dias, A. R. and Ramos, J. J. M.},
+  editortype = {editor},
+  location   = {Lisboa},
+  publisher  = {Escobar},
+  year       = {1990},
+  pages      = {49--62},
+  keywords   = {guia},
+}
+@comment{END:capitulo_org}
+
+@comment{BEGIN:tcc}
+@thesis{ex-tcc,
+  author      = {Alves, D. P.},
+  title       = {Implementação de conceitos de manufatura colaborativa},
+  subtitle    = {um projeto virtual},
+  type        = {Trabalho de Conclusão de Curso (Bacharelado em Engenharia Industrial Mecânica)},
+  institution = {Universidade Tecnológica Federal do Paraná},
+  location    = {Curitiba},
+  year        = {2008},
+  eventdate   = {2008},
+  keywords    = {guia},
+}
+@comment{END:tcc}
+
+@comment{BEGIN:dissertacao}
+@thesis{ex-dissertacao,
+  author      = {Santos, M. L.},
+  title       = {Crescimento e alocação de biomassa e de nutrientes em eucalipto, decorrentes da aplicação de nitrogênio e potássio},
+  type        = {Dissertação (Mestrado em Ciências do Solo)},
+  institution = {Departamento de Solos, Universidade Federal de Viçosa},
+  location    = {Viçosa, MG},
+  year        = {2001},
+  eventdate   = {2001},
+  keywords    = {guia},
+}
+@comment{END:dissertacao}
+
+@comment{BEGIN:tese}
+@thesis{ex-tese,
+  author      = {Carmo, F. M. S.},
+  title       = {Estudo de polimorfismo do gene candidato, o fator miogênico-5 (myf-5), em suínos},
+  type        = {Tese (Doutorado em Zootecnia)},
+  institution = {Departamento de Zootecnia, Universidade Federal de Viçosa},
+  location    = {Viçosa, MG},
+  year        = {2003},
+  eventdate   = {2003},
+  keywords    = {guia},
+}
+@comment{END:tese}
+
+@comment{BEGIN:artigo}
+@article{ex-artigo,
+  author       = {Hevner, Alan R. and March, Salvatore T. and Park, Jinsoo and Ram, Sudha},
+  title        = {Design science in information systems research},
+  journaltitle = {MIS Quarterly},
+  location     = {Minneapolis},
+  volume       = {28},
+  number       = {1},
+  pages        = {75--105},
+  date         = {2004-03},
+  keywords     = {guia},
+}
+@comment{END:artigo}
+
+@comment{BEGIN:artigo_online}
+@article{ex-artigo-online,
+  author       = {Nardelli, A. M. B. and Griffith, J. J.},
+  title        = {Modelo teórico para compreensão do ambientalismo empresarial do setor florestal brasileiro},
+  journaltitle = {Revista Árvore},
+  location     = {Viçosa, MG},
+  volume       = {27},
+  number       = {6},
+  pages        = {855--869},
+  date         = {2003-11/2003-12},
+  doi          = {10.1590/S0100-67622003000600010},
+  url          = {http://www.scielo.br/pdf/rarv/v27n6/a12v27n6.pdf},
+  urldate      = {2004-10-11},
+  keywords     = {guia},
+}
+@comment{END:artigo_online}
+
+@comment{BEGIN:evento}
+@inproceedings{ex-evento,
+  author     = {Orlando Sobrinho, J. and Silva, L. E.},
+  title      = {Resposta à calagem},
+  eventtitle = {Seminário sobre corretivos agrícolas},
+  eventdate  = {1985},
+  venue      = {Campinas},
+  booktitle  = {Anais},
+  location   = {Campinas},
+  publisher  = {Fundação Cargill},
+  year       = {1985},
+  pages      = {123--157},
+  number     = {2},
+  keywords   = {guia},
+}
+@comment{END:evento}
+
+@comment{BEGIN:norma}
+@book{ex-norma,
+  author       = {{Associação Brasileira de Normas Técnicas}},
+  title        = {ABNT NBR 14724},
+  subtitle     = {informação e documentação: trabalhos acadêmicos: apresentação},
+  location     = {Rio de Janeiro},
+  publisher    = {ABNT},
+  year         = {2011},
+  keywords     = {guia},
+}
+@comment{END:norma}
+
+@comment{BEGIN:legislacao}
+@misc{ex-legislacao,
+  author       = {Brasil},
+  title        = {\textmd{Lei nº 13.709, de 14 de agosto de 2018.} Lei Geral de Proteção de Dados Pessoais (LGPD)},
+  location     = {Brasília, DF},
+  publisher    = {Presidência da República},
+  year         = {2018},
+  url          = {https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm},
+  urldate      = {2025-01-28},
+  keywords     = {guia},
+}
+@comment{END:legislacao}
+
+@comment{BEGIN:site}
+@misc{ex-site,
+  author       = {{Python Software Foundation}},
+  title        = {Python 3 documentation},
+  location     = {[S. l.]},
+  year         = {2025},
+  url          = {https://docs.python.org/3/},
+  urldate      = {2025-01-28},
+  keywords     = {guia},
+}
+@comment{END:site}
+
+@comment{BEGIN:software}
+@book{ex-software,
+  author       = {{Apple}},
+  title        = {OS X El Capitan},
+  edition      = {Versão 10.11.6},
+  location     = {[Cupertino]},
+  publisher    = {Apple},
+  year         = {2017},
+  keywords     = {guia},
+}
+@comment{END:software}
+
+@comment{BEGIN:repositorio}
+@misc{ex-repositorio,
+  author       = {Torvalds, Linus},
+  title        = {Linux kernel source tree},
+  howpublished = {Repositório GitHub},
+  year         = {2025},
+  url          = {https://github.com/torvalds/linux},
+  urldate      = {2025-01-28},
+  keywords     = {guia},
+}
+@comment{END:repositorio}
+
+@comment{BEGIN:relatorio}
+@book{ex-relatorio,
+  author       = {{World Health Organization}},
+  title        = {New WHO recommendations to accelerate progress on TB},
+  location     = {Geneva},
+  publisher    = {World Health Organization},
+  date         = {2019-03-20},
+  url          = {http://www.who.int},
+  urldate      = {2019-03-21},
+  keywords     = {guia},
+}
+@comment{END:relatorio}
+
+@comment{BEGIN:entidade}
+@book{ex-entidade,
+  author    = {{Universidade Federal de Viçosa}},
+  title     = {Estatuto da Universidade Federal de Viçosa, 1999},
+  location  = {Viçosa, MG},
+  publisher = {UFV},
+  year      = {1999},
+  pagetotal = {27},
+  keywords  = {guia},
+}
+@comment{END:entidade}
+
+@comment{BEGIN:sem_autor}
+@book{ex-sem-autor,
+  title     = {Pequena biblioteca do vinho},
+  location  = {São Paulo},
+  publisher = {Lafonte},
+  year      = {2012},
+  keywords  = {guia},
+}
+@comment{END:sem_autor}
+
+@comment{BEGIN:sem_autor_artigo}
+@book{ex-sem-autor-artigo,
+  title      = {OS GRANDES clássicos das poesias líricas},
+  shorttitle = {Os grandes},
+  location   = {[S. l.]},
+  publisher  = {Ex Libris},
+  year       = {1981},
+  pagetotal  = {60},
+  keywords   = {guia},
+}
+@comment{END:sem_autor_artigo}
+
+@comment{BEGIN:mesmo_ano}
+@book{ex-reeside-a,
+  author    = {Reeside, J. B.},
+  title     = {Primeira obra do autor},
+  location  = {Washington, DC},
+  publisher = {U.S. Geological Survey},
+  year      = {1927},
+  keywords  = {guia},
+}
+@book{ex-reeside-b,
+  author    = {Reeside, J. B.},
+  title     = {Segunda obra do autor},
+  location  = {Washington, DC},
+  publisher = {U.S. Geological Survey},
+  year      = {1927},
+  keywords  = {guia},
+}
+@comment{END:mesmo_ano}

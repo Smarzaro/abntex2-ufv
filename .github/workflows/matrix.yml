@@ -1,0 +1,26 @@
+name: matrix
+
+# Testes de compatibilidade: roda tests/ com o TeX Live atual e com uma versão mais antiga.
+# Semanal (para detectar quebras causadas por atualizações de pacotes) e manual.
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # segundas-feiras, 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        texlive: ['latest', '2024']
+    # a versão antiga é informativa: não derruba o workflow
+    continue-on-error: ${{ matrix.texlive != 'latest' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Testes (TeX Live ${{ matrix.texlive }})
+        uses: xu-cheng/texlive-action@v2
+        with:
+          texlive_version: ${{ matrix.texlive }}
+          scheme: full
+          run: sh scripts/run-tests.sh

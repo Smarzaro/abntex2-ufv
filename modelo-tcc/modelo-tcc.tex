@@ -6,8 +6,8 @@
 %% (edição 2026-2; NBR 14724/2025, 6023/2025, 10520/2023)
 %%
 %% Arquivo em formato UTF-8. Compilar com pdflatex + biber (nesta pasta: latexmk).
-%% Precisa do arquivo abntex2-UFV.sty (pasta pai; se copiar este modelo para outro
-%% lugar, copie o .sty para a mesma pasta e apague a linha ensure_path do latexmkrc).
+%% Precisa dos arquivos abntex2-ufv.cls e abntex2-ufv.sty (pasta pai; se copiar este modelo para outro
+%% lugar, copie os dois para a mesma pasta e apague a linha ensure_path do latexmkrc).
 %%
 %% COMO USAR
 %%  1. Preencha os dados do trabalho (seção "DADOS DO TRABALHO", logo abaixo).
@@ -20,32 +20,17 @@
 %% classe, estão documentados no guia da pasta ../docs (guia-abntex2-ufv.pdf).
 %%==============================================================
 
-% A classe abntex2 carrega o babel com o nome obsoleto "brazil"; o aviso é inofensivo
-\RequirePackage{silence}
-\WarningFilter{babel}{Name 'brazil' is deprecated}
-\documentclass[
-    12pt,                   % tamanho da fonte
-    openright,              % seções primárias começam em página ímpar (em oneside equivale a nova página)
-    oneside,                % impressão só no anverso (twoside para frente e verso)
-    a4paper,                % tamanho do papel
-    english,                % idioma adicional (hifenização)
-    brazilian,              % idioma principal do documento
-    ]{abntex2}
+% Opções: twoside (frente e verso), fonte=arial, capacampus. Os padrões já seguem o manual
+% (12pt, A4, frente apenas, português do Brasil); veja o Apêndice C do guia.
+\documentclass{abntex2-ufv}
 
 % ---
-% PACOTES
+% PACOTES ADICIONAIS
+% A classe já carrega: fontenc, indentfirst, graphicx, csquotes, microtype, booktabs,
+% tabularx, multirow, acro e biblatex (estilo abnt, com xurl). Descomente o que mais usar.
 % ---
-\usepackage{abntex2-UFV}        % Personalização UFV (opções: fonte=times|arial|cm, capacampus)
-\usepackage[T1]{fontenc}        % Seleção de códigos de fonte de saída
-\usepackage{indentfirst}        % Indenta o primeiro parágrafo de cada seção
-\usepackage{graphicx}           % Inclusão de figuras
-\usepackage{csquotes}           % Aspas (\enquote) e citações no padrão do idioma
-\usepackage[final]{microtype}   % Melhorias de justificação
 
 % Tabelas e quadros
-\usepackage{booktabs}           % \toprule, \midrule e \bottomrule
-\usepackage{tabularx}           % colunas X de largura automática
-\usepackage{multirow}           % células mescladas em linhas
 %\usepackage{longtable}         % tabelas que ocupam mais de uma página
 %\usepackage{pdflscape}         % página em paisagem (ambiente landscape)
 %\usepackage{colortbl}          % células sombreadas (\cellcolor)
@@ -88,25 +73,12 @@
 %\lstset{style=ufvcodigo}
 
 % ---
-% REFERÊNCIAS: biblatex com o estilo abnt (ajustes UFV no abntex2-UFV.sty)
+% REFERÊNCIAS: o biblatex (estilo abnt) já é carregado pela classe; indique a base aqui
 % ---
-\usepackage[backend=biber,
-            style=abnt,
-            uniquename=init,
-            giveninits,
-            repeatfields,
-            justify,
-            noslsn]{biblatex}
-
-\usepackage{xurl}               % quebra de linha em URLs longas
-\urlstyle{same}
-
 \addbibresource{referencias.bib}
-\setlength\bibparsep{10pt}
-\setlength{\emergencystretch}{3em}
 
 % ---
-% SIGLAS (pacote acro, carregado pelo abntex2-UFV)
+% SIGLAS (pacote acro, carregado pelo abntex2-ufv)
 % Declare cada sigla aqui e use \ac{chave} na primeira ocorrência no texto (a sigla sai por
 % extenso, seguida da sigla entre parênteses) e nas seguintes (só a sigla). Não use \ac em
 % resumos, títulos e legendas. Nomes em outro idioma ficam em itálico (\textit{...}).

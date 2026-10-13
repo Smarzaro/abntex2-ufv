@@ -1,0 +1,35 @@
+name: build
+
+# Compila o guia (docs/) e o modelo (modelo-tcc/) e roda os testes em tests/.
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compilar guia, modelo e testes
+        uses: xu-cheng/texlive-action@v2
+        with:
+          scheme: full
+          run: |
+            (cd docs && latexmk)
+            (cd modelo-tcc && latexmk)
+            sh scripts/run-tests.sh
+
+      - name: Verificar logs do guia e do modelo
+        run: |
+          if grep -E "^!|There were undefined references|Citation .* undefined|Please \(re\)run" \
+               docs/build/*.log modelo-tcc/build/*.log; then
+            echo "Problemas encontrados nos logs"; exit 1
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pdfs
+          path: |
+            docs/guia-abntex2-ufv.pdf
+            modelo-tcc/modelo-tcc.pdf

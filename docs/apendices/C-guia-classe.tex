@@ -1,14 +1,23 @@
-% Apêndice do modelo: guia rápido da personalização abntex2-UFV. Apague-o no seu trabalho.
+% Apêndice do modelo: guia rápido da personalização abntex2-ufv. Apague-o no seu trabalho.
 
-\chapter{Guia rápido do \texttt{abntex2-UFV}}\label{ap:classe}
+\chapter{Guia rápido do \texttt{abntex2-ufv}}\label{ap:classe}
 
-O pacote \texttt{abntex2-UFV} personaliza a classe abn\TeX2 \cite{abntex2classe} para o
-manual de normalização da UFV \cite{manualUFV}. Ele deve ser carregado logo após a
-classe, com \texttt{\textbackslash usepackage\{abntex2-UFV\}}, e aceita as opções do
-\autoref{qua:opcoes}.
+A classe \texttt{abntex2-ufv} personaliza a classe abn\TeX2 \cite{abntex2classe} para o
+manual de normalização da UFV \cite{manualUFV}. O uso mais simples é
+\texttt{\textbackslash documentclass\{abntex2-ufv\}}: os padrões já seguem o manual (12pt,
+A4, impressão só no anverso, português do Brasil) e a classe carrega os pacotes que todo
+\ac{tcc} usa (\texttt{fontenc}, \texttt{indentfirst}, \texttt{graphicx}, \texttt{csquotes},
+\texttt{microtype}, \texttt{booktabs}, \texttt{tabularx}, \texttt{multirow}, \texttt{acro} e o
+\texttt{biblatex} com o estilo \texttt{abnt}). Para mudar algum padrão, use as opções do
+\autoref{qua:opcoes} dentro dos colchetes, como em
+\texttt{\textbackslash documentclass[twoside, fonte=arial]\{abntex2-ufv\}}.
+Quem prefere partir da classe \texttt{abntex2} pode carregar só a personalização, com
+\texttt{\textbackslash documentclass\{abntex2\}} seguido de
+\texttt{\textbackslash usepackage\{abntex2-ufv\}}; nesse caso os demais pacotes e o
+\texttt{biblatex} ficam por sua conta.
 
 \begin{quadro}[htbp]
-\begin{ilustracao}{\caption[Opções do pacote abntex2-UFV]{Opções do pacote \texttt{abntex2-UFV}}\label{qua:opcoes}}{\elaboracaopropria}
+\begin{ilustracao}{\caption[Opções da classe abntex2-ufv]{Opções da classe \texttt{abntex2-ufv}}\label{qua:opcoes}}{\elaboracaopropria}
   \renewcommand{\arraystretch}{1.2}
   \small
   \begin{tabularx}{\textwidth}{|>{\ttfamily\raggedright\arraybackslash}p{3.4cm}|X|}
@@ -22,6 +31,14 @@ classe, com \texttt{\textbackslash usepackage\{abntex2-UFV\}}, e aceita as opç�
     fonte=cm & Mantém a fonte do documento (Computer Modern ou a que você carregar) \\
     \hline
     capacampus & Imprime \emph{campus} e curso na capa (o manual não os exige) \\
+    \hline
+    twoside & Impressão frente e verso, com margens espelhadas (padrão: \texttt{oneside}) \\
+    \hline
+    openany & Capítulos começam em qualquer página (padrão: \texttt{openright}) \\
+    \hline
+    11pt, 10pt & Tamanho da letra (padrão e exigido pelo manual: 12pt) \\
+    \hline
+    nobiblatex & Não carrega o \texttt{biblatex} (para quem usa outro sistema de referências) \\
     \hline
   \end{tabularx}
 \end{ilustracao}
@@ -152,8 +169,8 @@ com o termo em negrito. Veja o exemplo antes dos apêndices deste modelo.
         \texttt{latexmk} executa \texttt{pdflatex} e \texttt{biber} quantas vezes forem
         necessárias. O arquivo \texttt{latexmkrc} grava o \ac{pdf} na pasta do trabalho e
         todos os arquivos auxiliares em \texttt{build/}, e procura o
-        \texttt{abntex2-UFV.sty} na pasta pai; se você copiar o modelo para outro lugar,
-        copie também o \texttt{.sty} para a mesma pasta e apague essa linha do \texttt{latexmkrc}.
+        \texttt{abntex2-ufv.cls} (e o \texttt{.sty}) na pasta pai; se você copiar o modelo para outro
+        lugar, copie também esses dois arquivos para a mesma pasta e apague essa linha do \texttt{latexmkrc}.
   \item \textbf{Onde começar}: a pasta \texttt{modelo-tcc} traz um trabalho vazio, pronto
         para ser preenchido; este guia (pasta \texttt{docs}) é a documentação.
   \item \textbf{Editores}: TeXstudio e VS Code (LaTeX Workshop) trazem receitas com

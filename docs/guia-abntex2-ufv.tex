@@ -1,5 +1,5 @@
 %%==============================================================
-%% GUIA DE USO DO abntex2-UFV, com um trabalho de exemplo completo
+%% GUIA DE USO DO abntex2-ufv, com um trabalho de exemplo completo
 %% para o curso de Sistemas de Informação da Universidade Federal de
 %% Viçosa - Campus de Rio Paranaíba
 %% Autor: Rodrigo Smarzaro (smarzaro@ufv.br)
@@ -7,7 +7,7 @@
 %% Acadêmicos da UFV (edição 2026-2; NBR 14724/2025, 6023/2025, 10520/2023)
 %% Arquivo em formato UTF-8
 %% Compilar com pdflatex + biber (nesta pasta: latexmk)
-%% Precisa do arquivo ../abntex2-UFV.sty
+%% Precisa dos arquivos ../abntex2-ufv.cls e ../abntex2-ufv.sty
 %%
 %% Este documento é a DOCUMENTAÇÃO do pacote: mostra todos os recursos, com dicas de
 %% metodologia científica e de uso da classe. Para escrever o seu trabalho, comece
@@ -23,36 +23,17 @@
 %% As caixas "Dica" (ambiente dica) existem apenas neste guia.
 %%==============================================================
 
-% A classe abntex2 carrega o babel com o nome obsoleto "brazil"; o aviso é inofensivo
-\RequirePackage{silence}
-\WarningFilter{babel}{Name 'brazil' is deprecated}
-\documentclass[
-    % -- opções da classe memoir --
-    12pt,                   % tamanho da fonte
-    openright,              % seções primárias começam em página ímpar (em oneside equivale a nova página)
-    oneside,                % para impressão só no anverso. Oposto a twoside
-    a4paper,                % tamanho do papel.
-    % -- opções do pacote abntex2 --
-    % sumario=tradicional,  % (não usar: o padrão abnt-6027-2012 segue o manual UFV)
-    % -- opções do pacote babel --
-    english,                % idioma adicional para hifenização
-    brazilian,              % idioma principal do documento
-    ]{abntex2}
+% Opções: twoside (frente e verso), fonte=arial, capacampus. Os padrões já seguem o manual
+% (12pt, A4, frente apenas, português do Brasil); veja o Apêndice C.
+\documentclass{abntex2-ufv}
 
 % ---
-% PACOTES
+% PACOTES ADICIONAIS
+% A classe já carrega: fontenc, indentfirst, graphicx, csquotes, microtype, booktabs,
+% tabularx, multirow, acro e biblatex (estilo abnt, com xurl).
 % ---
-\usepackage{abntex2-UFV}        % Personalização UFV (opções: fonte=times|arial|cm, capacampus)
-\usepackage[T1]{fontenc}        % Seleção de códigos de fonte de saída
-\usepackage{indentfirst}        % Indenta o primeiro parágrafo de cada seção.
-\usepackage{graphicx}           % Inclusão de figuras
-\usepackage{csquotes}           % Aspas (\enquote) e citações no padrão do idioma
-\usepackage[final]{microtype}   % Melhorias de justificação
 
 % Tabelas e quadros (veja o Apêndice B)
-\usepackage{booktabs}           % \toprule, \midrule e \bottomrule
-\usepackage{tabularx}           % colunas X de largura automática
-\usepackage{multirow}           % células mescladas em linhas
 \usepackage{longtable}          % tabelas que ocupam mais de uma página
 \usepackage{pdflscape}          % ambiente landscape (página em paisagem)
 \usepackage{colortbl}           % células sombreadas (\cellcolor)
@@ -118,26 +99,13 @@
 }{\end{dicabase}}
 
 % ---
-% REFERÊNCIAS: biblatex com o estilo abnt (ajustes UFV no abntex2-UFV.sty)
+% REFERÊNCIAS: o biblatex (estilo abnt) já é carregado pela classe
 % ---
-\usepackage[backend=biber,
-            style=abnt,
-            uniquename=init,
-            giveninits,
-            repeatfields,
-            justify,
-            noslsn]{biblatex}
-
-\usepackage{xurl}               % quebra de linha em URLs longas
-\urlstyle{same}
-
 \addbibresource{referencias.bib}
 \addbibresource{exemplos-referencias.bib}   % apenas para o Apêndice A
-\setlength\bibparsep{10pt}
-\setlength{\emergencystretch}{3em}   % evita linhas estouradas com comandos longos no texto
 
 % ---
-% SIGLAS (pacote acro, carregado pelo abntex2-UFV): declare aqui e use \ac{chave}
+% SIGLAS (pacote acro, carregado pelo abntex2-ufv): declare aqui e use \ac{chave}
 % ---
 % Toda sigla usada no texto deve ser declarada aqui e usada com \ac{chave}; a lista só
 % inclui as siglas efetivamente usadas. Não use \ac em resumos, títulos e legendas.
@@ -172,7 +140,7 @@
 % ---
 % DADOS DO TRABALHO (capa, folha de rosto e folha de aprovação)
 % ---
-\titulo{Guia de uso do abntex2-UFV: trabalho de exemplo para Sistemas de Informação}
+\titulo{Guia de uso do abntex2-ufv: trabalho de exemplo para Sistemas de Informação}
 \autor{Rodrigo Smarzaro}
 \local{Rio Paranaíba}
 \data{\the\year}
@@ -254,7 +222,7 @@ trabalho.
 % resumo em português
 \begin{resumo}
  \noindent
- Este guia documenta a personalização \texttt{abntex2-UFV} da classe abn\TeX2 para
+ Este guia documenta a personalização \texttt{abntex2-ufv} da classe abn\TeX2 para
  trabalhos de conclusão de curso do curso de Sistemas de Informação da Universidade
  Federal de Viçosa, no \emph{Campus} Rio Paranaíba. Ele funciona como um trabalho de
  exemplo completo, com seções, citações, referências, tabelas, quadros, figuras e

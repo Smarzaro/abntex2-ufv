@@ -1,0 +1,35 @@
+name: release
+
+# Ao criar uma tag v* (por exemplo v2.0): compila, roda os testes, gera o zip no formato
+# da CTAN e o anexa a uma GitHub Release. O envio à CTAN continua manual.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compilar guia, modelo e testes
+        uses: xu-cheng/texlive-action@v2
+        with:
+          scheme: full
+          run: |
+            (cd docs && latexmk)
+            (cd modelo-tcc && latexmk)
+            sh scripts/run-tests.sh
+
+      - name: Gerar o zip para a CTAN
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq zip
+          sh scripts/make-ctan-zip.sh
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/abntex2-ufv.zip
+          generate_release_notes: true

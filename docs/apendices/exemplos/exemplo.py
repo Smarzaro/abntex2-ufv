@@ -1,4 +1,4 @@
-"""Exemplo de módulo usado no Apêndice D do guia abntex2-UFV."""
+"""Exemplo de módulo usado no Apêndice D do guia abntex2-ufv."""
 
 
 def media(valores):

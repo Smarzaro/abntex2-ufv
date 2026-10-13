@@ -24,13 +24,21 @@
 % INICIO DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DE VIÇOSA
 % ---
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{abntex2-ufv}[2026/10/13 v2.0 abnTeX2-UFV]
+\ProvidesPackage{abntex2-ufv}[2026/10/13 v1.5 abnTeX2-UFV (obsoleto: use a classe abntex2-ufv)]
 
 % Este pacote só faz sentido sobre a classe abntex2
 \@ifclassloaded{abntex2}{}{%
   \PackageError{abntex2-ufv}{Este pacote requer a classe abntex2}{%
     Use \string\documentclass{abntex2} antes de carregar abntex2-ufv.}%
 }
+
+% Versão de transição (1.5): carregar este arquivo diretamente com \usepackage está obsoleto.
+% Use \documentclass{abntex2-ufv}; o .sty será descontinuado na versão 2.0 do pacote.
+\ifdefined\ufv@viacls\else
+  \PackageWarningNoLine{abntex2-ufv}{%
+    Uso obsoleto: \string\usepackage{abntex2-ufv} sera descontinuado na versao 2.0.\MessageBreak
+    Migre para \string\documentclass{abntex2-ufv} (veja o guia, secao de migracao)}%
+\fi
 
 \RequirePackage{etoolbox}
 \RequirePackage{kvoptions}

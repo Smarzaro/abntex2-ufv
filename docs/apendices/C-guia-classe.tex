@@ -44,6 +44,78 @@ Quem prefere partir da classe \texttt{abntex2} pode carregar só a personalizaç
 \end{ilustracao}
 \end{quadro}
 
+\section{Migração do pacote para a classe}\label{sec:migracao}
+
+A versão 1.5 é uma versão de \emph{transição}. Até a versão 1.3.1 o uso era a classe
+\texttt{abntex2} com o pacote \texttt{abntex2-UFV}; a partir da 1.5 a forma recomendada é a
+classe \texttt{abntex2-ufv}. O pacote (\texttt{abntex2-ufv.sty}) continua funcionando, mas
+emite o aviso ``Uso obsoleto'' e \textbf{será descontinuado na versão 2.0}. Trabalhos novos
+devem começar com a classe, e os trabalhos em andamento devem ser migrados agora, pelos
+passos abaixo.
+
+\begin{enumerate}
+  \item \textbf{Atualize os arquivos.} Baixe os arquivos da versão 1.5 e substitua os antigos.
+        O nome do pacote passou a ser em minúsculas: apague o \texttt{abntex2-UFV.sty} antigo
+        e use o \texttt{abntex2-ufv.cls} e o \texttt{abntex2-ufv.sty} novos, na mesma pasta do
+        seu arquivo principal (no Overleaf, envie os dois arquivos ao projeto).
+  \item \textbf{Troque o \texttt{\textbackslash documentclass}.} A classe já aplica os padrões
+        do manual, então as opções \texttt{12pt}, \texttt{a4paper}, \texttt{oneside},
+        \texttt{openright}, \texttt{english} e \texttt{brazilian} podem ser removidas. Mantenha
+        só o que fugir do padrão (\texttt{twoside}, \texttt{openany}, \texttt{11pt},
+        \texttt{fonte=arial}, \texttt{capacampus}), que agora vão entre os colchetes da classe.
+        As opções que antes iam em \texttt{\textbackslash usepackage[...]\{abntex2-UFV\}}
+        também passam para o \texttt{\textbackslash documentclass}.
+  \item \textbf{Apague o \texttt{\textbackslash usepackage\{abntex2-UFV\}}} e os pacotes que
+        a classe já carrega: \texttt{fontenc}, \texttt{indentfirst}, \texttt{graphicx},
+        \texttt{csquotes}, \texttt{microtype}, \texttt{booktabs}, \texttt{tabularx} e
+        \texttt{multirow}. Os demais pacotes do seu trabalho continuam como estavam.
+  \item \sloppy\textbf{Apague a configuração do \texttt{biblatex}}: o \texttt{\textbackslash usepackage\allowbreak[backend=biber,
+        style=abnt, ...]\allowbreak\{biblatex\}}, o \texttt{xurl}, o
+        \texttt{\textbackslash urlstyle\{same\}}, o \texttt{\textbackslash setlength\{\textbackslash bibparsep\}}
+        e o \texttt{\textbackslash setlength\{\textbackslash emergencystretch\}}. Mantenha o
+        \texttt{\textbackslash addbibresource}. Se você usa opções diferentes das do
+        modelo, use a opção \texttt{nobiblatex} e mantenha o seu próprio carregamento.
+  \item \textbf{Apague o filtro do aviso do \texttt{babel}} (as duas linhas com
+        \texttt{silence} e \texttt{\textbackslash WarningFilter}, antes do
+        \texttt{\textbackslash documentclass}): a classe já faz isso.
+  \item \textbf{Mova as imagens para a pasta \texttt{imagens/}.} A classe define
+        \texttt{\textbackslash graphicspath\allowbreak\{\{imagens/\}\}}; assim,
+        \texttt{\textbackslash includegraphics\{figura\}} basta, sem o nome da pasta. Os
+        caminhos antigos, como \texttt{imagens/figura} ou arquivos na pasta principal,
+        continuam funcionando.
+  \item \textbf{Compile e confira.} Rode o \texttt{latexmk} (ou o seu editor) e verifique
+        que o aviso ``Uso obsoleto'' não aparece mais e que as listas, as siglas e as
+        referências saíram como antes.
+\end{enumerate}
+
+O exemplo abaixo resume as mudanças no preâmbulo. Antes (versão 1.3.1):
+
+\begin{lstlisting}[style=exemplo, language={[LaTeX]TeX}]
+\documentclass[12pt, openright, oneside, a4paper, english, brazilian]{abntex2}
+\usepackage{abntex2-UFV}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[final]{microtype}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage[backend=biber, style=abnt, uniquename=init, giveninits,
+            repeatfields, justify, noslsn]{biblatex}
+\usepackage{xurl}
+\urlstyle{same}
+\addbibresource{referencias.bib}
+\setlength\bibparsep{10pt}
+\setlength{\emergencystretch}{3em}
+\end{lstlisting}
+Depois (versão 1.5 ou posterior):
+
+\begin{lstlisting}[style=exemplo, language={[LaTeX]TeX}]
+\documentclass{abntex2-ufv}
+\addbibresource{referencias.bib}
+\end{lstlisting}
+
 \section{Dados do trabalho}
 
 Os dados são declarados no preâmbulo e impressos na capa, na folha de rosto e na folha

@@ -25,7 +25,7 @@
 %% (margens, fonte, capa, listas, siglas etc.) está em abntex2-ufv.sty.
 %%
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesClass{abntex2-ufv}[2026/10/13 v2.0 Classe abntex2-ufv (TCC SI UFV-CRP)]
+\ProvidesClass{abntex2-ufv}[2026/10/13 v1.5 Classe abntex2-ufv (TCC SI UFV-CRP)]
 
 % A classe abntex2 carrega o babel com o nome obsoleto "brazil"; o aviso é inofensivo
 \RequirePackage{silence}
@@ -75,10 +75,12 @@
 % ---
 % Personalização UFV e pacotes que todo TCC usa
 % ---
+\def\ufv@viacls{}                   % avisa o .sty que ele foi carregado pela classe
 \RequirePackage{abntex2-ufv}
 \RequirePackage[T1]{fontenc}        % códigos de fonte de saída
 \RequirePackage{indentfirst}        % indenta o primeiro parágrafo de cada seção
 \RequirePackage{graphicx}           % inclusão de figuras
+\graphicspath{{imagens/}}           % as imagens do trabalho ficam na pasta imagens/
 \RequirePackage{csquotes}           % aspas (\enquote) e citações no padrão do idioma
 \RequirePackage[final]{microtype}   % melhorias de justificação
 \RequirePackage{booktabs}           % \toprule, \midrule e \bottomrule

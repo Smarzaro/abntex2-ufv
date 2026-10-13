@@ -1,10 +1,21 @@
 name: release
 
-# Ao criar uma tag v* (por exemplo v2.0): compila, roda os testes, gera o zip no formato
-# da CTAN e o anexa a uma GitHub Release. O envio à CTAN continua manual.
+# Ao criar uma tag de versão (por exemplo 1.5 ou v1.5): compila, roda os testes, gera os
+# pacotes de download e os anexa a uma GitHub Release:
+#   abntex2-ufv-modelo.zip   projeto vazio, pronto para enviar ao Overleaf
+#   abntex2-ufv-guia.zip     guia com o trabalho de exemplo, pronto para o Overleaf
+#   abntex2-ufv.zip          pacote no formato da CTAN (o envio à CTAN continua manual)
+# Os nomes dos arquivos são fixos: o link
+#   https://github.com/Smarzaro/abntex2-ufv/releases/latest/download/abntex2-ufv-modelo.zip
+# sempre baixa a versão mais recente.
+# Também pode ser executado manualmente (Actions > release > Run workflow): nesse caso os
+# zips ficam como artefato do workflow, sem criar release.
 on:
   push:
-    tags: ['v*']
+    tags:
+      - '[0-9]*'
+      - 'v[0-9]*'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -24,12 +35,25 @@ jobs:
             (cd modelo-tcc && latexmk)
             sh scripts/run-tests.sh
 
-      - name: Gerar o zip para a CTAN
+      - name: Gerar os pacotes de download
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq zip
+          command -v zip >/dev/null || sudo apt-get install -y -qq zip
           sh scripts/make-ctan-zip.sh
+          sh scripts/make-overleaf-zips.sh
 
-      - uses: softprops/action-gh-release@v2
+      - name: Anexar à release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
         with:
-          files: dist/abntex2-ufv.zip
+          files: |
+            dist/abntex2-ufv-modelo.zip
+            dist/abntex2-ufv-guia.zip
+            dist/abntex2-ufv.zip
           generate_release_notes: true
+
+      - name: Guardar como artefato (execução manual)
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: pacotes
+          path: dist/*.zip

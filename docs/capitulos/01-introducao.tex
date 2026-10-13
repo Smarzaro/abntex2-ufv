@@ -1,0 +1,92 @@
+% Observação: no abntex2, \chapter corresponde à "seção primária" da NBR 6024.
+% O manual da UFV pede que o trabalho seja organizado em seções (não em "capítulos"):
+% o título impresso não leva a palavra "Capítulo", apenas o número e o título em caixa alta.
+\chapter{Introdução}\label{sec:introducao}
+
+\begin{dica}[Dica de metodologia científica: o que escrever na Introdução]
+A introdução apresenta o trabalho ao leitor e deve responder, em poucas páginas,
+às perguntas: \emph{de que trata}, \emph{qual é o problema}, \emph{por que
+importa}, \emph{o que se pretende fazer}, \emph{como} e \emph{como o texto está
+organizado}. Uma estrutura que funciona bem é o ``funil'':
+\begin{enumerate}
+  \item \textbf{contexto}: o tema e sua relevância, apoiados em fontes confiáveis;
+  \item \textbf{problema ou lacuna}: o que falta, falha ou não está resolvido;
+  \item \textbf{objetivo}: o que este trabalho faz a respeito;
+  \item \textbf{abordagem}: o método, em uma ou duas frases;
+  \item \textbf{contribuição}: o que o leitor ganha com o trabalho;
+  \item \textbf{organização}: um parágrafo descrevendo as demais seções.
+\end{enumerate}
+Evite a revisão extensa da literatura (ela pertence ao Referencial Teórico),
+afirmações sem fonte e histórico desnecessário (``desde os primórdios\ldots'').
+Escreva ou revise a introdução por último, quando já se sabe exatamente o que o
+trabalho entregou.
+\end{dica}
+
+\begin{dica}[Dica de uso da classe: texto, citações e referências cruzadas]
+Escreva em parágrafos normais (uma linha em branco separa os parágrafos; o recuo e o
+espaçamento 1,5 são automáticos). Use \texttt{\textbackslash section} e
+\texttt{\textbackslash subsection} para as subdivisões. Cite com
+\texttt{\textbackslash cite\{chave\}} (entre parênteses) ou
+\texttt{\textbackslash textcite\{chave\}} (no fluxo da frase); veja o
+Apêndice~\ref{ap:referencias}. Para remeter a outra parte do texto, dê um
+\texttt{\textbackslash label\{...\}} ao título e use
+\texttt{\textbackslash autoref\{...\}}, que escreve ``Seção 2'', ``Figura 1'' ou
+``Tabela 3'' sozinho. Na primeira vez que usar uma sigla declarada no preâmbulo, use
+\texttt{\textbackslash ac\{chave\}}: o texto sai por extenso, com a sigla entre
+parênteses, e nas demais vezes só a sigla (Apêndice~\ref{ap:classe}).
+\end{dica}
+
+Apresente aqui o contexto do trabalho. Por exemplo: a elaboração de trabalhos
+acadêmicos exige o cumprimento das normas da \ac{abnt} e das normas da \ac{ufv}, e o
+uso de \LaTeX\ automatiza boa parte dessa formatação \cite{abntex2classe,manualUFV}.
+Em seguida, descreva o problema, o objetivo geral e a abordagem adotada.
+
+\section{Objetivos}\label{sec:objetivos}
+
+\begin{dica}[Dica de metodologia científica: como formular objetivos]
+O \textbf{objetivo geral} é único, abrangente e começa por um verbo no infinitivo
+(\emph{desenvolver}, \emph{avaliar}, \emph{propor}, \emph{comparar}). Os
+\textbf{objetivos específicos} desdobram o geral em etapas verificáveis, em geral de
+três a cinco, cada uma com verbo de ação mensurável: \emph{identificar},
+\emph{levantar}, \emph{modelar}, \emph{implementar}, \emph{testar}, \emph{avaliar}.
+Evite verbos vagos como \emph{estudar}, \emph{conhecer} ou \emph{entender}. Um bom teste:
+ao final do trabalho, deve ser possível apontar a seção, o artefato ou o resultado que
+comprova o cumprimento de cada objetivo. As conclusões retomarão exatamente esta lista.
+\end{dica}
+
+\subsection{Objetivo geral}
+
+Desenvolver\ldots{} (um verbo no infinitivo, uma única frase).
+
+\subsection{Objetivos específicos}
+
+\begin{alineas}
+  \item levantar os requisitos do sistema junto aos usuários;
+  \item modelar o sistema com a \ac{uml};
+  \item implementar o protótipo; e
+  \item avaliar o protótipo com usuários.
+\end{alineas}
+
+\begin{dica}[Dica de uso da classe: listas]
+Para listas, use o ambiente \texttt{alineas} (itens com a), b), c); cada item termina
+em ponto e vírgula e o penúltimo em ``; e'', conforme a NBR 6024). O ambiente
+\texttt{incisos} cria subitens com travessão.
+\end{dica}
+
+\section{Justificativa}\label{sec:justificativa}
+
+\begin{dica}[Dica de metodologia científica: justificativa]
+Explique por que o trabalho vale a pena: a relevância do problema (com dados ou
+literatura), a lacuna que os trabalhos existentes deixam, o impacto esperado (para
+usuários, organizações ou a área) e a viabilidade (tempo, recursos e conhecimentos
+disponíveis). Argumentos precisam de fontes; opiniões sem apoio enfraquecem o texto.
+\end{dica}
+
+Escreva aqui a justificativa.
+
+\section{Organização do trabalho}\label{sec:organizacao}
+
+Este trabalho está organizado da seguinte forma: a \autoref{sec:RefTeorico}
+apresenta o referencial teórico; a \autoref{sec:metodos} descreve a metodologia; a
+\autoref{sec:resultados} apresenta os resultados; e a \autoref{sec:conclusao} traz
+as considerações finais.

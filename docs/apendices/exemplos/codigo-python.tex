@@ -1,0 +1,16 @@
+\begin{codigo}[htbp]
+\begin{ilustracao}[\linewidth]{\caption{Função em Python, com numeração de linhas e sintaxe colorida}\label{cod:guia-python}}{\elaboracaopropria\nota{Estilo \texttt{ufvcodigo}, aplicado a todo \texttt{lstlisting} pelo \texttt{\textbackslash lstset}.}}
+  \begin{lstlisting}[language=Python]
+def media(valores):
+    """Calcula a média aritmética de uma lista."""
+    if not valores:
+        return 0.0
+    total = 0  # acumulador
+    for v in valores:
+        total += v
+    return total / len(valores)
+
+print(f"Média: {media([8.5, 7.0, 9.25]):.2f}")
+  \end{lstlisting}
+\end{ilustracao}
+\end{codigo}

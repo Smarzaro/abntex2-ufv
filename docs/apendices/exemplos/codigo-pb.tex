@@ -1,0 +1,13 @@
+\begin{codigo}[htbp]
+\begin{ilustracao}[\linewidth]{\caption{O mesmo código em preto e branco (estilo \texttt{ufvcodigopb})}\label{cod:guia-pb}}{\elaboracaopropria}
+  \begin{lstlisting}[language=SQL, style=ufvcodigopb]
+-- Alunos aprovados por disciplina
+SELECT d.nome, COUNT(*) AS aprovados
+FROM matricula m
+JOIN disciplina d ON d.id = m.disciplina_id
+WHERE m.nota >= 6.0 AND m.situacao = 'APROVADO'
+GROUP BY d.nome
+ORDER BY aprovados DESC;
+  \end{lstlisting}
+\end{ilustracao}
+\end{codigo}

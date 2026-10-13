@@ -1,0 +1,166 @@
+% Apêndice do modelo: guia rápido da personalização abntex2-UFV. Apague-o no seu trabalho.
+
+\chapter{Guia rápido do \texttt{abntex2-UFV}}\label{ap:classe}
+
+O pacote \texttt{abntex2-UFV} personaliza a classe abn\TeX2 \cite{abntex2classe} para o
+manual de normalização da UFV \cite{manualUFV}. Ele deve ser carregado logo após a
+classe, com \texttt{\textbackslash usepackage\{abntex2-UFV\}}, e aceita as opções do
+\autoref{qua:opcoes}.
+
+\begin{quadro}[htbp]
+\begin{ilustracao}{\caption[Opções do pacote abntex2-UFV]{Opções do pacote \texttt{abntex2-UFV}}\label{qua:opcoes}}{\elaboracaopropria}
+  \renewcommand{\arraystretch}{1.2}
+  \small
+  \begin{tabularx}{\textwidth}{|>{\ttfamily\raggedright\arraybackslash}p{3.4cm}|X|}
+    \hline
+    \textnormal{\textbf{Opção}} & \textbf{Efeito} \\
+    \hline
+    fonte=times & Times 12 (TeX Gyre Termes); é o padrão \\
+    \hline
+    fonte=arial & Arial 12 (TeX Gyre Heros, equivalente métrico do Helvetica/Arial) \\
+    \hline
+    fonte=cm & Mantém a fonte do documento (Computer Modern ou a que você carregar) \\
+    \hline
+    capacampus & Imprime \emph{campus} e curso na capa (o manual não os exige) \\
+    \hline
+  \end{tabularx}
+\end{ilustracao}
+\end{quadro}
+
+\section{Dados do trabalho}
+
+Os dados são declarados no preâmbulo e impressos na capa, na folha de rosto e na folha
+de aprovação (\autoref{qua:dados}).
+
+\begin{quadro}[htbp]
+\begin{ilustracao}{\caption{Comandos de dados do trabalho}\label{qua:dados}}{\elaboracaopropria}
+  \renewcommand{\arraystretch}{1.2}
+  \small
+  \begin{tabularx}{\textwidth}{|>{\ttfamily\raggedright\arraybackslash}p{6.4cm}|X|}
+    \hline
+    \textnormal{\textbf{Comando}} & \textbf{Função} \\
+    \hline
+    \textbackslash titulo\{...\}, \textbackslash autor\{...\} & Título e autor \\
+    \hline
+    \textbackslash local\{...\}, \textbackslash data\{...\} & Cidade e ano de depósito (\texttt{\textbackslash the\textbackslash year} usa o ano atual) \\
+    \hline
+    \textbackslash instituicao\{...\} & Nome da instituição \\
+    \hline
+    \textbackslash campus\{...\}, \textbackslash curso\{...\} & \emph{Campus} e curso (capa só com a opção \texttt{capacampus}; o curso também entra na nota descritiva) \\
+    \hline
+    \textbackslash orientador[sigla]\{...\} & Orientador; \texttt{\textbackslash orientadora} no feminino. A sigla é a da instituição (padrão UFV-CRP) \\
+    \hline
+    \textbackslash coorientador\{...\} & Coorientador; \texttt{\textbackslash coorientadora} no feminino \\
+    \hline
+    \textbackslash membrobanca[sigla]\{Titulação Nome\} & Membro da banca; repita para cada membro (ordem de impressão = ordem de declaração) \\
+    \hline
+    \textbackslash databanca\{...\} & Data da defesa; se omitida, a folha de aprovação traz espaço para preencher à mão \\
+    \hline
+    \textbackslash siglainstituicaopadrao\{...\} & Troca a sigla padrão (UFV-CRP) dos membros da banca \\
+    \hline
+    \textbackslash preambuloUFV\{tipo\}\{curso\} & Nota descritiva padrão; \texttt{tipo} = \texttt{tcc}, \texttt{bacharelado} ou \texttt{licenciatura} \\
+    \hline
+    \textbackslash preambulo\{...\} & Nota descritiva livre, para outros tipos de trabalho \\
+    \hline
+  \end{tabularx}
+\end{ilustracao}
+\end{quadro}
+
+\section{Elementos pré-textuais}
+
+Imprimem-se na ordem: \texttt{\textbackslash imprimircapa}, \texttt{\textbackslash imprimirfolhaderosto},
+(ficha catalográfica, apenas em teses e dissertações),
+\texttt{\textbackslash imprimirfolhadeaprovacao}, ambientes \texttt{dedicatoria},
+\texttt{agradecimentos} e \texttt{epigrafe}, resumos (\texttt{resumo}, com
+\texttt{\textbackslash palavraschave\{a, b, c\}} e \texttt{\textbackslash keywords\{...\}}),
+listas de ilustrações, de tabelas, de siglas e de símbolos e, por último, o sumário.
+Dedicatória e epígrafe não têm título e ficam na parte inferior da folha, alinhadas à
+direita. Resumo: parágrafo único, de 150 a 500 palavras; as palavras-chave vêm separadas
+por ponto e vírgula e terminam em ponto (a macro faz isso a partir da lista com vírgulas).
+
+\section{Ilustrações, quadros e códigos}
+
+\begin{itemize}
+  \item \texttt{figure} (``Figura''), \texttt{table} (``Tabela''), \texttt{quadro}
+        (``Quadro''), \texttt{grafico} (``Gráfico'') e \texttt{codigo} (``Código''):
+        cada tipo tem numeração e lista próprias
+        (\texttt{\textbackslash listoffigures*}, \texttt{\textbackslash listoftables*},
+        \texttt{\textbackslash listofquadros*}, \texttt{\textbackslash listofgraficos*},
+        \texttt{\textbackslash listofcodigos*}).
+  \item \texttt{\textbackslash elaboracaopropria} imprime ``Fonte: Elaborado pelo próprio autor'';
+        \texttt{\textbackslash fonte\{texto\}} imprime outra fonte; \texttt{\textbackslash legenda\{texto\}}
+        imprime a legenda (explicação de símbolos, cores ou siglas) e \texttt{\textbackslash nota\{texto\}}
+        imprime uma nota. O rodapé fica alinhado à esquerda, em espaço simples e tamanho 10.
+  \item \texttt{ilustracao} e \texttt{tabela}: ambientes de sintaxe
+        \texttt{\textbackslash begin\{ilustracao\}\allowbreak\{\textbackslash caption\{...\}\}\allowbreak\{rodapé\}}.
+        Medem o conteúdo e dão ao título e ao rodapé a largura dele. \texttt{ilustracao}
+        centraliza o título (figuras, quadros, gráficos e códigos) e \texttt{tabela} o
+        alinha à esquerda, com o conteúdo em tamanho 10 (padrão do \ac{ibge}). Veja o
+        Apêndice~\ref{ap:tabelas}.
+  \item \texttt{citacao}: citação direta longa, com recuo de 4 cm, fonte menor e espaço simples.
+  \item \texttt{alineas} e \texttt{incisos}: listas da NBR 6024.
+\end{itemize}
+
+\section{Siglas}
+
+As siglas usam o pacote \texttt{acro}. Declare-as no preâmbulo e use \texttt{\textbackslash ac}
+no texto; a lista é impressa por \texttt{\textbackslash listadesiglas}, em ordem alfabética
+e só com as siglas efetivamente usadas (\autoref{qua:siglas}). O manual recomenda uma
+lista própria para cada tipo: as abreviaturas (p., ed., art.) usam a etiqueta
+\texttt{tag = abreviatura}, são citadas com \texttt{\textbackslash acs} e saem na
+\texttt{\textbackslash listadeabreviaturas}. Não use \texttt{\textbackslash ac} em resumos,
+títulos e legendas: a expansão da primeira ocorrência deve ficar no texto corrido, onde a
+sigla aparece pela primeira vez.
+
+\begin{quadro}[htbp]
+\begin{ilustracao}{\caption[Comandos de siglas (pacote acro)]{Comandos de siglas (pacote \texttt{acro})}\label{qua:siglas}}{\elaboracaopropria}
+  \renewcommand{\arraystretch}{1.2}
+  \small
+  \begin{tabularx}{\textwidth}{|>{\ttfamily\raggedright\arraybackslash}p{6.8cm}|X|}
+    \hline
+    \textnormal{\textbf{Comando}} & \textbf{Resultado} \\
+    \hline
+    \textbackslash DeclareAcronym\{api\}\{short = API, long = Interface de Programação de Aplicações\} & Declara a sigla (no preâmbulo) \\
+    \hline
+    \textbackslash ac\{api\} & 1ª vez: Interface de Programação de Aplicações (API); depois: API \\
+    \hline
+    \textbackslash acp\{api\} & Plural: APIs \\
+    \hline
+    \textbackslash acs\{api\} / \textbackslash acl\{api\} & Só a sigla / só o nome por extenso \\
+    \hline
+    \textbackslash listadesiglas & Imprime a Lista de siglas \\
+    \hline
+    \textbackslash DeclareAcronym\{art\}\{short = art., long = artigo, tag = abreviatura\} & Declara uma abreviatura (lista própria) \\
+    \hline
+    \textbackslash listadeabreviaturas & Imprime a Lista de abreviaturas \\
+    \hline
+  \end{tabularx}
+\end{ilustracao}
+\end{quadro}
+
+\section{Glossário}
+
+O glossário é um elemento pós-textual opcional, com termos técnicos e suas definições. O
+ambiente \texttt{glossario} imprime o título ``GLOSSÁRIO'' (que entra no sumário) e cada
+\texttt{\textbackslash termo\{termo\}\{definição\}} vira um parágrafo em espaço simples,
+com o termo em negrito. Veja o exemplo antes dos apêndices deste modelo.
+
+\section{Compilação}
+
+\begin{itemize}
+  \item \textbf{Linha de comando (MiKTeX ou TeX Live)}: na pasta do seu trabalho,
+        \texttt{latexmk} executa \texttt{pdflatex} e \texttt{biber} quantas vezes forem
+        necessárias. O arquivo \texttt{latexmkrc} grava o \ac{pdf} na pasta do trabalho e
+        todos os arquivos auxiliares em \texttt{build/}, e procura o
+        \texttt{abntex2-UFV.sty} na pasta pai; se você copiar o modelo para outro lugar,
+        copie também o \texttt{.sty} para a mesma pasta e apague essa linha do \texttt{latexmkrc}.
+  \item \textbf{Onde começar}: a pasta \texttt{modelo-tcc} traz um trabalho vazio, pronto
+        para ser preenchido; este guia (pasta \texttt{docs}) é a documentação.
+  \item \textbf{Editores}: TeXstudio e VS Code (LaTeX Workshop) trazem receitas com
+        \texttt{latexmk}; configure o motor como \texttt{pdfLaTeX} e a bibliografia como \texttt{biber}.
+  \item \textbf{Overleaf}: compilador \texttt{pdfLaTeX}; o \texttt{biber} é executado
+        automaticamente.
+  \item \textbf{Arquivos auxiliares}: se o PDF ficar com ``(?)'' ou com o sumário
+        desatualizado, apague os arquivos \texttt{.aux}, \texttt{.toc}, \texttt{.bbl}
+        etc. e compile de novo.
+\end{itemize}

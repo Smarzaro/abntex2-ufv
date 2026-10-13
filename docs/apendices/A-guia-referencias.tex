@@ -1,0 +1,240 @@
+% Apêndice do modelo: guia de referências e citações. Apague-o no seu trabalho
+% (e remova exemplos-referencias.bib do preâmbulo).
+
+% Exibe uma entrada de exemplo (trecho do arquivo exemplos-referencias.bib entre as
+% marcas @comment{BEGIN:#1} e @comment{END:#1}) e o resultado impresso (\fullcite)
+% da chave #2.
+% Uso: \refex{marcador}{chave}{descrição}
+\newcommand{\refex}[3]{%
+  \par\medskip\noindent\textbf{#3}\par\nopagebreak\smallskip
+  \lstinputlisting[style=exemplo, language=BibTeX, linerange={BEGIN:#1-END:#1},
+                   rangeprefix=@comment\{, rangesuffix=\}, includerangemarker=false]%
+                  {exemplos-referencias.bib}%
+  \par\nopagebreak\smallskip\noindent\textit{Resultado na lista de referências:}\par\nopagebreak
+  \begin{SingleSpacing}\noindent\hspace{1cm}\begin{minipage}{0.9\textwidth}%
+    \raggedright\fullcite{#2}.\end{minipage}\end{SingleSpacing}\par\medskip}
+
+\chapter{Guia de referências e citações}\label{ap:referencias}
+
+Este apêndice mostra como escrever as entradas do arquivo \texttt{referencias.bib}
+para os tipos de documento mais usados em trabalhos de computação e o resultado que
+elas produzem na lista de referências, conforme o Manual de Normalização de Trabalhos
+Acadêmicos da \ac{ufv} \cite{manualUFV}, a NBR 6023/2025 (referências) e a NBR 10520/2023
+(citações). Os exemplos vêm do arquivo \texttt{exemplos-referencias.bib}: parte deles
+reproduz exemplos do manual; os demais têm dados ilustrativos.
+
+\section{Regras gerais}
+
+\begin{itemize}
+  \item As referências ficam em \textbf{uma única lista}, em ordem alfabética, em
+        espaço simples, alinhadas à margem esquerda e separadas por uma linha em branco.
+        O estilo \texttt{abnt} do biblatex faz tudo isso automaticamente.
+  \item Entram na lista \textbf{somente as obras citadas} no texto. (Obras apenas
+        lidas, sem citação, formariam uma \emph{bibliografia}, outro elemento.)
+  \item O \textbf{destaque tipográfico do título} (aqui, negrito) deve ser o mesmo em
+        todas as referências; ele não se aplica às obras sem autoria, cuja entrada é o
+        título, já destacado pelas maiúsculas na primeira palavra.
+  \item O autor é indicado pelo último sobrenome em maiúsculas, seguido do prenome
+        (por extenso ou abreviado, \textbf{de forma uniforme}). Até três autores,
+        todos; com quatro ou mais, indicam-se todos ou só o primeiro seguido de
+        \emph{et al.} (este modelo usa \emph{et al.}).
+  \item Documentos \emph{online} levam, ao final, \textbf{Disponível em:} (endereço) e
+        \textbf{Acesso em:} (data de acesso).
+  \item Quando um elemento não aparece na obra, mas pode ser identificado, vai entre
+        colchetes: \texttt{[Cupertino]}. Se não puder ser identificado, usam-se
+        \texttt{[S. l.]} (local) e \texttt{[s. n.]} (editora).
+\end{itemize}
+
+\section{Campos mais usados}
+
+O \autoref{qua:campos} resume os campos do \texttt{.bib} usados nos exemplos. Escreva
+os nomes como \emph{Sobrenome, Prenome} e separe os autores com \texttt{and}. Para
+entidades (autor institucional), use chaves duplas, que impedem a inversão do nome:
+\texttt{author = \{\{Universidade Federal de Viçosa\}\}}. O campo \texttt{doi} recebe
+apenas o número do \ac{doi}, sem o prefixo de endereço.
+
+\begin{quadro}[htbp]
+\begin{ilustracao}{\caption{Campos do biblatex mais usados nas entradas}\label{qua:campos}}{\fonte{Elaborado pelo próprio autor}}
+  \renewcommand{\arraystretch}{1.2}
+  \small
+  \begin{tabularx}{\textwidth}{|>{\ttfamily\raggedright\arraybackslash}p{3.2cm}|X|}
+    \hline
+    \textnormal{\textbf{Campo}} & \textbf{Uso} \\
+    \hline
+    author, editor & Autores (\texttt{Sobrenome, Prenome and ...}) e organizadores/editores \\
+    \hline
+    title, subtitle & Título e subtítulo; o subtítulo é impresso após dois-pontos \\
+    \hline
+    edition & Número da edição (\texttt{2} gera ``2. ed.''); texto livre vira o próprio texto \\
+    \hline
+    location, publisher & Local (cidade) e editora, sem natureza jurídica (``Editora Atlas'' $\to$ ``Atlas'') \\
+    \hline
+    year, date & Ano ou data completa (\texttt{2003-11/2003-12} gera ``nov./dez. 2003'') \\
+    \hline
+    pages, pagetotal & Páginas inicial e final (\texttt{15--24}) e número total de páginas \\
+    \hline
+    journaltitle, volume, number & Periódico, volume e fascículo (artigos) \\
+    \hline
+    doi, url, urldate & DOI, endereço eletrônico e data de acesso (\texttt{AAAA-MM-DD}) \\
+    \hline
+    type, institution, eventdate & Trabalhos acadêmicos: tipo (grau e curso), instituição e data da defesa \\
+    \hline
+    eventtitle, venue & Eventos: nome do evento e cidade de realização \\
+    \hline
+    shorttitle & Título curto, usado na citação de obras sem autoria \\
+    \hline
+    keywords & Palavras-chave internas (nos exemplos, \texttt{guia}) \\
+    \hline
+  \end{tabularx}
+\end{ilustracao}
+\end{quadro}
+
+\section{Convenções do estilo \texttt{abnt}}
+
+O pacote \texttt{biblatex-abnt} segue a NBR 6023, mas algumas formas só saem certas
+com estas convenções (já adotadas nos exemplos abaixo):
+\begin{alineas}
+  \item \textbf{trabalhos acadêmicos}: use \texttt{@thesis} e informe a data da defesa
+        em \texttt{eventdate}, que é impressa ao final (``\ldots\ Universidade, Local, ano'');
+  \item \textbf{documentos online com local e editora}: use \texttt{@book} (ou
+        \texttt{@misc}) com \texttt{url} e \texttt{urldate}; \texttt{@online} não imprime
+        local nem editora;
+  \item \textbf{obras sem autoria}: omita \texttt{author}; se o título começar por
+        artigo ou monossílabo, preencha \texttt{shorttitle} (ver a Seção~\ref{sec:semautoria});
+  \item \textbf{local ou editora desconhecidos}: escreva \texttt{[S. l.]} ou \texttt{[s. n.]}
+        no próprio campo;
+  \item \textbf{autor institucional}: use chaves duplas,
+        \texttt{author = \{\{Universidade Federal de Viçosa\}\}}. Com chaves simples, o
+        biblatex trata ``Viçosa'' como sobrenome e imprime \emph{VIÇOSA, U. F. de.} na lista e
+        ``(Viçosa, 1999)'' na citação, o que está errado.
+\end{alineas}
+
+\section{Livros}
+
+\refex{livro}{ex-livro}{Livro com um autor}
+\refex{livro_3}{ex-livro-3}{Livro com três autores (todos são indicados)}
+\refex{livro_4}{ex-livro-4}{Livro com quatro ou mais autores (primeiro autor e \emph{et al.})}
+\refex{livro_org}{ex-livro-org}{Livro com organizador}
+\refex{livro_trad}{ex-livro-trad}{Livro com tradutor, número de páginas e \ac{isbn} (elementos complementares)}
+
+\section{Partes de livros}
+
+\refex{capitulo}{ex-capitulo}{Capítulo de livro do mesmo autor}
+\refex{capitulo_org}{ex-capitulo-org}{Capítulo de livro organizado por outros autores}
+
+\section{Trabalhos acadêmicos (TCC, dissertação e tese)}
+
+\refex{tcc}{ex-tcc}{Trabalho de conclusão de curso}
+\refex{dissertacao}{ex-dissertacao}{Dissertação}
+\refex{tese}{ex-tese}{Tese}
+
+\begingroup\sloppy
+Para um \ac{tcc} do curso de Sistemas de Informação da \ac{ufv}, o campo \texttt{type} fica
+``\texttt{Trabalho de Conclusão de Curso (Bacharelado em Sistemas de Informação)}'' e
+\texttt{institution} fica
+``\texttt{Instituto de Ciências Exatas e Tecnológicas, Universidade Federal de Viçosa}'' (ou o nome da unidade do seu \emph{campus}).\par\endgroup
+
+\section{Artigos de periódicos}
+
+\refex{artigo}{ex-artigo}{Artigo de periódico, versão impressa}
+\refex{artigo_online}{ex-artigo-online}{Artigo de periódico \emph{online}, com DOI, endereço e data de acesso}
+
+\section{Trabalhos apresentados em eventos}
+
+\refex{evento}{ex-evento}{Trabalho em evento (\texttt{@inproceedings}); \texttt{number} é o número da edição do evento}
+
+\section{Normas, legislação e documentos institucionais}
+
+\refex{norma}{ex-norma}{Norma técnica}
+\refex{legislacao}{ex-legislacao}{Legislação disponível \emph{online}: o autor é a jurisdição (Brasil, estado ou município); o nome e a data da lei ficam fora do negrito (\texttt{\textbackslash textmd\{...\}}) e só a ementa é destacada}
+
+Este modelo cobre a legislação (seção 5.12.16.1 e 5.12.16.2 do manual). A jurisprudência
+(acórdãos, súmulas) e os atos administrativos normativos (portarias, resoluções) têm
+elementos próprios, como tribunal, número do processo e relator, que o estilo \texttt{abnt}
+não cobre por completo; para eles, siga o manual (seções 5.12.16.3 a 5.12.16.6). Pode ser necessário usar
+\texttt{@misc} e montar parte do texto nos campos \texttt{title} e \texttt{note}; confira
+sempre o resultado impresso contra os exemplos do manual.
+\refex{entidade}{ex-entidade}{Autor institucional (a entidade é o autor)}
+\refex{relatorio}{ex-relatorio}{Relatório de organização (publicação em meio eletrônico, com data completa)}
+
+\section{Documentos \emph{online}, repositórios e programas}
+
+\refex{site}{ex-site}{Página \emph{web} (use \texttt{[S. l.]} se o local não é identificado)}
+\refex{repositorio}{ex-repositorio}{Repositório de código}
+\refex{software}{ex-software}{Programa de computador (a versão fica no campo \texttt{edition})}
+
+\section{Obras sem autoria}\label{sec:semautoria}
+
+\refex{sem_autor}{ex-sem-autor}{Título como entrada (primeira palavra em maiúsculas na lista)}
+\refex{sem_autor_artigo}{ex-sem-autor-artigo}{Título iniciado por artigo: escreva em maiúsculas o artigo e a palavra seguinte, e use \texttt{shorttitle}}
+
+\section{Citações no texto}\label{sec:citacoes}
+
+O sistema de chamada adotado é o \textbf{autor-data} (NBR 10520:2023). O sistema
+numérico não pode ser usado quando há notas. O \autoref{qua:citacoes} mostra os
+comandos e o resultado para os casos mais comuns.
+
+\begin{quadro}[htbp]
+\begin{ilustracao}{\caption{Comandos de citação e resultado}\label{qua:citacoes}}{\fonte{Elaborado pelo próprio autor}}
+  \renewcommand{\arraystretch}{1.2}
+  \small
+  \begin{tabularx}{\textwidth}{|>{\ttfamily\raggedright\arraybackslash}p{6.4cm}|X|}
+    \hline
+    \textnormal{\textbf{Comando}} & \textbf{Resultado} \\
+    \hline
+    \textbackslash cite\{ex-livro\} & \cite{ex-livro} (um autor) \\
+    \hline
+    \textbackslash cite[p.~35]\{ex-livro\} & \cite[p.~35]{ex-livro} (com página) \\
+    \hline
+    \textbackslash cite\{ex-livro,ex-artigo\} & \cite{ex-livro,ex-artigo} (várias obras, em ordem alfabética) \\
+    \hline
+    \textbackslash cite\{ex-livro-3\} & \cite{ex-livro-3} (três autores) \\
+    \hline
+    \textbackslash cite\{ex-livro-4\} & \cite{ex-livro-4} (quatro ou mais autores) \\
+    \hline
+    \textbackslash textcite\{ex-livro\} & \textcite{ex-livro} (no fluxo da frase) \\
+    \hline
+    \textbackslash textcite[p.~35]\{ex-livro-3\} & \textcite[p.~35]{ex-livro-3} \\
+    \hline
+    \textbackslash cite\{ex-entidade\} & \cite{ex-entidade} (autor institucional) \\
+    \hline
+    \textbackslash cite\{ex-norma\} & \cite{ex-norma} \\
+    \hline
+    \textbackslash cite\{ex-sem-autor\} & \cite{ex-sem-autor} (sem autoria) \\
+    \hline
+    \textbackslash cite\{ex-sem-autor-artigo\} & \cite{ex-sem-autor-artigo} (sem autoria, com \texttt{shorttitle}) \\
+    \hline
+    \textbackslash cite\{ex-reeside-a,\allowbreak ex-reeside-b\} & \cite{ex-reeside-a,ex-reeside-b} (mesmo autor e ano: letras a, b) \\
+    \hline
+    \textbackslash textapud\{ex-livro\}\{ex-livro-3\} & \textapud{ex-livro}{ex-livro-3} (citação de citação; só a obra consultada entra na lista) \\
+    \hline
+  \end{tabularx}
+\end{ilustracao}
+\end{quadro}
+
+Outras regras da NBR 10520:2023 que o manual da \ac{ufv} destaca:
+\begin{itemize}
+  \item \textbf{supressões} no trecho citado são indicadas por \texttt{[...]};
+        interpolações e comentários, por \texttt{[~~]}; ênfase por sublinhado, negrito ou
+        itálico, seguida de ``\emph{grifo nosso}'' ou ``\emph{grifo próprio}'' na chamada;
+  \item \textbf{tradução} própria de trecho citado: acrescente \emph{tradução nossa} na chamada;
+  \item citações diretas de documento \textbf{sem paginação} indicam a localização do
+        trecho (\texttt{local.}, capítulo, artigo etc.);
+  \item o \textbf{ponto final} encerra a frase, não a citação.
+\end{itemize}
+
+\section{Dicas de uso do arquivo \texttt{.bib}}
+
+\begin{itemize}
+  \item \textbf{Chaves}: use chaves curtas e padronizadas (\texttt{silva2024}, sem acentos
+        nem espaços). Cada chave é única.
+  \item \textbf{Codificação}: o arquivo deve estar em UTF-8; acentos são digitados normalmente.
+  \item \textbf{Maiúsculas}: o estilo decide a caixa dos títulos; para preservar uma sigla
+        ou nome próprio, use chaves: \texttt{title = \{Uso de \{Python\} em \{SGBD\}\}}.
+  \item \textbf{Gerenciadores}: Zotero e JabRef exportam \texttt{.bib}; confira os campos
+        exportados com este guia, pois nem sempre seguem as convenções acima.
+  \item \textbf{Compilação}: após incluir ou alterar citações, rode
+        \texttt{pdflatex}, \texttt{biber}, \texttt{pdflatex}, \texttt{pdflatex} (ou
+        simplesmente \texttt{latexmk -pdf}). ``Citation \ldots\ undefined'' ou ``(?)''
+        indica que o \texttt{biber} ainda não foi executado ou que a chave está errada.
+\end{itemize}

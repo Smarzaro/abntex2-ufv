@@ -2,8 +2,9 @@ name: build
 
 # Compila o guia (docs/) e o modelo (modelo-tcc/) e roda os testes em tests/.
 on:
-  push:
   pull_request:
+  push:
+    branches: [master]
 
 jobs:
   build:

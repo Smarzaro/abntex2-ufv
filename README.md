@@ -1,6 +1,12 @@
 # abntex2-ufv
-
+[![build](https://github.com/Smarzaro/abntex2-ufv/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Smarzaro/abntex2-ufv/actions/workflows/build.yml)
+[![release](https://img.shields.io/github/v/release/Smarzaro/abntex2-ufv)](https://github.com/Smarzaro/abntex2-ufv/releases/latest)
 [![License: LPPL 1.3c](https://img.shields.io/badge/license-LPPL%201.3c-blue.svg)](LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23345953.svg)](https://doi.org/10.5281/zenodo.23345953)
+
+<!-- Depois que o pacote for aceito na CTAN:
+[![CTAN](https://img.shields.io/ctan/v/abntex2-ufv)](https://ctan.org/pkg/abntex2-ufv)
+-->
 
 **Summary (English):** abntex2-ufv is a LaTeX class, built on top of the
 abnTeX2 class, for undergraduate final theses (TCC) of the Information

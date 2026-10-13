@@ -1,7 +1,7 @@
-% Apêndice do modelo: guia de referências e citações. Apague-o no seu trabalho
-% (e remova exemplos-referencias.bib do preâmbulo).
+% Apêndice do exemplo: guia de referências e citações. Apague-o no seu trabalho
+% (e remova example-entradas.bib do preâmbulo).
 
-% Exibe uma entrada de exemplo (trecho do arquivo exemplos-referencias.bib entre as
+% Exibe uma entrada de exemplo (trecho do arquivo example-entradas.bib entre as
 % marcas @comment{BEGIN:#1} e @comment{END:#1}) e o resultado impresso (\fullcite)
 % da chave #2.
 % Uso: \refex{marcador}{chave}{descrição}
@@ -9,7 +9,7 @@
   \par\medskip\noindent\textbf{#3}\par\nopagebreak\smallskip
   \lstinputlisting[style=exemplo, language=BibTeX, linerange={BEGIN:#1-END:#1},
                    rangeprefix=@comment\{, rangesuffix=\}, includerangemarker=false]%
-                  {exemplos-referencias.bib}%
+                  {example/example-entradas.bib}%
   \par\nopagebreak\smallskip\noindent\textit{Resultado na lista de referências:}\par\nopagebreak
   \begin{SingleSpacing}\noindent\hspace{1cm}\begin{minipage}{0.9\textwidth}%
     \raggedright\fullcite{#2}.\end{minipage}\end{SingleSpacing}\par\medskip}
@@ -20,7 +20,7 @@ Este apêndice mostra como escrever as entradas do arquivo \texttt{referencias.b
 para os tipos de documento mais usados em trabalhos de computação e o resultado que
 elas produzem na lista de referências, conforme o Manual de Normalização de Trabalhos
 Acadêmicos da \ac{ufv} \cite{manualUFV}, a NBR 6023/2025 (referências) e a NBR 10520/2023
-(citações). Os exemplos vêm do arquivo \texttt{exemplos-referencias.bib}: parte deles
+(citações). Os exemplos vêm do arquivo \texttt{example-entradas.bib}: parte deles
 reproduz exemplos do manual; os demais têm dados ilustrativos.
 
 \section{Regras gerais}

@@ -134,8 +134,11 @@ build/
 texput.log
 .vscode/
 
-## Gerado por scripts/make-ctan-zip.sh
+## Gerado por scripts/make-ctan-zip.sh e scripts/make-overleaf-zips.sh
 dist/
+
+## PDF do template (gerado); só a documentação doc/abntex2-ufv.pdf é versionada
+doc/template/*.pdf
 
 ## Material de divulgação (local, não vai para o remoto)
 divulgacao/

@@ -1,31 +1,37 @@
 #!/bin/sh
 # Gera dist/abntex2-ufv.zip no formato de submissão à CTAN: uma pasta abntex2-ufv/ com
-# a classe, o pacote, o README, o guia (docs/) e o modelo (modelo-tcc/).
-# A disposição interna é a mesma do repositório, então o guia e o modelo continuam
-# compilando (eles procuram o .cls e o .sty na pasta pai).
-# Uso (na raiz do repositório):  scripts/make-ctan-zip.sh
-# Os PDFs incluídos são os que estão na árvore de trabalho; compile antes (latexmk em
-# docs/ e em modelo-tcc/) para que estejam atualizados.
+# README.md, CHANGES.md, tex/ (abntex2-ufv.cls e .sty) e doc/ (documentação com o
+# trabalho de exemplo e o template). A disposição é a mesma do repositório.
+#
+# Ficam de fora (só do repositório): .github/, scripts/, tests/, CITATION.cff, LICENSE,
+# doc/latexmkrc e arquivos gerados (apenas o PDF da documentação, doc/abntex2-ufv.pdf,
+# é incluído). Só entram arquivos versionados no git.
+#
+# O zip deve ser gerado em Linux (o workflow "release" faz isso), onde os arquivos de
+# texto têm só LF e o zip os marca como texto, como a CTAN pede.
+# Uso (na raiz do repositório):  sh scripts/make-ctan-zip.sh
+# Compile antes (latexmk em doc/) para que o PDF esteja atualizado.
 set -eu
 cd "$(dirname "$0")/.."
 pkg=abntex2-ufv
 dist=dist
-rm -rf "$dist"
-mkdir -p "$dist/$pkg"
+out="$dist/$pkg"
+rm -rf "$out" "$dist/$pkg.zip"
+mkdir -p "$out"
 
-# arquivos da raiz
-for f in abntex2-ufv.cls abntex2-ufv.sty README.md LICENSE; do
-  [ -f "$f" ] && cp "$f" "$dist/$pkg/"
+git ls-files README.md CHANGES.md tex doc | while read -r f; do
+  case "$f" in doc/latexmkrc) continue ;; esac
+  mkdir -p "$out/$(dirname "$f")"
+  cp "$f" "$out/$f"
 done
 
-# guia e modelo: apenas arquivos versionados no git (sem auxiliares nem build/)
-git ls-files docs modelo-tcc | while read -r f; do
-  mkdir -p "$dist/$pkg/$(dirname "$f")"
-  cp "$f" "$dist/$pkg/$f"
-done
+[ -f "$out/doc/abntex2-ufv.pdf" ] || { echo "faltou doc/abntex2-ufv.pdf (compile a documentação)" >&2; exit 1; }
+[ -f "$out/README.md" ] && [ -f "$out/tex/abntex2-ufv.cls" ] || { echo "arquivos obrigatórios ausentes" >&2; exit 1; }
 
-# o PDF do guia precisa existir
-[ -f "$dist/$pkg/docs/guia-abntex2-ufv.pdf" ] || { echo "faltou docs/guia-abntex2-ufv.pdf" >&2; exit 1; }
+# a CTAN pede só LF nos arquivos de texto: aviso se houver CR
+if grep -rlI "$(printf '\r')" "$out" >/dev/null 2>&1; then
+  echo "AVISO: há arquivos de texto com CRLF; gere o zip em Linux (workflow release)." >&2
+fi
 
 ( cd "$dist" && zip -qr "$pkg.zip" "$pkg" )
 echo "Gerado $dist/$pkg.zip"

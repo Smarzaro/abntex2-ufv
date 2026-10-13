@@ -1,12 +1,14 @@
 # abntex2-ufv
 [![build](https://github.com/Smarzaro/abntex2-ufv/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Smarzaro/abntex2-ufv/actions/workflows/build.yml)
 [![release](https://img.shields.io/github/v/release/Smarzaro/abntex2-ufv)](https://github.com/Smarzaro/abntex2-ufv/releases/latest)
-[![License: LPPL 1.3c](https://img.shields.io/badge/license-LPPL%201.3c-blue.svg)](LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23345953.svg)](https://doi.org/10.5281/zenodo.23345953)
+[![License: LPPL 1.3c](https://img.shields.io/badge/license-LPPL%201.3c-blue.svg)](https://www.latex-project.org/lppl.txt)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23345952.svg)](https://doi.org/10.5281/zenodo.23345952)
 
 <!-- Depois que o pacote for aceito na CTAN:
 [![CTAN](https://img.shields.io/ctan/v/abntex2-ufv)](https://ctan.org/pkg/abntex2-ufv)
 -->
+
+**Version 1.6** (2026-10-13)
 
 **Summary (English):** abntex2-ufv is a LaTeX class, built on top of the
 abnTeX2 class, for undergraduate final theses (TCC) of the Information
@@ -19,13 +21,14 @@ list (via `acro`), glossary, figure/table/chart captions with source and
 notes, and biblatex-abnt tweaks. The class is a thin layer: it sets the
 defaults (12pt, A4, one-sided, Brazilian Portuguese), loads the packages
 every thesis needs, and loads the customization package
-`abntex2-ufv.sty`. Version 1.5 is a transition release: using the `.sty`
-directly on top of `abntex2` still works but is deprecated, and the `.sty`
-will be discontinued in version 2.0, so theses should be migrated to
-`\documentclass{abntex2-ufv}`. A complete example thesis and an empty
-template are included. License: LPPL
-1.3c or later. Author: Rodrigo Smarzaro. Documentation (Portuguese): see
-`docs/guia-abntex2-ufv.pdf`.
+`abntex2-ufv.sty`. Versions 1.5 and later are transition releases: using
+the `.sty` directly on top of `abntex2` still works but is deprecated, and
+the `.sty` will be discontinued in version 2.0, so theses should be migrated
+to `\documentclass{abntex2-ufv}`. The documentation (in Portuguese)
+contains a complete example thesis, and an empty template is included.
+
+This material is subject to the LaTeX Project Public License 1.3c.
+Author: Rodrigo Smarzaro. Documentation: `doc/abntex2-ufv.pdf`.
 
 ---
 
@@ -49,10 +52,11 @@ português do Brasil. A classe carrega os pacotes que todo TCC usa
 
 | Arquivo/pasta | Descrição |
 |---|---|
-| `abntex2-ufv.cls` | a classe: padrões do manual e pacotes de uso comum |
-| `abntex2-ufv.sty` | a personalização (margens, fonte, capa, folha de rosto, folha de aprovação, resumo, listas, siglas, glossário, ilustrações, tabelas e quadros, ajustes do biblatex-abnt); carregada pela classe. O uso direto com `Sepackage` está obsoleto (será descontinuado na 2.0) |
-| `modelo-tcc/` | **modelo vazio**: copie esta pasta e escreva o seu trabalho |
-| `docs/` | **guia** com um trabalho de exemplo completo, dicas de metodologia científica e de uso da classe, e exemplos de referências, tabelas e quadros ([`guia-abntex2-ufv.pdf`](docs/guia-abntex2-ufv.pdf)) |
+| `tex/abntex2-ufv.cls` | a classe: padrões do manual e pacotes de uso comum |
+| `tex/abntex2-ufv.sty` | a personalização (margens, fonte, capa, folha de rosto, folha de aprovação, resumo, listas, siglas, glossário, ilustrações, tabelas e quadros, ajustes do biblatex-abnt); carregada pela classe. O uso direto com `\usepackage` está obsoleto (será descontinuado na 2.0) |
+| `doc/abntex2-ufv.pdf` | **documentação** com um trabalho de exemplo completo, dicas de metodologia científica e de uso da classe, e exemplos de referências, tabelas e quadros (fontes: `doc/abntex2-ufv.tex` e `doc/example/`) |
+| `doc/template/` | **template (modelo vazio)**: copie esta pasta e escreva o seu trabalho |
+| `CHANGES.md` | histórico de versões |
 
 ## Uso
 
@@ -63,16 +67,16 @@ Opções (todas opcionais): `twoside`, `openany`, `11pt`, `10pt`,
 \documentclass[twoside, fonte=arial]{abntex2-ufv}
 ```
 
-> **Versão 1.5 (transição).** O uso antigo, `\documentclass{abntex2}` +
-> `\usepackage{abntex2-ufv}`, continua funcionando, mas emite um aviso e
-> **o `.sty` será descontinuado na versão 2.0**. Trabalhos novos devem
-> usar a classe, e os trabalhos em andamento devem ser migrados (veja
-> [Migração](#migração-do-pacote-para-a-classe)).
+> **Versões 1.5 e seguintes (transição).** O uso antigo,
+> `\documentclass{abntex2}` + `\usepackage{abntex2-ufv}`, continua
+> funcionando, mas emite um aviso e **o `.sty` será descontinuado na versão
+> 2.0**. Trabalhos novos devem usar a classe, e os trabalhos em andamento
+> devem ser migrados (veja [Migração](#migração-do-pacote-para-a-classe)).
 
-Para começar um trabalho, use a pasta `modelo-tcc`:
+Para começar um trabalho, use a pasta `doc/template`:
 
 ```bash
-cd modelo-tcc
+cd doc/template
 latexmk
 ```
 
@@ -82,18 +86,16 @@ nome da pasta. Quem usa só o `.sty` deve declarar o `\graphicspath`
 no próprio documento.
 
 O `latexmkrc` grava o PDF na própria pasta e os arquivos auxiliares em
-`build/` (ignorada pelo git), e procura o `abntex2-ufv.cls` na pasta pai.
-Se copiar `modelo-tcc` para outro lugar, copie o `.cls` e o `.sty`
-junto e apague a linha `ensure_path` do `latexmkrc`. No Overleaf,
-coloque o `.cls` e o `.sty` ao lado do arquivo principal e use o
-compilador pdfLaTeX (o `biber` roda automaticamente).
+`build/` (ignorada pelo git), e procura o `abntex2-ufv.cls` em `../../tex`.
+Se o pacote estiver instalado, ou se copiar o template para outro lugar
+junto com o `.cls` e o `.sty`, apague a linha `ensure_path` do `latexmkrc`.
 
 ## Migração do pacote para a classe
 
 Resumo (o passo a passo completo está na seção "Migração do pacote para
-a classe" do Apêndice C do guia, [`guia-abntex2-ufv.pdf`](docs/guia-abntex2-ufv.pdf)):
+a classe" do Apêndice C da documentação, [`abntex2-ufv.pdf`](doc/abntex2-ufv.pdf)):
 
-1. Substitua os arquivos pelos da versão 1.5 (o nome agora é em
+1. Substitua os arquivos pelos da versão 1.5 ou posterior (o nome agora é em
    minúsculas: apague o `abntex2-UFV.sty` antigo).
 2. Troque `\documentclass[...]{abntex2}` por `\documentclass{abntex2-ufv}`.
    Remova as opções que já são padrão (`12pt`, `a4paper`, `oneside`,
@@ -129,27 +131,30 @@ Enquanto o pacote não estiver na CTAN, cada versão é publicada em
 
 | Arquivo | Para quê |
 |---|---|
-| [`abntex2-ufv-modelo.zip`](https://github.com/Smarzaro/abntex2-ufv/releases/latest/download/abntex2-ufv-modelo.zip) | projeto vazio, pronto para começar o trabalho |
-| [`abntex2-ufv-guia.zip`](https://github.com/Smarzaro/abntex2-ufv/releases/latest/download/abntex2-ufv-guia.zip) | guia com o trabalho de exemplo completo |
+| [`abntex2-ufv-template.zip`](https://github.com/Smarzaro/abntex2-ufv/releases/latest/download/abntex2-ufv-template.zip) | projeto vazio (template), pronto para começar o trabalho |
+| [`abntex2-ufv-example.zip`](https://github.com/Smarzaro/abntex2-ufv/releases/latest/download/abntex2-ufv-example.zip) | documentação com o trabalho de exemplo completo |
 | `abntex2-ufv.zip` | pacote no formato da CTAN |
 
 No **Overleaf**: *New Project* → *Upload Project* → escolha
-`abntex2-ufv-modelo.zip` (ou o do guia). O projeto já traz o `.cls` e o `.sty`
+`abntex2-ufv-template.zip` (ou o do exemplo). O projeto já traz o `.cls` e o `.sty`
 na raiz; use o compilador pdfLaTeX (o `biber` roda automaticamente).
 Os links `.../releases/latest/download/...` sempre apontam para a versão mais recente.
+As versões 1.5 e anteriores usam os nomes antigos (`abntex2-ufv-modelo.zip` e
+`abntex2-ufv-guia.zip`).
 
 ## Requisitos
 
 pdfLaTeX, `biber` e os pacotes `abntex2`, `biblatex-abnt`, `acro`,
 `tgtermes`/`tgheros`, `csquotes`, `booktabs`, `tabularx`, `multirow`,
 `microtype` e `silence` (todos incluídos no MiKTeX e no TeX Live
-completo). O guia usa ainda `tikz`, `pgfplots`, `listings`,
+completo). A documentação usa ainda `tikz`, `pgfplots`, `listings`,
 `tcolorbox`, `siunitx`, `longtable` e `colortbl`.
 
 ## Como citar
 
 Use o botão **Cite this repository** do GitHub (arquivo
-[`CITATION.cff`](CITATION.cff)).
+[`CITATION.cff`](CITATION.cff)) ou o DOI do Zenodo, que reúne todas as versões:
+[10.5281/zenodo.23345952](https://doi.org/10.5281/zenodo.23345952).
 
 ## Autor
 
@@ -161,5 +166,5 @@ Repositório e contato: <https://github.com/Smarzaro/abntex2-ufv>
 
 Distribuído sob a [LaTeX Project Public License (LPPL), versão 1.3c ou
 posterior](https://www.latex-project.org/lppl.txt); veja o arquivo
-[`LICENSE`](LICENSE). Veja <https://github.com/abntex/abntex2/> para a
-classe abnTeX2.
+[`LICENSE`](LICENSE) no repositório. Veja <https://github.com/abntex/abntex2/>
+para a classe abnTeX2.

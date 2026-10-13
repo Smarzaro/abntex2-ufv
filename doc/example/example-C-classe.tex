@@ -1,4 +1,4 @@
-% Apêndice do modelo: guia rápido da personalização abntex2-ufv. Apague-o no seu trabalho.
+% Apêndice do exemplo: guia rápido da personalização abntex2-ufv. Apague-o no seu trabalho.
 
 \chapter{Guia rápido do \texttt{abntex2-ufv}}\label{ap:classe}
 
@@ -46,15 +46,15 @@ Quem prefere partir da classe \texttt{abntex2} pode carregar só a personalizaç
 
 \section{Migração do pacote para a classe}\label{sec:migracao}
 
-A versão 1.5 é uma versão de \emph{transição}. Até a versão 1.3.1 o uso era a classe
-\texttt{abntex2} com o pacote \texttt{abntex2-UFV}; a partir da 1.5 a forma recomendada é a
+As versões 1.5 e seguintes, até a 2.0, são versões de \emph{transição}. Até a versão 1.3.1
+o uso era a classe \texttt{abntex2} com o pacote \texttt{abntex2-UFV}; a partir da 1.5 a forma recomendada é a
 classe \texttt{abntex2-ufv}. O pacote (\texttt{abntex2-ufv.sty}) continua funcionando, mas
 emite o aviso ``Uso obsoleto'' e \textbf{será descontinuado na versão 2.0}. Trabalhos novos
 devem começar com a classe, e os trabalhos em andamento devem ser migrados agora, pelos
 passos abaixo.
 
 \begin{enumerate}
-  \item \textbf{Atualize os arquivos.} Baixe os arquivos da versão 1.5 e substitua os antigos.
+  \item \textbf{Atualize os arquivos.} Baixe os arquivos da versão 1.5 ou posterior e substitua os antigos.
         O nome do pacote passou a ser em minúsculas: apague o \texttt{abntex2-UFV.sty} antigo
         e use o \texttt{abntex2-ufv.cls} e o \texttt{abntex2-ufv.sty} novos, na mesma pasta do
         seu arquivo principal (no Overleaf, envie os dois arquivos ao projeto).
@@ -241,10 +241,12 @@ com o termo em negrito. Veja o exemplo antes dos apêndices deste modelo.
         \texttt{latexmk} executa \texttt{pdflatex} e \texttt{biber} quantas vezes forem
         necessárias. O arquivo \texttt{latexmkrc} grava o \ac{pdf} na pasta do trabalho e
         todos os arquivos auxiliares em \texttt{build/}, e procura o
-        \texttt{abntex2-ufv.cls} (e o \texttt{.sty}) na pasta pai; se você copiar o modelo para outro
-        lugar, copie também esses dois arquivos para a mesma pasta e apague essa linha do \texttt{latexmkrc}.
-  \item \textbf{Onde começar}: a pasta \texttt{modelo-tcc} traz um trabalho vazio, pronto
-        para ser preenchido; este guia (pasta \texttt{docs}) é a documentação.
+        \texttt{abntex2-ufv.cls} (e o \texttt{.sty}) em \texttt{../../tex}; se você instalou o
+        pacote, ou copiou o template para outro lugar com esses dois arquivos na mesma pasta, apague essa
+        linha do \texttt{latexmkrc}.
+  \item \textbf{Onde começar}: a pasta \texttt{doc/template} traz um trabalho vazio, pronto
+        para ser preenchido; este documento (\texttt{doc/abntex2-ufv.pdf}, com o trabalho de
+        exemplo em \texttt{doc/example}) é a documentação.
   \item \textbf{Editores}: TeXstudio e VS Code (LaTeX Workshop) trazem receitas com
         \texttt{latexmk}; configure o motor como \texttt{pdfLaTeX} e a bibliografia como \texttt{biber}.
   \item \textbf{Overleaf}: compilador \texttt{pdfLaTeX}; o \texttt{biber} é executado

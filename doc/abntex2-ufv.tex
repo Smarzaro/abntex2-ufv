@@ -1,24 +1,27 @@
 %%==============================================================
-%% GUIA DE USO DO abntex2-ufv, com um trabalho de exemplo completo
+%% DOCUMENTAÇÃO DO abntex2-ufv, com um trabalho de exemplo completo
 %% para o curso de Sistemas de Informação da Universidade Federal de
 %% Viçosa - Campus de Rio Paranaíba
 %% Autor: Rodrigo Smarzaro (smarzaro@ufv.br)
-%% Versão 1.5 (transição para a classe) - baseado no Manual de Normalização de Trabalhos
+%% Versão 1.6 (transição para a classe) - baseado no Manual de Normalização de Trabalhos
 %% Acadêmicos da UFV (edição 2026-2; NBR 14724/2025, 6023/2025, 10520/2023)
 %% Arquivo em formato UTF-8
 %% Compilar com pdflatex + biber (nesta pasta: latexmk)
-%% Precisa dos arquivos ../abntex2-ufv.cls e ../abntex2-ufv.sty
+%% Precisa dos arquivos ../tex/abntex2-ufv.cls e ../tex/abntex2-ufv.sty (ou do pacote
+%% instalado; veja o README)
 %%
 %% Este documento é a DOCUMENTAÇÃO do pacote: mostra todos os recursos, com dicas de
 %% metodologia científica e de uso da classe. Para escrever o seu trabalho, comece
-%% pelo modelo vazio da pasta ../modelo-tcc.
+%% pelo template vazio da pasta template/.
 %%
-%% Estrutura dos arquivos desta pasta:
-%%   guia-abntex2-ufv.tex      este arquivo (dados do trabalho e elementos pré-textuais)
-%%   capitulos/*.tex           seções do texto de exemplo (com dicas)
-%%   apendices/*.tex           guias de referências, tabelas e quadros, e da classe
-%%   referencias.bib           referências citadas no texto de exemplo
-%%   exemplos-referencias.bib  exemplos de entradas (usado pelo Apêndice A)
+%% Estrutura dos arquivos:
+%%   abntex2-ufv.tex                  este arquivo (dados do trabalho e elementos pré-textuais)
+%%   example/example-0N-*.tex         seções do texto de exemplo (com dicas)
+%%   example/example-[A-D]-*.tex      apêndices: referências, tabelas e quadros, classe e listagens
+%%   example/example-referencias.bib  referências citadas no texto de exemplo
+%%   example/example-entradas.bib     exemplos de entradas (usado pelo Apêndice A)
+%%   example/snippets/                trechos de código exibidos nos apêndices
+%%   example/imagens/                 imagens do exemplo
 %%
 %% As caixas "Dica" (ambiente dica) existem apenas neste guia.
 %%==============================================================
@@ -101,8 +104,9 @@
 % ---
 % REFERÊNCIAS: o biblatex (estilo abnt) já é carregado pela classe
 % ---
-\addbibresource{referencias.bib}
-\addbibresource{exemplos-referencias.bib}   % apenas para o Apêndice A
+\graphicspath{{imagens/}{example/imagens/}}   % imagens do exemplo (o template usa só imagens/)
+\addbibresource{example/example-referencias.bib}
+\addbibresource{example/example-entradas.bib}   % apenas para o Apêndice A
 
 % ---
 % SIGLAS (pacote acro, carregado pelo abntex2-ufv): declare aqui e use \ac{chave}
@@ -295,12 +299,12 @@ trabalho.
 
 % Cada seção primária fica em um arquivo da pasta capitulos/.
 % Adicione, remova ou renomeie conforme a estrutura do seu trabalho.
-\input{capitulos/01-introducao}
-\input{capitulos/02-referencial-teorico}
-\input{capitulos/03-metodologia}
-\input{capitulos/04-resultados}
-\input{capitulos/05-conclusao}
-\input{capitulos/06-cronograma}  % apenas no projeto (TCC I)
+\input{example/example-01-introducao}
+\input{example/example-02-referencial-teorico}
+\input{example/example-03-metodologia}
+\input{example/example-04-resultados}
+\input{example/example-05-conclusao}
+\input{example/example-06-cronograma}  % apenas no projeto (TCC I)
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
@@ -322,10 +326,10 @@ trabalho.
 % Apêndices (texto elaborado pelo autor) e anexos (documentos de terceiros).
 \begin{apendicesenv}
 \partapendices
-\input{apendices/A-guia-referencias}
-\input{apendices/B-tabelas-quadros}
-\input{apendices/C-guia-classe}
-\input{apendices/D-listagens}
+\input{example/example-A-referencias}
+\input{example/example-B-tabelas-quadros}
+\input{example/example-C-classe}
+\input{example/example-D-listagens}
 \end{apendicesenv}
 
 % Anexos

@@ -21,7 +21,7 @@ date-released: "2026-10-13"   # atualize a cada release
 license: LPPL-1.3c
 repository-code: "https://github.com/Smarzaro/abntex2-ufv"
 url: "https://github.com/Smarzaro/abntex2-ufv"
-# doi: "10.5281/zenodo.XXXXXXX"   # preencha depois da primeira release arquivada no Zenodo
+doi: "10.5281/zenodo.23345953"
 keywords:
   - LaTeX
   - abnTeX2

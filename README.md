@@ -3,10 +3,8 @@
 [![release](https://img.shields.io/github/v/release/Smarzaro/abntex2-ufv)](https://github.com/Smarzaro/abntex2-ufv/releases/latest)
 [![License: LPPL 1.3c](https://img.shields.io/badge/license-LPPL%201.3c-blue.svg)](https://www.latex-project.org/lppl.txt)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23345952.svg)](https://doi.org/10.5281/zenodo.23345952)
-
-<!-- Depois que o pacote for aceito na CTAN:
 [![CTAN](https://img.shields.io/ctan/v/abntex2-ufv)](https://ctan.org/pkg/abntex2-ufv)
--->
+
 
 **Version 1.6.1** (2026-10-14)
 
@@ -158,7 +156,6 @@ Use o botão **Cite this repository** do GitHub (arquivo
 ## Autor
 
 - Rodrigo Smarzaro ([Universidade Federal de Viçosa](https://www.ufv.br))
-- abntex2-ufv na [CTAN](https://ctan.org/pkg/abntex2-ufv)
 
 ## Licença
 

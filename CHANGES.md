@@ -1,5 +1,15 @@
 # Changes
 
+## 1.6.1 (2026-10-14)
+
+- Fix: `\autoref` printed English names ("Figure", "Table", "Appendix") unless
+  `brazilian` was given in `\documentclass[...]`. The class now propagates the languages
+  (Brazilian Portuguese as main language, English as additional) to the global options of
+  the document, so hyperref and babel receive them. A regression check was added to the
+  tests.
+- The template (`doc/template/template.tex`) is now a single file with the whole text
+  inside; the tip on splitting the text into files with `\input` is kept as a comment.
+
 ## 1.6 (2026-10-13)
 
 - Repository and package layout reorganized for CTAN: `tex/` (class and package),

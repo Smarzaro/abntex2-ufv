@@ -126,8 +126,7 @@ Antes e depois:
 
 ## Download e Overleaf
 
-Enquanto o pacote não estiver na CTAN, cada versão é publicada em
-[Releases](https://github.com/Smarzaro/abntex2-ufv/releases) com três arquivos:
+Cada versão é publicada em [Releases](https://github.com/Smarzaro/abntex2-ufv/releases) com três arquivos:
 
 | Arquivo | Para quê |
 |---|---|
@@ -158,9 +157,8 @@ Use o botão **Cite this repository** do GitHub (arquivo
 
 ## Autor
 
-Rodrigo Smarzaro ([Universidade Federal de Viçosa](https://www.ufv.br))
-
-Repositório e contato: <https://github.com/Smarzaro/abntex2-ufv>
+- Rodrigo Smarzaro ([Universidade Federal de Viçosa](https://www.ufv.br))
+- abntex2-ufv na [CTAN](https://ctan.org/pkg/abntex2-ufv)
 
 ## Licença
 

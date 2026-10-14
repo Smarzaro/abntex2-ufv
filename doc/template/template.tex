@@ -11,7 +11,8 @@
 %%
 %% COMO USAR
 %%  1. Preencha os dados do trabalho (seção "DADOS DO TRABALHO", logo abaixo).
-%%  2. Escreva o texto nos arquivos da pasta capitulos/ (um por seção primária).
+%%  2. Escreva o texto neste mesmo arquivo, na seção "ELEMENTOS TEXTUAIS" (uma seção primária
+%%     por \chapter). Se o texto crescer muito, veja a dica de separá-lo em arquivos com \input.
 %%     Coloque as imagens na pasta imagens/ e use \includegraphics{arquivo} (sem o nome da pasta).
 %%  3. Cadastre as referências em referencias.bib e cite com \cite{chave} e
 %%     \textcite{chave}.
@@ -220,14 +221,65 @@
 % ----------------------------------------------------------
 \textual
 
-% Cada seção primária fica em um arquivo da pasta capitulos/.
-% Adicione, remova ou renomeie conforme a estrutura do seu trabalho.
-\input{capitulos/01-introducao}
-\input{capitulos/02-referencial-teorico}
-\input{capitulos/03-metodologia}
-\input{capitulos/04-resultados}
-\input{capitulos/05-conclusao}
-%\input{capitulos/06-cronograma}   % apenas no projeto (TCC I)
+% O texto do trabalho fica neste mesmo arquivo, logo abaixo. Cada seção primária começa com
+% \chapter. Adicione, remova ou renomeie conforme a estrutura do seu trabalho.
+%
+% DICA: se o texto crescer muito, separe cada seção primária em um arquivo próprio (por
+% exemplo, capitulos/introducao.tex, contendo o \chapter{Introdução} e o texto) e inclua-o
+% aqui com \input, sem a extensão:
+%     \input{capitulos/introducao}
+% Os arquivos podem ficar numa pasta (crie a pasta capitulos/ ao lado deste arquivo).
+
+% Observação: no abntex2, \chapter corresponde à "seção primária" da NBR 6024. O manual da UFV
+% pede que o trabalho seja organizado em seções: o título impresso não leva a palavra
+% "Capítulo", apenas o número e o título em caixa alta.
+\chapter{Introdução}\label{sec:introducao}
+
+% Contexto, problema, objetivo, abordagem, contribuição e organização do texto.
+
+\section{Objetivos}\label{sec:objetivos}
+
+\subsection{Objetivo geral}
+
+% Um único objetivo, com verbo no infinitivo.
+
+\subsection{Objetivos específicos}
+
+\begin{alineas}
+  \item primeiro objetivo específico;
+  \item segundo objetivo específico.
+\end{alineas}
+
+\section{Justificativa}\label{sec:justificativa}
+
+\section{Organização do trabalho}\label{sec:organizacao}
+
+\chapter{Referencial Teórico}\label{sec:RefTeorico}
+
+% Conceitos necessários ao trabalho, organizados por temas, com síntese crítica.
+
+\section{Fundamentação}\label{sec:fundamentacao}
+
+\section{Trabalhos Relacionados}\label{sec:TrabRel}
+
+\chapter{Metodologia}\label{sec:metodos}
+
+% Classificação da pesquisa, etapas, instrumentos e materiais, critérios de avaliação,
+% aspectos éticos, reprodutibilidade e limitações.
+
+\chapter{Resultados e Discussão}\label{sec:resultados}
+
+% Resultados na ordem dos objetivos específicos e discussão (interpretação, comparação com
+% a literatura, limitações).
+
+\chapter{Conclusão}\label{sec:conclusao}
+
+% Conclusões correspondentes aos objetivos, contribuições, limitações e trabalhos futuros.
+
+% Cronograma (use apenas no projeto, TCC I): descomente a linha abaixo. Três formas de
+% apresentá-lo (quadro com marcas, quadro com células sombreadas e diagrama de Gantt)
+% estão na documentação, em doc/example/example-06-cronograma.tex.
+%\chapter{Cronograma}\label{sec:cronograma}
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS

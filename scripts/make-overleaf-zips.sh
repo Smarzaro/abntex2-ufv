@@ -1,6 +1,6 @@
 #!/bin/sh
 # Gera, em dist/, dois projetos prontos para enviar ao Overleaf (New Project > Upload Project):
-#   abntex2-ufv-template.zip  template vazio: abntex2-ufv.cls, .sty, template.tex, capitulos/,
+#   abntex2-ufv-template.zip  template vazio: abntex2-ufv.cls, .sty, template.tex,
 #                             imagens/, referencias.bib (tudo na raiz do projeto)
 #   abntex2-ufv-example.zip   documentação com o trabalho de exemplo completo: abntex2-ufv.tex,
 #                             example/, abntex2-ufv.cls e .sty (tudo na raiz do projeto)

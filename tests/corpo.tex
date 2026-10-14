@@ -51,4 +51,11 @@ Texto com sigla (\ac{abnt}) e novamente \ac{abnt}; e \ac{api}. Veja a \autoref{f
 \postextual
 \printbibliography
 \fi
+
+% Os nomes do \autoref devem estar em português (e não "Figure"/"Table"):
+\def\ufvtestfig{Figura}\def\ufvtesttab{Tabela}
+\ifx\figureautorefname\ufvtestfig\else
+  \PackageError{teste}{\string\autoref em ingles: \figureautorefname}{Idioma nao propagado ao hyperref}\fi
+\ifx\tableautorefname\ufvtesttab\else
+  \PackageError{teste}{\string\autoref em ingles: \tableautorefname}{Idioma nao propagado ao hyperref}\fi
 \end{document}

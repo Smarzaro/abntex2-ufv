@@ -1,4 +1,18 @@
-% Preâmbulo comum dos testes (carregado depois do \documentclass)
+% Preâmbulo comum dos testes (carregado depois do \documentclass).
+% Desde a versão 1.7 a classe não carrega mais os pacotes de uso do autor: este arquivo
+% faz o papel do template. \ufvpkgsok (já carregados pelo teste) e \ufvsembib (sem biblatex)
+% ajustam o que é carregado.
+\ifdefined\ufvpkgsok\else
+  \usepackage{graphicx}
+  \graphicspath{{imagens/}}
+  \usepackage{csquotes}
+  \usepackage{booktabs}
+  \ifdefined\ufvsembib\else
+    \usepackage[backend=biber, style=abnt, uniquename=init, giveninits,
+                repeatfields, justify, noslsn]{biblatex}
+    \usepackage{xurl}
+  \fi
+\fi
 \ifdefined\addbibresource\addbibresource{refs.bib}\fi
 \DeclareAcronym{abnt}{short = ABNT, long = Associação Brasileira de Normas Técnicas}
 \DeclareAcronym{api}{short = API, long = Interface de Programação de Aplicações}

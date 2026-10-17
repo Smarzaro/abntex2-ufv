@@ -57,8 +57,8 @@ própria ilustração, em espaço simples e tamanho 10 (manual UFV 4.9). O ambie
 do \texttt{figure}, com os argumentos na ordem \emph{título} e \emph{rodapé}:
 \texttt{\textbackslash begin\{ilustracao\}\allowbreak\{\textbackslash caption\{Título\}\allowbreak\textbackslash label\{rótulo\}\}\allowbreak\{\textbackslash fonte\{Fonte\}\allowbreak\textbackslash nota\{Nota\}\}},
 com o \texttt{\textbackslash includegraphics} ou o diagrama dentro. As imagens ficam na
-pasta \texttt{imagens/}, ao lado do arquivo principal: a classe já configura o
-\texttt{\textbackslash graphicspath}, então basta
+pasta \texttt{imagens/}, ao lado do arquivo principal: o preâmbulo do template já declara
+\texttt{\textbackslash graphicspath\{\{imagens/\}\}}, então basta
 \texttt{\textbackslash includegraphics\{arquivo\}}, sem o nome da pasta. Para a fonte de autoria
 própria, use \texttt{\textbackslash elaboracaopropria}. Com
 \texttt{\textbackslash caption[título curto]\{título longo\}}, a lista de ilustrações

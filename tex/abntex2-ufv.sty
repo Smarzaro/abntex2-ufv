@@ -23,8 +23,8 @@
 % ---
 % INICIO DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DE VIÇOSA
 % ---
-\NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{abntex2-ufv}[2026/10/14 v1.6.1 abnTeX2-UFV (obsoleto: use a classe abntex2-ufv)]
+\NeedsTeXFormat{LaTeX2e}[2022/06/01]
+\ProvidesPackage{abntex2-ufv}[2026/10/17 v1.7 abnTeX2-UFV (obsoleto: use a classe abntex2-ufv)]
 
 % Este pacote só faz sentido sobre a classe abntex2
 \@ifclassloaded{abntex2}{}{%
@@ -41,19 +41,23 @@
 \fi
 
 \RequirePackage{etoolbox}
-\RequirePackage{kvoptions}
 
 % ---
-% Opções do pacote
+% Opções
 %   fonte=times  (padrão) Times 12 (TeX Gyre Termes)
 %   fonte=arial  Arial 12 (TeX Gyre Heros, métrica compatível com Helvetica/Arial)
 %   fonte=cm     mantém a fonte do documento (Computer Modern ou a definida pelo usuário)
 %   capacampus   imprime campus e curso na capa (não são exigidos pelo manual)
+% Carregado pela classe abntex2-ufv, as opções já foram lidas por ela (\ufv@fonte e
+% \ifufv@capacampus). Só no uso obsoleto, direto com \usepackage, o pacote as lê (kvoptions).
 % ---
-\SetupKeyvalOptions{family=ufv, prefix=ufv@}
-\DeclareStringOption[times]{fonte}
-\DeclareBoolOption{capacampus}
-\ProcessKeyvalOptions*
+\ifdefined\ufv@viacls\else
+  \RequirePackage{kvoptions}
+  \SetupKeyvalOptions{family=ufv, prefix=ufv@}
+  \DeclareStringOption[times]{fonte}
+  \DeclareBoolOption{capacampus}
+  \ProcessKeyvalOptions*
+\fi
 
 % ---
 % Fonte (manual UFV 4.1: Arial ou Times, tamanho 12, cor preta)
@@ -64,7 +68,12 @@
   \ifdefstring{\ufv@fonte}{arial}{%
     \RequirePackage{tgheros}%
     \renewcommand{\familydefault}{\sfdefault}%
-  }{}%
+  }{%
+    \ifdefstring{\ufv@fonte}{cm}{}{%
+      \PackageWarning{abntex2-ufv}{Valor desconhecido para fonte: \ufv@fonte\space
+        (use times, arial ou cm); mantida a fonte do documento}%
+    }%
+  }%
 }
 
 % ---
@@ -420,37 +429,82 @@
 \@ifundefined{extrasbrazilian}{}{\addto\extrasbrazilian{\ufv@autorefsecao}}
 
 % ---
-% Ajustes do biblatex (manual UFV, cap. 5 e 6), aplicados quando o pacote
-% estiver carregado (o biblatex é carregado depois deste pacote).
+% Padrões do documento (o usuário pode sobrescrevê-los no preâmbulo)
+% ---
+% Espaçamento após ponto como no texto em português (sem espaço extra entre frases)
+\AtBeginDocument{\frenchspacing}
+
+% Aparência do PDF: links pretos e citações em azul (para impressão, troque por black com
+% \hypersetup{...}). O hyperref já foi carregado pelo abntex2.
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=blue, filecolor=magenta,
+  urlcolor=blue, bookmarksdepth=4}
+
+% Metadados do PDF a partir de \titulo, \autor e \preambulo..., a menos que o usuário os
+% tenha definido com \hypersetup{pdftitle=..., pdfauthor=..., pdfsubject=...}
+% (\@title e \@author ainda valem as mensagens de erro do LaTeX enquanto \titulo e \autor
+% não forem usados; guardamos esses valores para não usá-los como metadados.)
+\let\ufv@titulopadrao\@title
+\let\ufv@autorpadrao\@author
+\newcommand{\ufv@metadadospdf}{%
+  \ifx\@pdftitle\@empty
+    \ifx\@title\ufv@titulopadrao\else\hypersetup{pdftitle={\@title}}\fi
+  \fi
+  \ifx\@pdfauthor\@empty
+    \ifx\@author\ufv@autorpadrao\else\hypersetup{pdfauthor={\@author}}\fi
+  \fi
+  \ifx\@pdfsubject\@empty
+    \ifdefined\imprimirpreambulo\hypersetup{pdfsubject={\imprimirpreambulo}}\fi
+  \fi}
+
+% ---
+% Correção do listings: \end{lstlisting} indentado não gera linha em branco no fim da
+% listagem. Mexe em macros internas do listings; só é aplicada se elas existirem.
+% ---
+\newcommand{\ufv@patchlistings}{%
+  % (1) sem keepspaces: descarta o espaço pendente ao fechar o ambiente
+  \let\ufv@lstDeInit\lst@DeInit
+  \def\lst@DeInit{\global\lst@token{}\global\lst@length\z@\ufv@lstDeInit}%
+  % (2) com keepspaces=true: os espaços iniciais de cada linha só são
+  % impressos quando surge o primeiro caractere visível da linha
+  \newcount\ufv@lstsp
+  \newif\ifufv@lstcont
+  \lst@AddToHook{InitVarsBOL}{\global\ufv@lstsp\z@\global\ufv@lstcontfalse}%
+  \let\ufv@lstPS\lst@ProcessSpace
+  \def\lst@ProcessSpace{\lst@ifkeepspaces
+    \ifufv@lstcont\expandafter\ufv@lstPS\else\expandafter\ufv@lstdefer\fi
+    \else\expandafter\ufv@lstPS\fi}%
+  \def\ufv@lstdefer{\global\advance\ufv@lstsp\@ne}%
+  \def\ufv@lstflush{\ifufv@lstcont\else\global\ufv@lstconttrue
+    \ifnum\ufv@lstsp>\z@
+      \@tempcnta\ufv@lstsp \global\ufv@lstsp\z@
+      \lst@PrintToken \lst@whitespacetrue
+      \@whilenum\@tempcnta>\z@\do{\lst@AppendOther\lst@outputspace
+        \advance\@tempcnta\m@ne}%
+      \lst@PrintToken
+    \fi\fi}%
+  \let\ufv@lstWF\lst@whitespacefalse
+  \def\lst@whitespacefalse{\ufv@lstflush\ufv@lstWF}}
+
+% ---
+% Ajustes aplicados no fim do preâmbulo, quando os pacotes já foram carregados:
+% metadados do PDF, correção do listings e ajustes do biblatex (manual UFV, cap. 5 e 6).
+% O biblatex é carregado pelo documento (veja o template), não pela classe.
 % ---
 \AtEndPreamble{%
+  \ufv@metadadospdf
   \@ifpackageloaded{listings}{%
-    % \end{lstlisting} indentado não gera linha em branco no fim da listagem.
-    % (1) sem keepspaces: descarta o espaço pendente ao fechar o ambiente
-    \let\ufv@lstDeInit\lst@DeInit
-    \def\lst@DeInit{\global\lst@token{}\global\lst@length\z@\ufv@lstDeInit}%
-    % (2) com keepspaces=true: os espaços iniciais de cada linha só são
-    % impressos quando surge o primeiro caractere visível da linha
-    \newcount\ufv@lstsp
-    \newif\ifufv@lstcont
-    \lst@AddToHook{InitVarsBOL}{\global\ufv@lstsp\z@\global\ufv@lstcontfalse}%
-    \let\ufv@lstPS\lst@ProcessSpace
-    \def\lst@ProcessSpace{\lst@ifkeepspaces
-      \ifufv@lstcont\expandafter\ufv@lstPS\else\expandafter\ufv@lstdefer\fi
-      \else\expandafter\ufv@lstPS\fi}%
-    \def\ufv@lstdefer{\global\advance\ufv@lstsp\@ne}%
-    \def\ufv@lstflush{\ifufv@lstcont\else\global\ufv@lstconttrue
-      \ifnum\ufv@lstsp>\z@
-        \@tempcnta\ufv@lstsp \global\ufv@lstsp\z@
-        \lst@PrintToken \lst@whitespacetrue
-        \@whilenum\@tempcnta>\z@\do{\lst@AppendOther\lst@outputspace
-          \advance\@tempcnta\m@ne}%
-        \lst@PrintToken
-      \fi\fi}%
-    \let\ufv@lstWF\lst@whitespacefalse
-    \def\lst@whitespacefalse{\ufv@lstflush\ufv@lstWF}%
+    \ifboolexpr{test{\ifdefined\lst@DeInit} and test{\ifdefined\lst@ProcessSpace}
+                and test{\ifdefined\lst@whitespacefalse}}%
+      {\ufv@patchlistings}%
+      {\PackageWarning{abntex2-ufv}{O listings mudou; a correcao da linha em branco
+        no fim das listagens foi desativada}}%
   }{}%
   \@ifpackageloaded{biblatex}{%
+    % URLs no estilo do texto. A linha em branco entre as referências já vem do
+    % biblatex-abnt (\bibitemsep = \baselineskip); não altere o \bibparsep (padrão 0pt):
+    % em uma lista, o espaço entre itens é \itemsep + \parsep, e valores maiores que 0
+    % deixariam o espaço entre as referências maior que uma linha em branco.
+    \ifdefined\urlstyle\urlstyle{same}\fi
     % referências em espaço simples
     \AtBeginBibliography{\SingleSpacing}%
     % intervalos: páginas com hífen (p. 855-869) e meses com barra (nov./dez. 2003)

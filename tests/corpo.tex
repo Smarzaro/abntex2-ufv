@@ -58,4 +58,12 @@ Texto com sigla (\ac{abnt}) e novamente \ac{abnt}; e \ac{api}. Veja a \autoref{f
   \PackageError{teste}{\string\autoref em ingles: \figureautorefname}{Idioma nao propagado ao hyperref}\fi
 \ifx\tableautorefname\ufvtesttab\else
   \PackageError{teste}{\string\autoref em ingles: \tableautorefname}{Idioma nao propagado ao hyperref}\fi
+
+% Metadados do PDF definidos pela classe a partir de \titulo e \autor:
+\makeatletter
+\ifx\@pdftitle\@empty
+  \PackageError{teste}{pdftitle vazio}{Metadados do PDF nao foram definidos}\fi
+\ifx\@pdfauthor\@empty
+  \PackageError{teste}{pdfauthor vazio}{Metadados do PDF nao foram definidos}\fi
+\makeatother
 \end{document}

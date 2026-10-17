@@ -16,8 +16,8 @@ authors:
     email: smarzaro@ufv.br
     affiliation: "Universidade Federal de Viçosa, Campus Rio Paranaíba"
     orcid: "https://orcid.org/0000-0002-4783-8383"
-version: "1.6.1"               # atualize a cada release
-date-released: "2026-10-14"   # atualize a cada release
+version: "1.7"               # atualize a cada release
+date-released: "2026-10-17"   # atualize a cada release
 license: LPPL-1.3c
 repository-code: "https://github.com/Smarzaro/abntex2-ufv"
 url: "https://github.com/Smarzaro/abntex2-ufv"

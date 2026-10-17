@@ -12,10 +12,12 @@ export TEXINPUTS="${raiz}/tex//${sep}"
 cd "$raiz/tests" || exit 1
 rm -rf build   # evita resíduos de execuções anteriores
 falhas=0
+# limite de tempo por documento (evita travar o CI em caso de laço), se o timeout existir
+if command -v timeout >/dev/null 2>&1; then limite="timeout 300"; else limite=""; fi
 for t in t*.tex; do
   nome="${t%.tex}"
   echo "== $nome"
-  if ! latexmk -pdf -interaction=nonstopmode -outdir=build "$t" > "build-$nome.out" 2>&1; then
+  if ! $limite latexmk -pdf -interaction=nonstopmode -outdir=build "$t" < /dev/null > "build-$nome.out" 2>&1; then
     echo "FALHA: erro de compilação em $t"; tail -n 25 "build-$nome.out"; falhas=$((falhas+1))
     rm -f "build-$nome.out"; continue
   fi

@@ -5,16 +5,18 @@
 A classe \texttt{abntex2-ufv} personaliza a classe abn\TeX2 \cite{abntex2classe} para o
 manual de normalização da UFV \cite{manualUFV}. O uso mais simples é
 \texttt{\textbackslash documentclass\{abntex2-ufv\}}: os padrões já seguem o manual (12pt,
-A4, impressão só no anverso, português do Brasil) e a classe carrega os pacotes que todo
-\ac{tcc} usa (\texttt{fontenc}, \texttt{indentfirst}, \texttt{graphicx}, \texttt{csquotes},
-\texttt{microtype}, \texttt{booktabs}, \texttt{tabularx}, \texttt{multirow}, \texttt{acro} e o
-\texttt{biblatex} com o estilo \texttt{abnt}). Para mudar algum padrão, use as opções do
-\autoref{qua:opcoes} dentro dos colchetes, como em
+A4, impressão só no anverso, português do Brasil) e a classe cuida do layout (margens, fonte,
+títulos, capa, folhas, listas, siglas com \texttt{acro}, legendas e os ajustes do
+\texttt{biblatex-abnt}). Ela carrega só o que ela mesma precisa (\texttt{fontenc} e
+\texttt{indentfirst}); os pacotes de uso do autor ficam no preâmbulo do documento, onde você os
+vê e pode ajustá-los: \texttt{graphicx}, \texttt{csquotes}, \texttt{microtype}, o próprio
+\texttt{biblatex} com o estilo \texttt{abnt}, e os de tabelas, como \texttt{booktabs},
+\texttt{tabularx} e \texttt{multirow}. O template traz o conjunto mínimo. Para mudar algum
+padrão da classe, use as opções do \autoref{qua:opcoes} dentro dos colchetes, como em
 \texttt{\textbackslash documentclass[twoside, fonte=arial]\{abntex2-ufv\}}.
-Quem prefere partir da classe \texttt{abntex2} pode carregar só a personalização, com
-\texttt{\textbackslash documentclass\{abntex2\}} seguido de
-\texttt{\textbackslash usepackage\{abntex2-ufv\}}; nesse caso os demais pacotes e o
-\texttt{biblatex} ficam por sua conta.
+Os metadados do \ac{pdf} (título e autor) e as cores dos links (pretos, com citações em azul)
+também são definidos pela classe; use \texttt{\textbackslash hypersetup\{...\}} para outra
+configuração.
 
 \begin{quadro}[htbp]
 \begin{ilustracao}{\caption[Opções da classe abntex2-ufv]{Opções da classe \texttt{abntex2-ufv}}\label{qua:opcoes}}{\elaboracaopropria}
@@ -38,8 +40,6 @@ Quem prefere partir da classe \texttt{abntex2} pode carregar só a personalizaç
     \hline
     11pt, 10pt & Tamanho da letra (padrão e exigido pelo manual: 12pt) \\
     \hline
-    nobiblatex & Não carrega o \texttt{biblatex} (para quem usa outro sistema de referências) \\
-    \hline
   \end{tabularx}
 \end{ilustracao}
 \end{quadro}
@@ -47,14 +47,22 @@ Quem prefere partir da classe \texttt{abntex2} pode carregar só a personalizaç
 \section{Migração do pacote para a classe}\label{sec:migracao}
 
 As versões 1.5 e seguintes, até a 2.0, são versões de \emph{transição}. Até a versão 1.3.1
-o uso era a classe \texttt{abntex2} com o pacote \texttt{abntex2-UFV}; a partir da 1.5 a forma recomendada é a
-classe \texttt{abntex2-ufv}. O pacote (\texttt{abntex2-ufv.sty}) continua funcionando, mas
-emite o aviso ``Uso obsoleto'' e \textbf{será descontinuado na versão 2.0}. Trabalhos novos
-devem começar com a classe, e os trabalhos em andamento devem ser migrados agora, pelos
-passos abaixo.
+o uso era a classe \texttt{abntex2} com o pacote \texttt{abntex2-UFV}; a partir da 1.5 a forma
+recomendada é a classe \texttt{abntex2-ufv}. O pacote (\texttt{abntex2-ufv.sty}) continua
+funcionando, mas emite o aviso ``Uso obsoleto'' e \textbf{será descontinuado na versão 2.0}.
+Trabalhos novos devem começar com a classe, e os trabalhos em andamento devem ser migrados
+agora, pelos passos abaixo.
+
+\textbf{Atenção (versão 1.7).} Nas versões 1.5 e 1.6 a classe carregava, além do seu próprio
+layout, os pacotes \texttt{graphicx}, \texttt{csquotes}, \texttt{microtype},
+\texttt{booktabs}, \texttt{tabularx}, \texttt{multirow} e \texttt{biblatex}. A partir da 1.7
+a classe \emph{não} os carrega mais: eles ficam no preâmbulo do documento (como no template),
+onde o editor os reconhece e você controla as opções. Quem migrou na 1.5 ou 1.6 e atualiza
+para a 1.7 deve acrescentar esses pacotes (veja o exemplo ao final desta seção). A opção
+\texttt{nobiblatex} deixou de existir; se for usada, é ignorada com um aviso.
 
 \begin{enumerate}
-  \item \textbf{Atualize os arquivos.} Baixe os arquivos da versão 1.5 ou posterior e substitua os antigos.
+  \item \textbf{Atualize os arquivos.} Baixe os arquivos da versão 1.7 ou posterior e substitua os antigos.
         O nome do pacote passou a ser em minúsculas: apague o \texttt{abntex2-UFV.sty} antigo
         e use o \texttt{abntex2-ufv.cls} e o \texttt{abntex2-ufv.sty} novos, na mesma pasta do
         seu arquivo principal (no Overleaf, envie os dois arquivos ao projeto).
@@ -65,24 +73,29 @@ passos abaixo.
         \texttt{fonte=arial}, \texttt{capacampus}), que agora vão entre os colchetes da classe.
         As opções que antes iam em \texttt{\textbackslash usepackage[...]\{abntex2-UFV\}}
         também passam para o \texttt{\textbackslash documentclass}.
-  \item \textbf{Apague o \texttt{\textbackslash usepackage\{abntex2-UFV\}}} e os pacotes que
-        a classe já carrega: \texttt{fontenc}, \texttt{indentfirst}, \texttt{graphicx},
-        \texttt{csquotes}, \texttt{microtype}, \texttt{booktabs}, \texttt{tabularx} e
-        \texttt{multirow}. Os demais pacotes do seu trabalho continuam como estavam.
-  \item \sloppy\textbf{Apague a configuração do \texttt{biblatex}}: o \texttt{\textbackslash usepackage\allowbreak[backend=biber,
-        style=abnt, ...]\allowbreak\{biblatex\}}, o \texttt{xurl}, o
-        \texttt{\textbackslash urlstyle\{same\}}, o \texttt{\textbackslash setlength\{\textbackslash bibparsep\}}
-        e o \texttt{\textbackslash setlength\{\textbackslash emergencystretch\}}. Mantenha o
-        \texttt{\textbackslash addbibresource}. Se você usa opções diferentes das do
-        modelo, use a opção \texttt{nobiblatex} e mantenha o seu próprio carregamento.
+  \item \textbf{Apague o \texttt{\textbackslash usepackage\{abntex2-UFV\}}}, o
+        \texttt{fontenc} e o \texttt{indentfirst}: a classe já os carrega. Mantenha os
+        demais pacotes do seu trabalho.
+  \item \sloppy\textbf{Mantenha o \texttt{biblatex} e o \texttt{xurl}} no preâmbulo, com as
+        opções do template. O \texttt{\textbackslash urlstyle\{same\}} e o
+        \texttt{\textbackslash setlength\{\textbackslash emergencystretch\}} podem ser apagados:
+        a classe os define. O \texttt{\textbackslash setlength\{\textbackslash bibparsep\}\{10pt\}}
+        do modelo antigo também deve ser apagado: ele deixava o espaço entre as referências
+        maior que uma linha em branco (o \texttt{biblatex-abnt} já separa as referências por
+        uma linha, e o padrão de \texttt{\textbackslash bibparsep} é 0pt). Para outro estilo de
+        citação, altere as opções do \texttt{biblatex} no próprio preâmbulo.
   \item \textbf{Apague o filtro do aviso do \texttt{babel}} (as duas linhas com
         \texttt{silence} e \texttt{\textbackslash WarningFilter}, antes do
         \texttt{\textbackslash documentclass}): a classe já faz isso.
-  \item \textbf{Mova as imagens para a pasta \texttt{imagens/}.} A classe define
+  \item \textbf{Mova as imagens para a pasta \texttt{imagens/}} e declare no preâmbulo
         \texttt{\textbackslash graphicspath\allowbreak\{\{imagens/\}\}}; assim,
         \texttt{\textbackslash includegraphics\{figura\}} basta, sem o nome da pasta. Os
         caminhos antigos, como \texttt{imagens/figura} ou arquivos na pasta principal,
         continuam funcionando.
+  \item \textbf{Apague o \texttt{\textbackslash hypersetup} e o \texttt{\textbackslash frenchspacing}}
+        se forem os do modelo antigo: a classe já define links pretos, citações em azul,
+        o título e o autor do \ac{pdf} e o espaçamento após ponto. Mantenha o
+        \texttt{\textbackslash hypersetup} só se quiser algo diferente.
   \item \textbf{Compile e confira.} Rode o \texttt{latexmk} (ou o seu editor) e verifique
         que o aviso ``Uso obsoleto'' não aparece mais e que as listas, as siglas e as
         referências saíram como antes.
@@ -108,11 +121,19 @@ O exemplo abaixo resume as mudanças no preâmbulo. Antes (versão 1.3.1):
 \addbibresource{referencias.bib}
 \setlength\bibparsep{10pt}
 \setlength{\emergencystretch}{3em}
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=blue, urlcolor=blue}
 \end{lstlisting}
-Depois (versão 1.5 ou posterior):
+Depois (versão 1.7 ou posterior):
 
 \begin{lstlisting}[style=exemplo, language={[LaTeX]TeX}]
 \documentclass{abntex2-ufv}
+\usepackage{graphicx}
+\graphicspath{{imagens/}}
+\usepackage{csquotes}
+\usepackage[final]{microtype}
+\usepackage[backend=biber, style=abnt, uniquename=init, giveninits,
+            repeatfields, justify, noslsn]{biblatex}
+\usepackage{xurl}
 \addbibresource{referencias.bib}
 \end{lstlisting}
 

@@ -142,3 +142,10 @@ doc/template/*.pdf
 
 ## Material de divulgação (local, não vai para o remoto)
 divulgacao/
+
+## Arquivos do Claude Code e do VS Code (nunca versionar)
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.vscode/
+*.code-workspace

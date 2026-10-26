@@ -1,0 +1,17 @@
+% Tabela mais larga que a página, SEM largura dada: o autor deve continuar recebendo o aviso
+% Overfull \hbox (o run-tests.sh exige esse aviso neste teste).
+\documentclass{abntex2-ufv}
+\input{estilo-listagens}
+\begin{document}
+\textual
+\chapter{Tabela larga}
+\begin{table}[htbp]
+\begin{tabela}{\caption{Tabela mais larga que a página}\label{tab:larga}}{\fonte{Elaborada pelo autor.}}
+  \begin{tabular}{llllllllll}
+    \toprule
+    Coluna número um & Coluna número dois & Coluna número três & Coluna número quatro & Coluna número cinco & Coluna número seis & Coluna sete & Coluna oito & Coluna nove & Coluna dez \\
+    \bottomrule
+  \end{tabular}
+\end{tabela}
+\end{table}
+\end{document}

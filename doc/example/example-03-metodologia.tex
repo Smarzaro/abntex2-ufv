@@ -100,7 +100,8 @@ linguagem em \texttt{[language=...]}. O ambiente \texttt{codigo}, definido pelo
 \texttt{abntex2-ufv}, cria o rótulo ``Código N'' e a lista própria. Como a moldura do
 \texttt{lstlisting} ocupa a largura da página, use
 \texttt{\textbackslash begin\{ilustracao\}[\textbackslash linewidth]\{...\}\{...\}}: o argumento
-opcional dá a largura mínima do título e do rodapé.
+opcional fixa a largura da ilustração; o código é composto nela (linhas longas são quebradas)
+e o título e o rodapé ficam alinhados à moldura.
 Para código com muitas linhas, \texttt{\textbackslash lstinputlisting\{arquivo.py\}}
 lê o arquivo diretamente.
 \end{dica}

@@ -19,7 +19,7 @@ O trecho abaixo, do preâmbulo, escolhe a fonte, define as cores e cria o estilo
 \texttt{ufvcodigo}, aplicado a todas as listagens com \texttt{\textbackslash lstset}:
 
 \begin{lstlisting}[style=exemplo, language={[LaTeX]TeX}]
-\usepackage[scaled=0.88]{FiraMono}   % fonte de largura fixa legível
+\usepackage[scaled=0.88,lining]{FiraMono}   % fonte de largura fixa legível
 \usepackage{xcolor}
 \usepackage{listings}
 \definecolor{ufvkw}{RGB}{0,51,153}      % palavras-chave
@@ -37,11 +37,21 @@ O trecho abaixo, do preâmbulo, escolhe a fonte, define as cores e cria o estilo
 \end{lstlisting}
 
 \begin{itemize}
-  \item \textbf{Fonte}: \texttt{FiraMono} distingue bem 0/O e 1/l/I e mantém a largura fixa.
-        Alternativas já instaladas no MiKTeX e no TeX Live: \texttt{sourcecodepro},
-        \texttt{zi4} (Inconsolata, mais leve) e \texttt{beramono}. Como o pacote muda o
-        \texttt{\textbackslash ttdefault}, vale também para o \texttt{\textbackslash texttt} do texto.
-        A opção \texttt{scaled} ajusta o tamanho relativo da fonte.
+  \item \textbf{Fonte}: \texttt{FiraMono} distingue bem 0/O e 1/l/I, mantém a largura fixa e
+        tem negrito, itálico e negrito-itálico de verdade, no \texttt{pdflatex}, no
+        Lua\LaTeX\ e no Xe\LaTeX. A opção \texttt{lining} dá algarismos alinhados (sem ela, a
+        fonte usa algarismos de estilo antigo, ruins em código) e \texttt{scaled=0.88} casa a
+        altura das letras com a do Times e deixa cerca de 85 colunas por linha no
+        \texttt{\textbackslash footnotesize}. Alternativas com negrito e itálico reais, também
+        instaladas no MiKTeX e no TeX Live: \texttt{beramono} com \texttt{scaled=0.81} (casa a
+        altura das letras com a do Times e deixa cerca de 93 colunas, com letras um pouco mais
+        miúdas; com \texttt{scaled=0.9} as letras ficam altas demais e cabem só 84 colunas),
+        \texttt{sourcecodepro} (\texttt{scaled=0.88}) e \texttt{plex-mono}
+        (\texttt{scale=0.88}). Evite o \texttt{inconsolata} (\texttt{zi4}) e o
+        \texttt{lmodern}, sem itálico e sem negrito de largura fixa, respectivamente (o \LaTeX\
+        acusa \emph{Font shape undefined}). Como o pacote muda o
+        \texttt{\textbackslash ttdefault}, vale também para o \texttt{\textbackslash texttt}
+        do texto.
   \item \textbf{Largura fixa}: use \texttt{columns=fixed} (e não \texttt{flexible}), senão o
         alinhamento das colunas do código se perde.
   \item \textbf{Cores}: as ilustrações podem ser coloridas (manual UFV 4.1), mas escolha
@@ -134,7 +144,8 @@ Com o arquivo em UTF-8 e \texttt{pdflatex}, o \texttt{listings} não reconhece o
 caracteres acentuados por si só; a opção \texttt{literate}, na configuração da
 Seção~\ref{sec:lst-config}, converte cada letra acentuada na sua versão correta (é preciso listar as letras
 que aparecem no código, em maiúsculas e minúsculas). Sem ela, o PDF mostra caracteres
-estranhos ou o \LaTeX\ acusa erro. Se o código tiver símbolos como \texttt{<}, \texttt{>} ou
+estranhos ou o \LaTeX\ acusa erro (\emph{Invalid UTF-8 byte sequence}). Com Lua\LaTeX\ ou
+Xe\LaTeX\ a opção é desnecessária, mas inofensiva: pode ficar na configuração. Se o código tiver símbolos como \texttt{<}, \texttt{>} ou
 \texttt{|} que saiam errados em algumas fontes, use fonte \texttt{T1} (\texttt{\textbackslash usepackage[T1]\{fontenc\}}),
 já carregada neste modelo.
 
@@ -160,8 +171,19 @@ a escolha deste modelo.
         só o essencial e cite o repositório nas referências.
   \item Nunca use imagem (\emph{print}) de código: não pode ser copiado nem lido por leitores
         de tela, e perde nitidez.
-  \item Em \texttt{ilustracao}, use o argumento opcional \texttt{[\textbackslash linewidth]} para que
-        o título e o rodapé tenham a largura da página e acompanhem a moldura da listagem.
+  \item Em \texttt{ilustracao}, use o argumento opcional \texttt{[\textbackslash linewidth]}: o
+        conteúdo é composto nessa largura, então as linhas longas são quebradas
+        (\texttt{breaklines=true}) em vez de estourar a margem, e o título e o rodapé
+        ficam alinhados à moldura da listagem. Não é preciso envolver a listagem em
+        \texttt{minipage} (documentos que já o fazem continuam funcionando).
+  \item Termos longos no texto, como parâmetros de uma API, não quebram em \texttt{\textbackslash texttt}
+        (a fonte de largura fixa desliga a hifenização) e podem estourar a margem. Escreva-os
+        com \texttt{\textbackslash texttt\{\textbackslash path\{/api/v1/projetos/12345/tarefas\}\}}:
+        o comando \texttt{\textbackslash path} (do pacote \texttt{url}, já carregado pelo
+        \texttt{hyperref}) permite a quebra de linha, e com o \texttt{xurl} do modelo a
+        quebra pode ocorrer entre quaisquer letras. Para só evitar o link, use
+        \texttt{\textbackslash nolinkurl\{...\}}; em último caso, divida o trecho em dois
+        \texttt{\textbackslash texttt}.
   \item Cuide da indentação e da largura: com \texttt{\textbackslash footnotesize} cabem cerca de
         85 colunas de código na largura do texto; linhas mais longas são quebradas
         (\texttt{breaklines=true}).

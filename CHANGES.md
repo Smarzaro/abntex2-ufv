@@ -1,5 +1,30 @@
 # Changes
 
+## 1.7.1 (2026-10-26)
+
+- Fix: `ilustracao` (and `tabela`) with the optional width argument, e.g.
+  `\begin{ilustracao}[\linewidth]`, now typesets its content in a `minipage` of that width
+  (the argument is the width of the illustration, no longer only a minimum width of the
+  title and footer). Before, a `listings` listing inside it was typeset at the natural width
+  of its longest line: `breaklines` was ignored, the box overflowed the margin (Overfull
+  `\hbox`) and the caption was shifted. Without the argument nothing changes (natural width),
+  and content wider than the given width still produces an Overfull `\hbox`. Documents
+  that wrapped each listing in `minipage{\linewidth}` keep working and can drop it.
+- Fix: the `listings` patch for an indented `\end{lstlisting}` was never applied (the
+  `\ifboolexpr`/`test{\ifdefined...}` guard was always false), so the warning "O listings
+  mudou" appeared in every run. The guard now works; the patch is applied (the blank line
+  with `keepspaces=true` still exists in listings 1.11b) and the warning is gone.
+- No more `Token not allowed in a PDF string: removing \uppercase` (hyperref) in the
+  first chapter of appendices and annexes: `\uppercase` is disabled in PDF bookmarks only.
+- The class filters the harmless `memoir` deprecation warning for `\settocpreprocessor`
+  (used by `abntex2`, still working).
+- Documentation and template: the monospaced font is `FiraMono` with `lining` figures
+  (`\usepackage[scaled=0.88,lining]{FiraMono}`); comparison with other fonts, advice on long
+  `\texttt` terms (`\path`; `beramono` with `scaled=0.81` listed as an alternative) and migration note in the guide (Appendices C and D).
+- Tests: `t7` to `t11` (listings, narrow figure, wide table that must keep warning,
+  monospaced font, appendices), also compiled with LuaLaTeX by `scripts/run-tests.sh`,
+  which now fails on class/hyperref/font warnings and on unexpected Overfull `\hbox`.
+
 ## 1.7 (2026-10-17)
 
 - **Breaking for documents that relied on the class loading packages (1.5 and 1.6):** the

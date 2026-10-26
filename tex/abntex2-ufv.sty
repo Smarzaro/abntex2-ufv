@@ -24,7 +24,7 @@
 % INICIO DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DE VIÇOSA
 % ---
 \NeedsTeXFormat{LaTeX2e}[2022/06/01]
-\ProvidesPackage{abntex2-ufv}[2026/10/17 v1.7 abnTeX2-UFV (obsoleto: use a classe abntex2-ufv)]
+\ProvidesPackage{abntex2-ufv}[2026/10/26 v1.7.1 abnTeX2-UFV (obsoleto: use a classe abntex2-ufv)]
 
 % Este pacote só faz sentido sobre a classe abntex2
 \@ifclassloaded{abntex2}{}{%
@@ -393,7 +393,12 @@
 \newlength{\ufv@ilminw}
 \newenvironment{ufv@ilcaixa}[4]{%
   \def\ufv@ilestilo{#1}\setlength{\ufv@ilminw}{#2}\def\ufv@iltitulo{#3}\def\ufv@ilrodape{#4}%
-  \begin{lrbox}{\ufv@ilbox}}{%
+  \begin{lrbox}{\ufv@ilbox}%
+  % Com largura dada, o conteúdo é composto em modo vertical, nessa largura (como no
+  % \linewidth do texto): o listings quebra linhas longas (breaklines) e o título e o
+  % rodapé ficam centralizados/alinhados à largura certa. Sem ela, vale a largura natural.
+  \ifdim\ufv@ilminw>\z@\minipage{\ufv@ilminw}\fi}{%
+  \ifdim\ufv@ilminw>\z@\endminipage\fi
   \end{lrbox}\par\noindent\hfil
   \setlength{\ufv@ilw}{\wd\ufv@ilbox}%
   \ifdim\ufv@ilw<\ufv@ilminw\setlength{\ufv@ilw}{\ufv@ilminw}\fi
@@ -408,9 +413,12 @@
   \begin{ufv@ilcaixa}{\ufv@ilestilocentro}{#1}{#2}{#3}}{\end{ufv@ilcaixa}}
 \newenvironment{tabela}[3][0pt]{%
   \begin{ufv@ilcaixa}{\ufv@ilestiloesquerda}{#1}{#2}{#3}\IBGEtabfontsize}{\end{ufv@ilcaixa}}
-% O argumento opcional [<largura>] dá a largura mínima do título e do rodapé; use
-% \begin{ilustracao}[\linewidth] para códigos (lstlisting com moldura) e outros
-% conteúdos cuja largura natural é menor que a da página.
+% O argumento opcional [<largura>] fixa a largura da ilustração: o conteúdo é composto
+% (em minipage) nessa largura, e o título e o rodapé ficam alinhados a ela. Use
+% \begin{ilustracao}[\linewidth] para códigos (lstinputlisting e lstlisting, que então
+% quebram linhas longas com breaklines=true) e para conteúdos cuja largura natural é
+% menor que a da página mas que devem ocupá-la. Sem o argumento, a ilustração tem a
+% largura natural do conteúdo. Conteúdo mais largo que a largura dada gera Overfull \hbox.
 
 % Fonte de ilustração produzida pelo próprio autor (manual UFV 4.9)
 \newcommand{\elaboracaopropria}{\fonte{Elaborado pelo pr\'oprio autor}}
@@ -438,6 +446,9 @@
 % \hypersetup{...}). O hyperref já foi carregado pelo abntex2.
 \hypersetup{colorlinks=true, linkcolor=black, citecolor=blue, filecolor=magenta,
   urlcolor=blue, bookmarksdepth=4}
+% O abntex2 escreve o nome de "Apêndices" e "Anexos" com \uppercase; nos marcadores do PDF
+% (hyperref) esse comando não é permitido e gerava um aviso. O título impresso não muda.
+\pdfstringdefDisableCommands{\let\uppercase\@firstofone}
 
 % Metadados do PDF a partir de \titulo, \autor e \preambulo..., a menos que o usuário os
 % tenha definido com \hypersetup{pdftitle=..., pdfauthor=..., pdfsubject=...}
@@ -460,6 +471,8 @@
 % Correção do listings: \end{lstlisting} indentado não gera linha em branco no fim da
 % listagem. Mexe em macros internas do listings; só é aplicada se elas existirem.
 % ---
+\newcommand{\ufv@avisolistings}{\PackageWarning{abntex2-ufv}{O listings mudou; a correcao
+  da linha em branco no fim das listagens foi desativada}}
 \newcommand{\ufv@patchlistings}{%
   % (1) sem keepspaces: descarta o espaço pendente ao fechar o ambiente
   \let\ufv@lstDeInit\lst@DeInit
@@ -493,11 +506,10 @@
 \AtEndPreamble{%
   \ufv@metadadospdf
   \@ifpackageloaded{listings}{%
-    \ifboolexpr{test{\ifdefined\lst@DeInit} and test{\ifdefined\lst@ProcessSpace}
-                and test{\ifdefined\lst@whitespacefalse}}%
-      {\ufv@patchlistings}%
-      {\PackageWarning{abntex2-ufv}{O listings mudou; a correcao da linha em branco
-        no fim das listagens foi desativada}}%
+    % (\ifdefined direto: dentro de test{} do \ifboolexpr o teste sempre dava falso)
+    \ifdefined\lst@DeInit\ifdefined\lst@ProcessSpace\ifdefined\lst@whitespacefalse
+      \ufv@patchlistings
+    \else\ufv@avisolistings\fi\else\ufv@avisolistings\fi\else\ufv@avisolistings\fi
   }{}%
   \@ifpackageloaded{biblatex}{%
     % URLs no estilo do texto. A linha em branco entre as referências já vem do

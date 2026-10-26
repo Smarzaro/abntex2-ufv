@@ -1,0 +1,21 @@
+% Pacotes e estilo de listagens dos testes t7 a t10 (o papel do preâmbulo do template).
+% Fonte monoespaçada: FiraMono (funciona em pdflatex, LuaLaTeX e XeLaTeX), algarismos alinhados.
+\usepackage[scaled=0.88,lining]{FiraMono}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xurl}
+\usepackage{listings}
+\lstdefinestyle{ufvcodigo}{
+  basicstyle=\ttfamily\footnotesize, columns=fixed, keepspaces=true, tabsize=4,
+  keywordstyle=\bfseries, commentstyle=\itshape, showstringspaces=false,
+  numbers=left, numberstyle=\tiny, numbersep=7pt, frame=single,
+  breaklines=true, extendedchars=true,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+           {â}{{\^a}}1 {ê}{{\^e}}1 {ô}{{\^o}}1 {ã}{{\~a}}1 {õ}{{\~o}}1
+           {ç}{{\c c}}1 {Ç}{{\c C}}1,
+}
+\lstset{style=ufvcodigo}
+\titulo{Teste de listagens}
+\autor{Nome do Autor}

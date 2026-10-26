@@ -6,7 +6,7 @@
 [![CTAN](https://img.shields.io/ctan/v/abntex2-ufv)](https://ctan.org/pkg/abntex2-ufv)
 
 
-**Version 1.7** (2026-10-17)
+**Version 1.7.1** (2026-10-26)
 
 **Summary (English):** abntex2-ufv is a LaTeX class, built on top of the
 abnTeX2 class, for undergraduate final theses (TCC) of the Information

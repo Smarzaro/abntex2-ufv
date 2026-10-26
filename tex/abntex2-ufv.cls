@@ -27,13 +27,17 @@
 %% abntex2-ufv.sty.
 %%
 \NeedsTeXFormat{LaTeX2e}[2022/06/01]
-\ProvidesClass{abntex2-ufv}[2026/10/17 v1.7 Classe abntex2-ufv (TCC SI UFV-CRP)]
+\ProvidesClass{abntex2-ufv}[2026/10/26 v1.7.1 Classe abntex2-ufv (TCC SI UFV-CRP)]
 
-\newcommand{\ufvversion}{1.7}
+\newcommand{\ufvversion}{1.7.1}
 
 % A classe abntex2 carrega o babel com o nome obsoleto "brazil"; o aviso é inofensivo
 \RequirePackage{silence}
 \WarningFilter{babel}{Name 'brazil' is deprecated}
+% O abntex2 usa \settocpreprocessor (sumário em caixa alta), que o memoir de 2026 marca como
+% obsoleto: o recurso continua funcionando (o aviso é só de depreciação) e a classe abntex2
+% ainda não foi atualizada, então o aviso não depende de nada que o autor possa corrigir
+\WarningFilter{memoir}{\settocpreprocessor is marked deprecated}
 \RequirePackage{etoolbox}
 
 % ---

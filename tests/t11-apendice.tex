@@ -1,0 +1,20 @@
+% Apêndices e anexos: o marcador do PDF (hyperref) não pode receber \uppercase no título
+\documentclass{abntex2-ufv}
+\input{estilo-listagens}
+\begin{document}
+\textual
+\chapter{Introdução}
+Texto.
+\begin{apendicesenv}
+\partapendices
+\chapter{Primeiro apêndice}
+Texto do apêndice.
+\chapter{Segundo apêndice}
+Mais texto.
+\end{apendicesenv}
+\begin{anexosenv}
+\partanexos
+\chapter{Primeiro anexo}
+Texto do anexo.
+\end{anexosenv}
+\end{document}

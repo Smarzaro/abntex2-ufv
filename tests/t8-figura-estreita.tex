@@ -1,0 +1,31 @@
+% Figura e quadro mais estreitos que a página, sem largura dada: título e fonte ficam na
+% largura do conteúdo. Com largura dada ([\linewidth]) o conteúdo ocupa a largura do texto.
+\documentclass{abntex2-ufv}
+\input{estilo-listagens}
+\begin{document}
+\textual
+\chapter{Ilustrações estreitas}
+\begin{figure}[htbp]
+\begin{ilustracao}{\caption{Figura estreita, com título comprido que quebra na largura da figura}\label{fig:estreita}}{\elaboracaopropria}
+  \rule{4cm}{2cm}
+\end{ilustracao}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{ilustracao}[\linewidth]{\caption{Figura com largura do texto}\label{fig:larga}}{\elaboracaopropria}
+  \centering\rule{4cm}{2cm}
+\end{ilustracao}
+\end{figure}
+
+\begin{table}[htbp]
+\begin{tabela}{\caption{Tabela estreita}\label{tab:estreita}}{\fonte{Elaborada pelo autor.}}
+  \begin{tabular}{lrrr}
+    \toprule
+    Item & Frequência & Percentual & Total \\
+    \midrule
+    A & 1,0 & 10\% & 12 \\
+    \bottomrule
+  \end{tabular}
+\end{tabela}
+\end{table}
+\end{document}

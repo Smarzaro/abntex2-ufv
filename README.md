@@ -6,7 +6,7 @@
 [![CTAN](https://img.shields.io/ctan/v/abntex2-ufv)](https://ctan.org/pkg/abntex2-ufv)
 
 
-**Version 1.6.1** (2026-10-14)
+**Version 1.7** (2026-10-26)
 
 **Summary (English):** abntex2-ufv is a LaTeX class, built on top of the
 abnTeX2 class, for undergraduate final theses (TCC) of the Information
@@ -17,9 +17,11 @@ and NBR 10520/2023): page layout, fonts, section headings, cover, title
 and approval pages, abstract, lists of figures/tables/charts/code, acronym
 list (via `acro`), glossary, figure/table/chart captions with source and
 notes, and biblatex-abnt tweaks. The class is a thin layer: it sets the
-defaults (12pt, A4, one-sided, Brazilian Portuguese), loads the packages
-every thesis needs, and loads the customization package
-`abntex2-ufv.sty`. Versions 1.5 and later are transition releases: using
+defaults (12pt, A4, one-sided, Brazilian Portuguese), loads only what it
+needs itself (the author's own packages, such as graphicx and biblatex, are
+loaded in the document preamble, as in the template), and loads the
+customization package `abntex2-ufv.sty`. It requires LaTeX 2022-06 or newer
+(`\DeclareKeys`). Versions 1.5 and later are transition releases: using
 the `.sty` directly on top of `abntex2` still works but is deprecated, and
 the `.sty` will be discontinued in version 2.0, so theses should be migrated
 to `\documentclass{abntex2-ufv}`. The documentation (in Portuguese)
@@ -41,10 +43,11 @@ Trabalhos Acadêmicos* da UFV (edição 2026-2; ABNT NBR 14724/2025, NBR
 ```
 
 Os padrões já seguem o manual: 12pt, A4, impressão só no anverso e
-português do Brasil. A classe carrega os pacotes que todo TCC usa
-(`fontenc`, `indentfirst`, `graphicx`, `csquotes`, `microtype`,
-`booktabs`, `tabularx`, `multirow`, `acro` e o `biblatex` com o estilo
-`abnt`).
+português do Brasil. A classe cuida do layout e carrega só o que ela mesma
+precisa (`fontenc`, `indentfirst`, `acro`); os pacotes de uso do autor
+(`graphicx`, `csquotes`, `microtype`, `biblatex` com o estilo `abnt` e os de
+tabelas) ficam no preâmbulo do documento, como no template, onde o editor os
+reconhece e você controla as opções.
 
 ## Conteúdo
 
@@ -59,7 +62,7 @@ português do Brasil. A classe carrega os pacotes que todo TCC usa
 ## Uso
 
 Opções (todas opcionais): `twoside`, `openany`, `11pt`, `10pt`,
-`fonte=arial` ou `fonte=cm`, `capacampus` e `nobiblatex`.
+`fonte=arial` ou `fonte=cm` e `capacampus`.
 
 ```latex
 \documentclass[twoside, fonte=arial]{abntex2-ufv}
@@ -78,10 +81,9 @@ cd doc/template
 latexmk
 ```
 
-As imagens do trabalho ficam na pasta `imagens/` (a classe define
+As imagens do trabalho ficam na pasta `imagens/` (o template já declara
 `\graphicspath{{imagens/}}`): basta `\includegraphics{arquivo}`, sem o
-nome da pasta. Quem usa só o `.sty` deve declarar o `\graphicspath`
-no próprio documento.
+nome da pasta.
 
 O `latexmkrc` grava o PDF na própria pasta e os arquivos auxiliares em
 `build/` (ignorada pelo git), e procura o `abntex2-ufv.cls` em `../../tex`.
@@ -99,14 +101,22 @@ a classe" do Apêndice C da documentação, [`abntex2-ufv.pdf`](doc/abntex2-ufv.
    Remova as opções que já são padrão (`12pt`, `a4paper`, `oneside`,
    `openright`, `english`, `brazilian`) e leve as opções do pacote
    (`fonte=`, `capacampus`) para os colchetes da classe.
-3. Apague `\usepackage{abntex2-UFV}` e os pacotes que a classe já carrega
-   (`fontenc`, `indentfirst`, `graphicx`, `csquotes`, `microtype`,
-   `booktabs`, `tabularx`, `multirow`).
-4. Apague a configuração do `biblatex`, o `xurl` e os `\setlength` de
-   `\bibparsep` e `\emergencystretch`; mantenha o `\addbibresource`.
+3. Apague `\usepackage{abntex2-UFV}`, `fontenc` e `indentfirst` (a classe os
+   carrega). Mantenha os demais pacotes no preâmbulo.
+4. Mantenha o `biblatex` e o `xurl` no preâmbulo; apague `\urlstyle{same}`,
+   `\setlength{\bibparsep}{10pt}` (deixava as referências mais afastadas que uma
+   linha em branco) e `\setlength{\emergencystretch}` (a classe define o resto).
 5. Apague o filtro do aviso do `babel` (`silence`/`\WarningFilter`).
-6. Mova as imagens para a pasta `imagens/`.
-7. Compile e confira que o aviso "Uso obsoleto" não aparece mais.
+6. Mova as imagens para a pasta `imagens/` e declare
+   `\graphicspath{{imagens/}}` no preâmbulo.
+7. Apague o `\hypersetup` e o `\frenchspacing` do modelo antigo (a classe já os
+   define).
+8. Compile e confira que o aviso "Uso obsoleto" não aparece mais.
+
+> **Da 1.5/1.6 para a 1.7:** a classe deixou de carregar `graphicx`, `csquotes`,
+> `microtype`, `booktabs`, `tabularx`, `multirow` e `biblatex`. Acrescente-os ao
+> preâmbulo (veja o `doc/template/template.tex`). A opção `nobiblatex` foi
+> removida (é ignorada com um aviso).
 
 Antes e depois:
 
@@ -117,8 +127,15 @@ Antes e depois:
 % ... fontenc, indentfirst, graphicx, csquotes, microtype, booktabs, tabularx,
 % multirow, biblatex, xurl, \setlength{...}
 
-% versão 1.5 ou posterior
+% versão 1.7 ou posterior
 \documentclass{abntex2-ufv}
+\usepackage{graphicx}
+\graphicspath{{imagens/}}
+\usepackage{csquotes}
+\usepackage[final]{microtype}
+\usepackage[backend=biber, style=abnt, uniquename=init, giveninits,
+            repeatfields, justify, noslsn]{biblatex}
+\usepackage{xurl}
 \addbibresource{referencias.bib}
 ```
 
@@ -141,17 +158,45 @@ As versões 1.5 e anteriores usam os nomes antigos (`abntex2-ufv-modelo.zip` e
 
 ## Requisitos
 
-pdfLaTeX, `biber` e os pacotes `abntex2`, `biblatex-abnt`, `acro`,
-`tgtermes`/`tgheros`, `csquotes`, `booktabs`, `tabularx`, `multirow`,
-`microtype` e `silence` (todos incluídos no MiKTeX e no TeX Live
-completo). A documentação usa ainda `tikz`, `pgfplots`, `listings`,
-`tcolorbox`, `siunitx`, `longtable` e `colortbl`.
+LaTeX de junho de 2022 ou mais recente (TeX Live ou MiKTeX 2022+), pdfLaTeX,
+`biber` e os pacotes `abntex2`, `biblatex-abnt`, `acro`, `tgtermes`/`tgheros`,
+`silence` e `etoolbox` (usados pela classe); o template usa também `csquotes`,
+`microtype`, `graphicx`, `biblatex` e `xurl`. Todos estão incluídos no MiKTeX e
+no TeX Live completo. A documentação usa ainda `booktabs`, `tabularx`,
+`multirow`, `tikz`, `pgfplots`, `listings`, `tcolorbox`, `siunitx`, `longtable`
+e `colortbl`.
 
 ## Como citar
 
 Use o botão **Cite this repository** do GitHub (arquivo
 [`CITATION.cff`](CITATION.cff)) ou o DOI do Zenodo, que reúne todas as versões:
 [10.5281/zenodo.23345952](https://doi.org/10.5281/zenodo.23345952).
+
+Entrada completa para o `biblatex` (tipo `@software`; copie para o seu `referencias.bib`
+e atualize `version` e `date` para a versão que você usou):
+
+```bibtex
+@software{smarzaro_abntex2-ufv,
+  author       = {Smarzaro, Rodrigo},
+  title        = {abntex2-ufv: classe {LaTeX} para trabalhos de conclusão de curso de
+                  Sistemas de Informação da {UFV} ({Campus} Rio Paranaíba)},
+  shorttitle   = {abntex2-ufv},
+  version      = {1.7},
+  date         = {2026-10-26},
+  year         = {2026},
+  organization = {Universidade Federal de Viçosa},
+  location     = {Rio Paranaíba},
+  url          = {https://github.com/Smarzaro/abntex2-ufv},
+  doi          = {10.5281/zenodo.23345952},
+  license      = {LPPL-1.3c},
+  note         = {Classe LaTeX baseada no abnTeX2},
+  langid       = {brazilian},
+  keywords     = {LaTeX, abnTeX2, ABNT, UFV, TCC},
+}
+```
+
+O DOI acima é o *conceito* (todas as versões); para citar uma versão específica, use o
+DOI dela na página do Zenodo.
 
 ## Autor
 

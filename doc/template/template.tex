@@ -1,3 +1,5 @@
+% !TeX program = pdflatex
+% !BIB program = biber
 %%==============================================================
 %% TEMPLATE (MODELO VAZIO) DE TRABALHO DE CONCLUSÃO DE CURSO
 %% Curso de Sistemas de Informação - Universidade Federal de Viçosa
@@ -7,92 +9,61 @@
 %%
 %% Arquivo em formato UTF-8. Compilar com pdflatex + biber (nesta pasta: latexmk).
 %% Precisa dos arquivos abntex2-ufv.cls e abntex2-ufv.sty (em ../../tex, ou o pacote instalado;
-%% se copiar este template para outro lugar, copie os dois para a mesma pasta e apague a linha ensure_path do latexmkrc).
+%% se copiar este template para outro lugar, copie os dois para a mesma pasta e apague a
+%% linha ensure_path do latexmkrc).
 %%
 %% COMO USAR
-%%  1. Preencha os dados do trabalho (seção "DADOS DO TRABALHO", logo abaixo).
+%%  1. Preencha os dados do trabalho (seção 3, "DADOS DO TRABALHO").
 %%  2. Escreva o texto neste mesmo arquivo, na seção "ELEMENTOS TEXTUAIS" (uma seção primária
 %%     por \chapter). Se o texto crescer muito, veja a dica de separá-lo em arquivos com \input.
 %%     Coloque as imagens na pasta imagens/ e use \includegraphics{arquivo} (sem o nome da pasta).
-%%  3. Cadastre as referências em referencias.bib e cite com \cite{chave} e
-%%     \textcite{chave}.
-%%  4. Descomente as listas, pacotes e elementos opcionais de que precisar.
+%%  3. Cadastre as referências em referencias.bib e cite com \cite{chave} e \textcite{chave}.
+%%  4. Descomente as listas e elementos opcionais de que precisar.
 %%
-%% Todos os recursos, com exemplos, dicas de metodologia científica e de uso da
-%% classe, estão documentados em ../abntex2-ufv.pdf (fontes em ../abntex2-ufv.tex e ../example/).
+%% Documentação completa, com exemplos, dicas de metodologia científica e de uso da classe:
+%% ../abntex2-ufv.pdf (fontes em ../abntex2-ufv.tex e ../example/). Código-fonte, tabelas
+%% avançadas, gráficos e diagramas: veja o Guia de recursos indicado no README.
 %%==============================================================
 
-% Opções: twoside (frente e verso), fonte=arial, capacampus. Os padrões já seguem o manual
-% (12pt, A4, frente apenas, português do Brasil); veja o Apêndice C do guia.
+% Opções (todas opcionais): twoside (frente e verso), openany, 11pt, fonte=arial, capacampus.
+% Os padrões já seguem o manual: 12pt, A4, frente apenas, português do Brasil.
 \documentclass{abntex2-ufv}
 
-% ---
-% PACOTES ADICIONAIS
-% A classe já carrega: fontenc, indentfirst, graphicx, csquotes, microtype, booktabs,
-% tabularx, multirow, acro e biblatex (estilo abnt, com xurl). Descomente o que mais usar.
-% ---
+% ----------------------------------------------------------
+% 1. PACOTES (a classe carrega só o que ela precisa; estes são seus)
+% ----------------------------------------------------------
+\usepackage{graphicx}                % figuras
+\graphicspath{{imagens/}}            % as imagens ficam na pasta imagens/
+\usepackage{csquotes}                % \enquote{} e citações (exigido pelo biblatex)
+\usepackage[final]{microtype}        % melhor justificação (recomendado)
+\usepackage[backend=biber,           % referências no estilo ABNT (biblatex-abnt)
+            style=abnt,
+            uniquename=init,
+            giveninits,
+            repeatfields,
+            justify,
+            noslsn]{biblatex}
+\usepackage{xurl}                    % quebra de linha em URLs longas
+\addbibresource{referencias.bib}     % base de referências
+% Código-fonte (opcional): fonte de largura fixa legível, com algarismos alinhados, para
+% listagens e \texttt (funciona com pdflatex, LuaLaTeX e XeLaTeX); o restante da
+% configuração (pacote listings) está no guia de recursos
+%\usepackage[scaled=0.88,lining]{FiraMono}
 
-% Tabelas e quadros
-%\usepackage{longtable}         % tabelas que ocupam mais de uma página
-%\usepackage{pdflscape}         % página em paisagem (ambiente landscape)
-%\usepackage{colortbl}          % células sombreadas (\cellcolor)
-%\usepackage{siunitx}           % alinhamento decimal e unidades
-%\sisetup{output-decimal-marker = {,}, group-separator = {.}}
-
-% Diagramas, gráficos e cronograma (descomente o que usar)
-%\usepackage{tikz}
-%\usetikzlibrary{arrows.meta, positioning}
-%\usepackage{pgfplots}
-%\pgfplotsset{compat=newest}
-
-% Código-fonte (use dentro dos ambientes codigo e ilustracao). Para ativar, descomente o
-% bloco inteiro; as opções estão explicadas no Apêndice D do guia (doc/abntex2-ufv.pdf).
-%\usepackage[scaled=0.88]{FiraMono}   % fonte de largura fixa legível
-%\usepackage{xcolor}
-%\usepackage{listings}
-%\definecolor{ufvcodebg}{gray}{0.96}
-%\definecolor{ufvkw}{RGB}{0,51,153}      % palavras-chave
-%\definecolor{ufvcom}{RGB}{0,110,50}     % comentários
-%\definecolor{ufvstr}{RGB}{163,21,21}    % cadeias de caracteres
-%\lstdefinestyle{ufvcodigo}{
-%  basicstyle=\ttfamily\footnotesize, columns=fixed, keepspaces=true, tabsize=4,
-%  keywordstyle=\bfseries\color{ufvkw}, commentstyle=\itshape\color{ufvcom},
-%  stringstyle=\color{ufvstr}, showstringspaces=false,
-%  numbers=left, numberstyle=\tiny\color{black!55}, numbersep=7pt,
-%  backgroundcolor=\color{ufvcodebg}, frame=single, rulecolor=\color{black!25},
-%  breaklines=true, postbreak={\mbox{\textcolor{ufvcom}{$\hookrightarrow$}\space}},
-%  extendedchars=true,
-%  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
-%           {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
-%           {â}{{\^a}}1 {ê}{{\^e}}1 {ô}{{\^o}}1 {ã}{{\~a}}1 {õ}{{\~o}}1
-%           {Ã}{{\~A}}1 {Õ}{{\~O}}1 {ç}{{\c c}}1 {Ç}{{\c C}}1 {à}{{\`a}}1
-%           {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1,
-%}
-% versão em preto e branco do mesmo estilo (para impressão sem cores)
-%\lstdefinestyle{ufvcodigopb}{style=ufvcodigo, keywordstyle=\bfseries,
-%  commentstyle=\itshape, stringstyle=\relax, backgroundcolor=\color{white},
-%  rulecolor=\color{black}, numberstyle=\tiny}
-%\lstset{style=ufvcodigo}
-
-% ---
-% REFERÊNCIAS: o biblatex (estilo abnt) já é carregado pela classe; indique a base aqui
-% ---
-\addbibresource{referencias.bib}
-
-% ---
-% SIGLAS (pacote acro, carregado pelo abntex2-ufv)
-% Declare cada sigla aqui e use \ac{chave} na primeira ocorrência no texto (a sigla sai por
-% extenso, seguida da sigla entre parênteses) e nas seguintes (só a sigla). Não use \ac em
-% resumos, títulos e legendas. Nomes em outro idioma ficam em itálico (\textit{...}).
-% ---
+% ----------------------------------------------------------
+% 2. SIGLAS (opcional; pacote acro)
+% Declare cada sigla aqui e use \ac{chave} na primeira ocorrência no texto (sai por extenso,
+% com a sigla entre parênteses) e nas seguintes (só a sigla). Não use \ac em resumos,
+% títulos e legendas. Nomes em outro idioma ficam em itálico (\textit{...}).
+% ----------------------------------------------------------
 %\DeclareAcronym{abnt}{short = ABNT, long = Associação Brasileira de Normas Técnicas}
 %\DeclareAcronym{api}{short = API, long = Interface de Programação de Aplicações}
 % Abreviaturas (lista própria): use tag = abreviatura e \acs{chave}
 %\DeclareAcronym{art}{short = art., long = artigo, tag = abreviatura}
 
-% ---
-% DADOS DO TRABALHO (capa, folha de rosto e folha de aprovação)
-% ---
+% ----------------------------------------------------------
+% 3. DADOS DO TRABALHO (capa, folha de rosto e folha de aprovação)
+% ----------------------------------------------------------
 \titulo{Título do trabalho}
 \autor{Nome do Autor}
 \local{Rio Paranaíba}
@@ -100,7 +71,6 @@
 \orientador{Nome do Orientador}      % \orientadora{...} no feminino; instituição padrão: UFV-CRP
 %\coorientador{Nome do Coorientador} % \coorientadora{...} no feminino
 \instituicao{Universidade Federal de Viçosa}
-
 \campus{\emph{Campus} Rio Paranaíba}   % aparece na capa só com a opção capacampus
 \curso{Sistemas de Informação}
 \membrobanca{Dr. Nome do Membro da Banca}       % instituição padrão: UFV-CRP
@@ -108,29 +78,15 @@
 %\databanca{14 de janeiro de 2026}              % se omitida, a folha de aprovação traz espaço em branco
 
 % Natureza do trabalho (nota descritiva da folha de rosto), conforme o manual da UFV:
-% \preambuloUFV{tcc|bacharelado|licenciatura}{título}   ou   \preambulo{texto livre}
-\preambuloUFV{bacharelado}{Sistemas de Informação}
+%   \preambuloUFV{tcc}{bacharel em Sistemas de Informação}  relatório final de TCC
+%   \preambuloUFV{bacharelado}{Sistemas de Informação}      monografia (bacharelado)
+%   \preambulo{texto livre}                                 outro tipo de trabalho
+\preambuloUFV{tcc}{bacharel em Sistemas de Informação}
 
-% ---
-% Configurações de aparência do PDF final (para impressão, troque as cores dos links por black)
-\makeatletter
-\hypersetup{
-        pdftitle={\@title},
-        pdfauthor={\@author},
-        pdfsubject={\imprimirpreambulo},
-        pdfcreator={LaTeX with abnTeX2},
-        colorlinks=true,
-        linkcolor=black,
-        citecolor=blue,
-        filecolor=magenta,
-        urlcolor=blue,
-        bookmarksdepth=4
-}
-\makeatother
-% ---
+% Aparência do PDF: a classe já define links pretos, citações em azul e os metadados
+% (título e autor). Para outra configuração: \hypersetup{...}
 
 \begin{document}
-\frenchspacing
 
 % ----------------------------------------------------------
 % ELEMENTOS PRÉ-TEXTUAIS

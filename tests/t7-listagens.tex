@@ -1,0 +1,60 @@
+% Listagens dentro de ilustracao com [\linewidth]: sem Overfull, legenda centralizada, linhas
+% longas quebradas (breaklines), \end{lstlisting} indentado sem linha em branco, e sem os
+% avisos do patch do listings. Compila com pdflatex e LuaLaTeX.
+\documentclass{abntex2-ufv}
+\input{estilo-listagens}
+\begin{document}
+\textual
+\chapter{Listagens}
+O \autoref{cod:longo} traz uma linha de 127 caracteres; o \autoref{cod:curto}, uma listagem curta.
+
+\begin{codigo}[htbp]
+\begin{ilustracao}[\linewidth]{\caption{Arquivo com linha de 127 caracteres}\label{cod:longo}}{\elaboracaopropria}
+\lstinputlisting[language=Python]{exemplo-longo.py}
+\end{ilustracao}
+\end{codigo}
+
+\begin{codigo}[htbp]
+\begin{ilustracao}[\linewidth]{\caption{Listagem curta}\label{cod:curto}}{\elaboracaopropria}
+\begin{lstlisting}[language=Python]
+x = 1
+print(x)
+\end{lstlisting}
+\end{ilustracao}
+\end{codigo}
+
+\begin{codigo}[htbp]
+\begin{ilustracao}[\linewidth]{\caption{Linha de 127 caracteres escrita no ambiente}\label{cod:inline}}{\elaboracaopropria}
+\begin{lstlisting}[language=Python]
+resultado = sum(valores) / len(valores) + sum(valores) * 2 - len(valores) ** 2 + max(valores) - min(valores) + 12345.67
+\end{lstlisting}
+\end{ilustracao}
+\end{codigo}
+
+% \end{lstlisting} indentado, com keepspaces falso e verdadeiro (o patch evita a linha extra)
+\lstset{keepspaces=false}
+\begin{codigo}[htbp]
+\begin{ilustracao}[\linewidth]{\caption{Fim indentado, keepspaces=false}\label{cod:ks-f}}{\elaboracaopropria}
+  \begin{lstlisting}
+a = 1
+  \end{lstlisting}
+\end{ilustracao}
+\end{codigo}
+\lstset{keepspaces=true}
+\begin{codigo}[htbp]
+\begin{ilustracao}[\linewidth]{\caption{Fim indentado, keepspaces=true}\label{cod:ks-t}}{\elaboracaopropria}
+  \begin{lstlisting}
+a = 1
+  \end{lstlisting}
+\end{ilustracao}
+\end{codigo}
+
+% documento já migrado: minipage manual dentro da ilustracao continua funcionando
+\begin{codigo}[htbp]
+\begin{ilustracao}[\linewidth]{\caption{Com minipage manual (uso antigo)}\label{cod:minipage}}{\elaboracaopropria}
+\begin{minipage}{\linewidth}
+\lstinputlisting[language=Python]{exemplo-longo.py}
+\end{minipage}
+\end{ilustracao}
+\end{codigo}
+\end{document}

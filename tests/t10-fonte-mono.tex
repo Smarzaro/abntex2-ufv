@@ -1,0 +1,24 @@
+% \texttt e listagem com acentos, negrito, itálico e algarismos alinhados; \texttt longo
+% quebrado com \path (xurl).
+\documentclass{abntex2-ufv}
+\input{estilo-listagens}
+\begin{document}
+\textual
+\chapter{Fonte monoespaçada}
+Texto com \texttt{código em linha}, \texttt{\textbf{negrito}}, \texttt{\textit{itálico}},
+\texttt{\textbf{\textit{negrito-itálico}}} e algarismos \texttt{0123456789} (0O 1lI), acentos
+\texttt{ação, coração, é, ê, ü, ç}.
+
+Parâmetro longo de API: \texttt{\path{/api/v1/organizacoes/12345/projetos/67890/tarefas?status=aberta&ordem=prazo&pagina=3}}
+fica quebrado na margem.
+
+\begin{codigo}[htbp]
+\begin{ilustracao}[\linewidth]{\caption{Listagem com acentos, negrito, itálico e algarismos}\label{cod:fonte}}{\elaboracaopropria}
+\begin{lstlisting}[language=Python]
+def média(ações):  # comentário em itálico: coração, ação
+    """Algarismos: 0123456789, 0O 1lI"""
+    return sum(ações) / len(ações)
+\end{lstlisting}
+\end{ilustracao}
+\end{codigo}
+\end{document}

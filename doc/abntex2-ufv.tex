@@ -3,7 +3,7 @@
 %% para o curso de Sistemas de Informação da Universidade Federal de
 %% Viçosa - Campus de Rio Paranaíba
 %% Autor: Rodrigo Smarzaro (smarzaro@ufv.br)
-%% Versão 1.6.1 (transição para a classe) - baseado no Manual de Normalização de Trabalhos
+%% Versão 1.7 (transição para a classe) - baseado no Manual de Normalização de Trabalhos
 %% Acadêmicos da UFV (edição 2026-2; NBR 14724/2025, 6023/2025, 10520/2023)
 %% Arquivo em formato UTF-8
 %% Compilar com pdflatex + biber (nesta pasta: latexmk)
@@ -31,12 +31,21 @@
 \documentclass{abntex2-ufv}
 
 % ---
-% PACOTES ADICIONAIS
-% A classe já carrega: fontenc, indentfirst, graphicx, csquotes, microtype, booktabs,
-% tabularx, multirow, acro e biblatex (estilo abnt, com xurl).
+% PACOTES
+% A classe carrega só o que ela precisa (fontenc, indentfirst, acro, hyperref via abntex2);
+% os pacotes de uso do autor são carregados aqui, como no template.
 % ---
+\usepackage{graphicx}           % figuras
+\usepackage{csquotes}           % \enquote{} e citações (exigido pelo biblatex)
+\usepackage[final]{microtype}   % melhor justificação
+\usepackage[backend=biber, style=abnt, uniquename=init, giveninits,
+            repeatfields, justify, noslsn]{biblatex}   % referências ABNT
+\usepackage{xurl}               % quebra de linha em URLs longas
 
 % Tabelas e quadros (veja o Apêndice B)
+\usepackage{booktabs}           % \toprule, \midrule e \bottomrule
+\usepackage{tabularx}           % colunas X de largura automática
+\usepackage{multirow}           % células mescladas em linhas
 \usepackage{longtable}          % tabelas que ocupam mais de uma página
 \usepackage{pdflscape}          % ambiente landscape (página em paisagem)
 \usepackage{colortbl}           % células sombreadas (\cellcolor)
@@ -50,7 +59,7 @@
 \pgfplotsset{compat=newest}
 
 % Código-fonte (use dentro dos ambientes codigo e ilustracao; veja o Apêndice D)
-\usepackage[scaled=0.88]{FiraMono}   % fonte de largura fixa legível (0/O e 1/l/I distintos)
+\usepackage[scaled=0.88,lining]{FiraMono}   % largura fixa legível (0/O e 1/l/I distintos), algarismos alinhados
 \usepackage{xcolor}
 \usepackage{listings}
 % cores da sintaxe (escolhidas para continuarem legíveis em escala de cinza)
@@ -102,9 +111,9 @@
 }{\end{dicabase}}
 
 % ---
-% REFERÊNCIAS: o biblatex (estilo abnt) já é carregado pela classe
+% REFERÊNCIAS E IMAGENS (o biblatex foi carregado acima)
 % ---
-\graphicspath{{imagens/}{example/imagens/}}   % imagens do exemplo (o template usa só imagens/)
+\graphicspath{{example/imagens/}}   % imagens do exemplo (o template usa imagens/)
 \addbibresource{example/example-referencias.bib}
 \addbibresource{example/example-entradas.bib}   % apenas para o Apêndice A
 

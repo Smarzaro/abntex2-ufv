@@ -20,53 +20,62 @@
 %% The Current Maintainer of this work is Rodrigo Smarzaro (smarzaro@ufv.br)
 %%
 %% Esta classe é uma camada fina sobre abntex2 + abntex2-ufv.sty: ela define os
-%% padrões do manual (12pt, A4, frente apenas, português do Brasil), carrega os
-%% pacotes que todo TCC usa e configura o biblatex-abnt. Toda a personalização
-%% (margens, fonte, capa, listas, siglas etc.) está em abntex2-ufv.sty.
+%% padrões do manual (12pt, A4, frente apenas, português do Brasil) e carrega só o
+%% que a própria classe precisa. Os pacotes de uso do autor (graphicx, csquotes,
+%% biblatex, tabelas etc.) são carregados no preâmbulo do documento (veja o template).
+%% Toda a personalização (margens, fonte, capa, listas, siglas etc.) está em
+%% abntex2-ufv.sty.
 %%
-\NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesClass{abntex2-ufv}[2026/10/14 v1.6.1 Classe abntex2-ufv (TCC SI UFV-CRP)]
+\NeedsTeXFormat{LaTeX2e}[2022/06/01]
+\ProvidesClass{abntex2-ufv}[2026/10/26 v1.7 Classe abntex2-ufv (TCC SI UFV-CRP)]
+
+\newcommand{\ufvversion}{1.7}
 
 % A classe abntex2 carrega o babel com o nome obsoleto "brazil"; o aviso é inofensivo
 \RequirePackage{silence}
 \WarningFilter{babel}{Name 'brazil' is deprecated}
+% O abntex2 usa \settocpreprocessor (sumário em caixa alta), que o memoir de 2026 marca como
+% obsoleto: o recurso continua funcionando (o aviso é só de depreciação) e a classe abntex2
+% ainda não foi atualizada, então o aviso não depende de nada que o autor possa corrigir
+\WarningFilter{memoir}{\settocpreprocessor is marked deprecated}
 \RequirePackage{etoolbox}
 
 % ---
-% Opções
+% Opções (chaves do kernel, \DeclareKeys)
 %   fonte=times|arial|cm   fonte do texto (padrão: times); veja abntex2-ufv.sty
 %   capacampus             imprime campus e curso na capa
-%   nobiblatex             não carrega o biblatex (para quem usa outro sistema)
 %   oneside|twoside        frente apenas (padrão) ou frente e verso
 %   openright|openany      capítulos em página ímpar (padrão) ou em qualquer página
 %   10pt|11pt|12pt         tamanho da letra (padrão e exigido pelo manual: 12pt)
 % As demais opções são repassadas à classe abntex2 (e, por ela, ao memoir).
 % O papel é sempre A4; o idioma principal é o português do Brasil, com inglês
 % como idioma adicional para hifenização.
+% A opção nobiblatex (versões 1.5 e 1.6) é obsoleta e ignorada: a classe não carrega
+% mais o biblatex; carregue-o no preâmbulo do documento.
 % ---
-\newif\ifufv@biblatex \ufv@biblatextrue
+\newcommand{\ufv@fonte}{times}
+\newif\ifufv@capacampus
 \newcommand{\ufv@side}{oneside}
 \newcommand{\ufv@open}{openright}
 \newcommand{\ufv@pt}{12pt}
 
-\DeclareOption{nobiblatex}{\ufv@biblatexfalse}
-\DeclareOption{capacampus}{\PassOptionsToPackage{capacampus}{abntex2-ufv}}
-\DeclareOption{oneside}{\renewcommand{\ufv@side}{oneside}}
-\DeclareOption{twoside}{\renewcommand{\ufv@side}{twoside}}
-\DeclareOption{openright}{\renewcommand{\ufv@open}{openright}}
-\DeclareOption{openany}{\renewcommand{\ufv@open}{openany}}
-\DeclareOption{10pt}{\renewcommand{\ufv@pt}{10pt}}
-\DeclareOption{11pt}{\renewcommand{\ufv@pt}{11pt}}
-\DeclareOption{12pt}{\renewcommand{\ufv@pt}{12pt}}
-\DeclareOption{a4paper}{}
-\DeclareOption*{%
-  \in@{=}{\CurrentOption}%
-  \ifin@
-    \PassOptionsToPackage{\CurrentOption}{abntex2-ufv}% fonte=...
-  \else
-    \PassOptionsToClass{\CurrentOption}{abntex2}%
-  \fi}
-\ProcessOptions\relax
+\DeclareKeys[ufv]{
+  fonte.store        = \ufv@fonte,
+  capacampus.if      = ufv@capacampus,
+  oneside.code       = \renewcommand{\ufv@side}{oneside},
+  twoside.code       = \renewcommand{\ufv@side}{twoside},
+  openright.code     = \renewcommand{\ufv@open}{openright},
+  openany.code       = \renewcommand{\ufv@open}{openany},
+  10pt.code          = \renewcommand{\ufv@pt}{10pt},
+  11pt.code          = \renewcommand{\ufv@pt}{11pt},
+  12pt.code          = \renewcommand{\ufv@pt}{12pt},
+  a4paper.code       = {},
+  nobiblatex.code    = {\ClassWarningNoLine{abntex2-ufv}{%
+    A opcao nobiblatex e obsoleta e foi ignorada: a classe nao carrega mais o biblatex.\MessageBreak
+    Carregue-o no preambulo do documento (veja o template)}},
+}
+\DeclareUnknownKeyHandler[ufv]{\PassOptionsToClass{\CurrentOption}{abntex2}}
+\ProcessKeyOptions[ufv]
 
 % Idiomas: o português do Brasil (principal) e o inglês precisam estar entre as opções
 % *globais* do documento, as mesmas que o usuário escreveria em \documentclass[...]. Assim
@@ -81,35 +90,11 @@
 \LoadClass{abntex2}
 
 % ---
-% Personalização UFV e pacotes que todo TCC usa
+% Personalização UFV e o que a própria classe precisa (o resto fica no documento)
 % ---
 \def\ufv@viacls{}                   % avisa o .sty que ele foi carregado pela classe
 \RequirePackage{abntex2-ufv}
-\RequirePackage[T1]{fontenc}        % códigos de fonte de saída
+\RequirePackage[T1]{fontenc}        % códigos de fonte de saída (acentos e hifenização)
 \RequirePackage{indentfirst}        % indenta o primeiro parágrafo de cada seção
-\RequirePackage{graphicx}           % inclusão de figuras
-\graphicspath{{imagens/}}           % as imagens do trabalho ficam na pasta imagens/
-\RequirePackage{csquotes}           % aspas (\enquote) e citações no padrão do idioma
-\RequirePackage[final]{microtype}   % melhorias de justificação
-\RequirePackage{booktabs}           % \toprule, \midrule e \bottomrule
-\RequirePackage{tabularx}           % colunas X de largura automática
-\RequirePackage{multirow}           % células mescladas em linhas
-
-% ---
-% Referências: biblatex com o estilo abnt (ajustes UFV em abntex2-ufv.sty).
-% Declare a base com \addbibresource{referencias.bib} no preâmbulo.
-% ---
-\ifufv@biblatex
-  \RequirePackage[backend=biber,
-                  style=abnt,
-                  uniquename=init,
-                  giveninits,
-                  repeatfields,
-                  justify,
-                  noslsn]{biblatex}
-  \RequirePackage{xurl}             % quebra de linha em URLs longas
-  \urlstyle{same}
-  \setlength{\bibparsep}{10pt}
-\fi
 \setlength{\emergencystretch}{3em}  % evita linhas estouradas com comandos longos
 \endinput

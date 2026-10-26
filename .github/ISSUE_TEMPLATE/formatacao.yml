@@ -1,0 +1,35 @@
+name: Formatação diferente do manual
+description: O resultado não segue o Manual de Normalização da UFV ou a norma ABNT
+labels: ["formatação"]
+body:
+  - type: input
+    id: versao
+    attributes:
+      label: Versão da classe
+      placeholder: "1.7"
+    validations:
+      required: true
+  - type: input
+    id: item
+    attributes:
+      label: Item do Manual UFV ou da norma ABNT
+      description: Seção do manual ou número da norma, se souber.
+      placeholder: "Manual UFV 4.9; NBR 14724/2025"
+  - type: textarea
+    id: atual
+    attributes:
+      label: Como está
+      description: Descreva ou anexe uma imagem da página.
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Como deveria ficar
+    validations:
+      required: true
+  - type: textarea
+    id: minimo
+    attributes:
+      label: Exemplo mínimo (opcional)
+      render: latex

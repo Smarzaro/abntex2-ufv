@@ -1,0 +1,56 @@
+name: Relatar problema
+description: Erro de compilação, aviso estranho ou resultado incorreto
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por ajudar a melhorar a classe. Quanto mais completo o relato, mais rápido o problema é reproduzido e corrigido.
+  - type: input
+    id: versao
+    attributes:
+      label: Versão da classe
+      description: Aparece no log (`abntex2-ufv ... v1.7`) ou na macro `\ufvversion`.
+      placeholder: "1.7"
+    validations:
+      required: true
+  - type: dropdown
+    id: ambiente
+    attributes:
+      label: Onde você compila?
+      options:
+        - Overleaf
+        - TeXstudio
+        - VS Code (LaTeX Workshop)
+        - Linha de comando (latexmk)
+        - Outro
+    validations:
+      required: true
+  - type: dropdown
+    id: motor
+    attributes:
+      label: Motor de compilação
+      options:
+        - pdflatex
+        - lualatex
+        - xelatex
+    validations:
+      required: true
+  - type: textarea
+    id: descricao
+    attributes:
+      label: O que aconteceu e o que você esperava
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Mensagem de erro ou aviso do .log
+      description: Cole só o trecho relevante.
+      render: text
+  - type: textarea
+    id: minimo
+    attributes:
+      label: Exemplo mínimo que reproduz o problema
+      description: Um documento curto, com `\documentclass{abntex2-ufv}`, que mostre o problema.
+      render: latex

@@ -61,20 +61,17 @@ onde o editor os reconhece e você controla as opções. Quem migrou na 1.5 ou 1
 para a 1.7 deve acrescentar esses pacotes (veja o exemplo ao final desta seção). A opção
 \texttt{nobiblatex} deixou de existir; se for usada, é ignorada com um aviso.
 
-\textbf{Atenção (versão 1.7.1).} Com o argumento opcional de largura, o ambiente
-\texttt{ilustracao} (e o \texttt{tabela}) passa a compor o conteúdo \emph{nessa largura}
+\textbf{Atenção (ilustrações de código, versão 1.7).} Com o argumento opcional de largura, o
+ambiente \texttt{ilustracao} (e o \texttt{tabela}) compõe o conteúdo \emph{nessa largura}
 (antes, usava a largura natural do conteúdo, e o argumento era só uma largura mínima do título
 e do rodapé). Em listagens do \texttt{listings}, isso faz as linhas longas serem quebradas
-(\texttt{breaklines}) em vez de estourar a margem e descentralizar o título. Para migrar da
-1.7: (i) apague as \texttt{minipage} que envolviam cada listagem (se ficarem, nada quebra);
+(\texttt{breaklines}) em vez de estourar a margem e descentralizar o título. Ao migrar:
+(i) apague as \texttt{minipage} que envolviam cada listagem (se ficarem, nada quebra);
 (ii) use \texttt{[\textbackslash linewidth]} nas ilustrações de código e nas demais que
 devem ocupar a largura do texto; (iii) nas que não têm argumento, nada muda; (iv) conteúdo
 mais largo que a largura dada continua gerando o aviso \emph{Overfull \textbackslash hbox}.
-A fonte de largura fixa do modelo passa a ser carregada com algarismos alinhados:
-\texttt{\textbackslash usepackage[scaled=0.88,lining]\{FiraMono\}}. O aviso ``O listings mudou''
-(correção da linha em branco no fim das listagens) deixou de aparecer, assim como o aviso
-\emph{Token not allowed in a PDF string} do \texttt{hyperref} nos apêndices e o da
-obsolescência do \texttt{\textbackslash settocpreprocessor}, do \texttt{memoir}.
+A fonte de largura fixa do modelo é carregada com algarismos alinhados:
+\texttt{\textbackslash usepackage[scaled=0.88,lining]\{FiraMono\}}.
 
 \begin{enumerate}
   \item \textbf{Atualize os arquivos.} Baixe os arquivos da versão 1.7 ou posterior e substitua os antigos.

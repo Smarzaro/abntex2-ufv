@@ -6,7 +6,7 @@
 [![CTAN](https://img.shields.io/ctan/v/abntex2-ufv)](https://ctan.org/pkg/abntex2-ufv)
 
 
-**Version 1.7.1** (2026-10-26)
+**Version 1.7** (2026-10-26)
 
 **Summary (English):** abntex2-ufv is a LaTeX class, built on top of the
 abnTeX2 class, for undergraduate final theses (TCC) of the Information
@@ -171,6 +171,32 @@ e `colortbl`.
 Use o botão **Cite this repository** do GitHub (arquivo
 [`CITATION.cff`](CITATION.cff)) ou o DOI do Zenodo, que reúne todas as versões:
 [10.5281/zenodo.23345952](https://doi.org/10.5281/zenodo.23345952).
+
+Entrada completa para o `biblatex` (tipo `@software`; copie para o seu `referencias.bib`
+e atualize `version` e `date` para a versão que você usou):
+
+```bibtex
+@software{smarzaro_abntex2-ufv,
+  author       = {Smarzaro, Rodrigo},
+  title        = {abntex2-ufv: classe {LaTeX} para trabalhos de conclusão de curso de
+                  Sistemas de Informação da {UFV} ({Campus} Rio Paranaíba)},
+  shorttitle   = {abntex2-ufv},
+  version      = {1.7},
+  date         = {2026-10-26},
+  year         = {2026},
+  organization = {Universidade Federal de Viçosa},
+  location     = {Rio Paranaíba},
+  url          = {https://github.com/Smarzaro/abntex2-ufv},
+  doi          = {10.5281/zenodo.23345952},
+  license      = {LPPL-1.3c},
+  note         = {Classe LaTeX baseada no abnTeX2},
+  langid       = {brazilian},
+  keywords     = {LaTeX, abnTeX2, ABNT, UFV, TCC},
+}
+```
+
+O DOI acima é o *conceito* (todas as versões); para citar uma versão específica, use o
+DOI dela na página do Zenodo.
 
 ## Autor
 

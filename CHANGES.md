@@ -1,7 +1,27 @@
 # Changes
 
-## 1.7.1 (2026-10-26)
+## 1.7 (2026-10-26)
 
+- **Breaking for documents that relied on the class loading packages (1.5 and 1.6):** the
+  class now loads only what it needs itself (`fontenc`, `indentfirst`, `acro`, `silence`,
+  `etoolbox`). `graphicx`, `csquotes`, `microtype`, `booktabs`, `tabularx`, `multirow`,
+  `biblatex` and `xurl` are no longer loaded by the class; load them in the document
+  preamble, as the template does. This also lets TeXstudio and LaTeX Workshop recognize their
+  commands. The `\graphicspath{{imagens/}}` declaration moved to the template.
+- The class option `nobiblatex` is obsolete and ignored with a warning.
+- Class options are now declared with the kernel `\DeclareKeys` (requires LaTeX 2022-06 or
+  newer).
+- The class now sets, as defaults that the document can override: link colors
+  (`\hypersetup`), PDF title/author/subject from `\titulo`, `\autor` and the preamble note,
+  `\frenchspacing` and `\urlstyle{same}` (when `biblatex` is loaded).
+- Removed the old `\setlength{\bibparsep}{10pt}`: in a list the space between items is
+  `\itemsep + \parsep`, so it made the gap between references larger than one blank line;
+  the biblatex default (0pt) with biblatex-abnt's `\bibitemsep` (one baseline) is correct.
+- New macro `\ufvversion`; `scripts/check-version.sh` checks it.
+- Template: cleaner preamble in numbered sections (packages, acronyms, thesis data),
+  magic comments for TeXstudio/VS Code (`pdflatex`, `biber`); no code-listing block (see the
+  resources guide).
+- Documentation: migration section (Appendix C) updated for 1.7.
 - Fix: `ilustracao` (and `tabela`) with the optional width argument, e.g.
   `\begin{ilustracao}[\linewidth]`, now typesets its content in a `minipage` of that width
   (the argument is the width of the illustration, no longer only a minimum width of the
@@ -24,31 +44,6 @@
 - Tests: `t7` to `t11` (listings, narrow figure, wide table that must keep warning,
   monospaced font, appendices), also compiled with LuaLaTeX by `scripts/run-tests.sh`,
   which now fails on class/hyperref/font warnings and on unexpected Overfull `\hbox`.
-
-## 1.7 (2026-10-17)
-
-- **Breaking for documents that relied on the class loading packages (1.5 and 1.6):** the
-  class now loads only what it needs itself (`fontenc`, `indentfirst`, `acro`, `silence`,
-  `etoolbox`). `graphicx`, `csquotes`, `microtype`, `booktabs`, `tabularx`, `multirow`,
-  `biblatex` and `xurl` are no longer loaded by the class; load them in the document
-  preamble, as the template does. This also lets TeXstudio and LaTeX Workshop recognize their
-  commands. The `\graphicspath{{imagens/}}` declaration moved to the template.
-- The class option `nobiblatex` is obsolete and ignored with a warning.
-- Class options are now declared with the kernel `\DeclareKeys` (requires LaTeX 2022-06 or
-  newer).
-- The class now sets, as defaults that the document can override: link colors
-  (`\hypersetup`), PDF title/author/subject from `\titulo`, `\autor` and the preamble note,
-  `\frenchspacing` and `\urlstyle{same}` (when `biblatex` is loaded).
-- Removed the old `\setlength{\bibparsep}{10pt}`: in a list the space between items is
-  `\itemsep + \parsep`, so it made the gap between references larger than one blank line;
-  the biblatex default (0pt) with biblatex-abnt's `\bibitemsep` (one baseline) is correct.
-- The `listings` fix for an indented `\end{lstlisting}` is applied only if the internal
-  macros it patches exist, with a warning otherwise.
-- New macro `\ufvversion`; `scripts/check-version.sh` checks it.
-- Template: cleaner preamble in numbered sections (packages, acronyms, thesis data),
-  magic comments for TeXstudio/VS Code (`pdflatex`, `biber`); no code-listing block (see the
-  resources guide).
-- Documentation: migration section (Appendix C) updated for 1.7.
 
 ## 1.6.1 (2026-10-14)
 

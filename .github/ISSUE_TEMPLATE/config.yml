@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Dúvida de uso
+    url: https://github.com/Smarzaro/abntex2-ufv/discussions
+    about: Para perguntas gerais sobre o uso da classe, use as Discussões (se estiverem ativadas) ou consulte o guia em PDF.

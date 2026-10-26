@@ -1,0 +1,22 @@
+name: Sugerir melhoria
+description: Novo recurso, ajuste ou melhoria da documentação
+labels: ["melhoria"]
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema ou necessidade
+      description: O que você não consegue fazer hoje, ou faz com dificuldade?
+    validations:
+      required: true
+  - type: textarea
+    id: sugestao
+    attributes:
+      label: Sugestão
+      description: Como a classe ou o guia poderiam resolver isso?
+    validations:
+      required: true
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas que você já tentou (opcional)

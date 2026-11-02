@@ -1,21 +1,12 @@
-{\captionstyle[\raggedright]{\raggedright}\setlength{\LTcapwidth}{\linewidth}
-\small\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}
-\begin{longtable}{@{\extracolsep{\fill}} l S[table-format=5.0] S[table-format=3.1]}
-  \caption{Cobertura de testes por módulo do sistema (exemplo de tabela longa)}\label{tab:guia-longa}\\
+\begin{tabelalonga}{\caption{Cobertura de testes por módulo do sistema (exemplo de tabela
+  longa)}\label{tab:guia-longa}}{\fonte{Elaborado pelo próprio autor. Dados fictícios.}
+  \legenda{As linhas de código não incluem comentários nem linhas em branco.}
+  \nota{Tabela com 60 linhas, para mostrar a quebra de página e a repetição do cabeçalho.}}%
+  {@{\extracolsep{\fill}} l S[table-format=5.0] S[table-format=3.1]@{}}
   \toprule
   \textbf{Módulo} & {\textbf{Linhas de código}} & {\textbf{Cobertura (\%)}} \\
   \midrule
-  \endfirsthead
-  \multicolumn{3}{@{}l}{\emph{Tabela \thetable\ -- continuação}}\\
-  \toprule
-  \textbf{Módulo} & {\textbf{Linhas de código}} & {\textbf{Cobertura (\%)}} \\
-  \midrule
-  \endhead
-  \midrule
-  \multicolumn{3}{r@{}}{\emph{Continua}}\\
-  \endfoot
-  \bottomrule
-  \endlastfoot
+\cabecalhofim
   Autenticação 1             &  1573 &  57,9 \\
   Cadastro 1                 &  2946 &  60,8 \\
   Catálogo 1                 &  4319 &  63,7 \\
@@ -76,9 +67,5 @@
   Configurações 3            &  3834 &  88,2 \\
   Internacionalização 3      &  5207 &  91,1 \\
   Utilitários 3              &  6580 &  94,0 \\
-\end{longtable}
-}
-\nopagebreak
-\fonte{Elaborado pelo próprio autor. Dados fictícios.}
-\legenda{As linhas de código não incluem comentários nem linhas em branco.}
-\nota{Tabela com 60 linhas, para mostrar a quebra de página e a repetição do cabeçalho.}
+  \bottomrule
+\end{tabelalonga}

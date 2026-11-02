@@ -163,7 +163,7 @@ LaTeX de junho de 2022 ou mais recente (TeX Live ou MiKTeX 2022+), pdfLaTeX,
 `silence` e `etoolbox` (usados pela classe); o template usa também `csquotes`,
 `microtype`, `graphicx`, `biblatex` e `xurl`. Todos estão incluídos no MiKTeX e
 no TeX Live completo. A documentação usa ainda `booktabs`, `tabularx`,
-`multirow`, `tikz`, `pgfplots`, `listings`, `tcolorbox`, `siunitx`, `longtable`
+`multirow`, `tikz`, `pgfplots`, `listings`, `tcolorbox`, `siunitx`, `xltabular`
 e `colortbl`.
 
 ## Como citar

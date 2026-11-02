@@ -168,32 +168,8 @@ No exemplo a seguir comparam-se discos rígidos (\ac{hdd}) e unidades de estado 
 
 \subsection{Tabela longa (mais de uma página)}
 
-O ambiente \texttt{longtable} repete o cabeçalho em cada página e permite indicar a
-continuação, como pedem as normas de apresentação tabular (``Continua'', ``Continuação''
-e ``Conclusão'', conforme a posição). Use-o apenas quando a tabela realmente não couber
-em uma página; tabelas longas e de consulta costumam ficar melhor em apêndice.
-
-O \texttt{longtable} não é um float e não cabe dentro dos ambientes \texttt{table} e
-\texttt{tabela}, por isso o título e o rodapé são tratados à parte:
-\begin{itemize}
-  \item o \textbf{título} é o \texttt{\textbackslash caption} da primeira linha da tabela. Para
-        que fique à esquerda e use a largura do texto, coloque o \texttt{longtable} dentro de
-        um grupo com
-        \texttt{\textbackslash captionstyle\allowbreak[\textbackslash raggedright]\allowbreak\{\textbackslash raggedright\}} e
-        \texttt{\textbackslash setlength\allowbreak\{\textbackslash LTcapwidth\}\allowbreak\{\textbackslash linewidth\}} (sem isso o
-        título é limitado a 4 polegadas);
-  \item para que o \textbf{rodapé} (\texttt{\textbackslash fonte}, \texttt{\textbackslash legenda} e
-        \texttt{\textbackslash nota}) fique alinhado com a tabela, faça a tabela ocupar a largura do
-        texto: \texttt{\textbackslash setlength\{\textbackslash LTleft\}\{0pt\}},
-        \texttt{\textbackslash setlength\{\textbackslash LTright\}\{0pt\}} e, na coluna
-        \texttt{@\{\textbackslash extracolsep\{\textbackslash fill\}\}} antes da primeira
-        coluna. O rodapé vem logo após o \texttt{\textbackslash end\{longtable\}}, em espaço simples e à
-        esquerda, e o \texttt{\textbackslash nopagebreak} evita que ele fique sozinho em outra página.
-\end{itemize}
-A tabela abaixo tem 60 linhas para mostrar a quebra de página, a repetição do cabeçalho com
-``continuação'' e a indicação ``Continua'' no pé de cada página.
-
-\codexemplolongo{tabela-longa}{18}
+Uma tabela que não cabe em uma página usa o ambiente \texttt{tabelalonga}, descrito na
+\autoref{sec:longos} junto com o \texttt{quadrolongo}.
 
 \section{Quadro bem formatado}
 
@@ -221,6 +197,144 @@ o que confunde a expansão de siglas; faça a primeira ocorrência de cada sigla
 corrido e use a sigla pura nas células.
 
 \codexemplo{quadro-tecnologias}
+
+\section{Quadros e tabelas longos}\label{sec:longos}
+
+Um quadro ou uma tabela cujo conteúdo pode passar de uma página (um inventário de códigos,
+uma lista de requisitos, dados de consulta) não cabe nos floats: o conteúdo do
+\texttt{ilustracao} e do \texttt{tabela} fica numa caixa, que não quebra entre páginas, e o
+resultado estoura a página ou o \LaTeX\ reclama de um float grande demais (\emph{Float too
+large}). Dividir o conteúdo em vários quadros não resolve, porque qualquer parte pode
+crescer. Para esses casos há os ambientes \texttt{quadrolongo} e \texttt{tabelalonga}:
+\begin{itemize}
+  \item são usados \textbf{fora} de float, direto no texto, e não flutuam: começam onde
+        estão no código e continuam nas páginas seguintes;
+  \item repetem o cabeçalho (as linhas antes de \texttt{\textbackslash cabecalhofim}) no
+        alto de cada página;
+  \item o título e o rodapé seguem a mesma regra do \texttt{ilustracao} e do
+        \texttt{tabela}: o título é o \texttt{\textbackslash caption}, com o título curto
+        opcional (\texttt{\textbackslash caption[curto]\{longo\}}) e o
+        \texttt{\textbackslash label} logo depois; o rodapé tem a fonte, obrigatória, e, se
+        preciso, a legenda e a nota (\texttt{\textbackslash fonte},
+        \texttt{\textbackslash legenda}, \texttt{\textbackslash nota},
+        \texttt{\textbackslash elaboracaopropria}) e sai só no fim da última página;
+  \item a aparência é a mesma: no \texttt{quadrolongo}, título centralizado, como no
+        \texttt{ilustracao}; no \texttt{tabelalonga}, título à esquerda e conteúdo em
+        tamanho 10, como no \texttt{tabela};
+  \item a numeração e as listas também: o \texttt{quadrolongo} é um ``Quadro N'' da Lista
+        de quadros, o \texttt{tabelalonga} uma ``Tabela N'' da Lista de tabelas, na mesma
+        sequência dos quadros e das tabelas comuns, e o
+        \texttt{\textbackslash autoref\{rótulo\}} funciona do mesmo jeito.
+\end{itemize}
+Se o conteúdo cabe numa página, prefira os floats (\texttt{quadro} com
+\texttt{ilustracao}, \texttt{table} com \texttt{tabela}), que o \LaTeX\ posiciona melhor.
+
+\subsection{Pacotes}
+
+A classe não carrega pacotes de tabela; os ambientes longos precisam
+de \texttt{xltabular} no preâmbulo (ele carrega \texttt{longtable} e \texttt{tabularx}).
+Sem ele, o uso do ambiente dá um erro que diz o que acrescentar. \texttt{colortbl} só é
+preciso se o documento usar \texttt{\textbackslash rowcolor} ou
+\texttt{\textbackslash cellcolor}, e \texttt{pdflscape} para páginas em paisagem:
+\begin{lstlisting}[style=exemplo, language={[LaTeX]TeX}]
+\usepackage{xltabular}   % carrega longtable e tabularx
+\usepackage{xcolor}      % \definecolor (HTML, RGB...)
+\usepackage{colortbl}    % só se usar \rowcolor ou \cellcolor
+\usepackage{pdflscape}   % só se usar páginas em paisagem
+\end{lstlisting}
+
+\subsection{Sintaxe}
+
+Os dois primeiros argumentos são os mesmos do \texttt{ilustracao} e do
+\texttt{tabela} (título e rodapé); o terceiro é a especificação das colunas, como no
+\texttt{tabularx}. Depois vêm as linhas do cabeçalho, o \texttt{\textbackslash cabecalhofim}
+e as linhas do corpo:
+\begin{lstlisting}[style=exemplo, language={[LaTeX]TeX}]
+\begin{quadrolongo}{\caption[Curto]{Título}\label{qua:x}}{\fonte{...}}{|l|X|c|}
+  \hline
+  \textbf{Coluna 1} & \textbf{Coluna 2} & \textbf{Coluna 3} \\  % cabeçalho, repetido
+  \hline
+\cabecalhofim                                                      % fim do cabeçalho
+  ... & ... & ... \\ \hline                                        % corpo
+\end{quadrolongo}
+\end{lstlisting}
+O ambiente ocupa sempre a largura do texto: use ao menos uma coluna \texttt{X} (que se ajusta
+à largura) ou, numa tabela só de números, comece a especificação com
+\texttt{@\{\textbackslash extracolsep\{\textbackslash fill\}\}}, que distribui as colunas na
+largura. O quadro abaixo, um inventário de códigos de um \ac{tcc}, pode cair entre duas
+páginas; as faixas coloridas agrupam os códigos por categoria.
+
+\codexemplolongo{quadro-longo}{11}
+
+\subsection{Continuação}
+
+Como pedem as normas de apresentação tabular do \ac{ibge}, quando o
+quadro ou a tabela passa de uma página, sai ``continua'' no pé de cada página que não é a
+última, ``continuação'' acima do cabeçalho repetido e ``conclusão'' no fim da última página,
+todos à direita; o que cabe numa página não leva nenhuma marca. Para saber onde a tabela
+termina, o \LaTeX\ precisa de duas compilações (o \texttt{latexmk} já faz isso). Os textos
+estão em \texttt{\textbackslash continuaname}, \texttt{\textbackslash continuacaoname} e
+\texttt{\textbackslash conclusaoname} (troque com \texttt{\textbackslash renewcommand}), e as
+marcas podem ser desligadas com
+\texttt{\textbackslash ufvmarcascontinuacao\{nao\}} (nos dois ambientes) ou só num deles,
+com \texttt{\textbackslash ufvmarcascontinuacao[quadros]\{nao\}} ou
+\texttt{[tabelas]}. Elas vêm ligadas nos dois; nos quadros, siga a orientação do
+orientador.
+
+\subsection{Linhas de grupo}
+
+Uma linha que agrupa as seguintes (um subtítulo que ocupa
+todas as colunas com \texttt{\textbackslash multicolumn}, com ou sem fundo colorido por
+\texttt{\textbackslash rowcolor}, como no \autoref{qua:guia-longo}) não pode ficar sozinha no pé da
+página, separada das linhas a que se refere. A regra geral vale para qualquer tabela que
+quebra entre páginas: \textbf{para que uma linha de subtítulo ou de grupo não fique sozinha
+no pé da página, termine-a com \texttt{\textbackslash\textbackslash*}}, que proíbe a quebra
+de página logo depois dela. Não ponha \texttt{\textbackslash hline} logo depois da linha
+de grupo: no \texttt{longtable} o filete permite a quebra de página (é desenhado no pé de uma
+página e repetido no alto da seguinte); a faixa colorida ou o filete da linha seguinte já
+separam o grupo. A forma dessas linhas (negrito, cor de fundo, filetes) é escolha
+de cada documento; a classe não define cores.
+
+\subsection{Paisagem}
+
+Um quadro largo pode ir para páginas em paisagem: coloque o ambiente
+dentro de um único \texttt{landscape} (pacote \texttt{pdflscape}), e ele continua nas
+páginas giradas seguintes. Por exemplo, o inventário de códigos de um \ac{tcc} no apêndice:
+\begin{lstlisting}[style=exemplo, language={[LaTeX]TeX}]
+% preâmbulo
+\usepackage{xltabular}   % carrega longtable e tabularx
+\usepackage{xcolor}
+\usepackage{colortbl}    % só se usar \rowcolor
+\usepackage{pdflscape}
+\definecolor{fundocategoria}{HTML}{A6C4DC}   % cor escolhida pelo documento
+
+% Apêndice B
+\begin{landscape}
+\begin{quadrolongo}{\caption[Códigos do projeto]{Códigos do projeto, por categoria,
+    com a função e a seção em que são usados}\label{qua:inventario}}%
+  {\elaboracaopropria}{@{}l>{\raggedright\arraybackslash}Xc@{}}
+\textbf{Arquivo} & \textbf{Função} & \textbf{Seção} \\
+\cabecalhofim
+\rowcolor{fundocategoria}\multicolumn{3}{@{\hspace{3pt}}l}{\textbf{Centrais}} \\*
+\texttt{07\_treinamento.py} & Treinamento de uma configuração com a SMP
+  & \ref{sec:treinamento} \\
+\texttt{08\_inferencia.py} & Inferência bloco a bloco em janela deslizante
+  & \ref{sec:posproc} \\
+\rowcolor{fundocategoria}
+  \multicolumn{3}{@{\hspace{3pt}}l}{\textbf{Dados e execução}} \\*
+\texttt{config.yaml} & Parâmetros de todas as etapas & \ref{sec:metodos} \\
+\end{quadrolongo}
+\end{landscape}
+\end{lstlisting}
+
+\subsection{Tabela longa}
+
+O \texttt{tabelalonga} funciona do mesmo modo, com título à
+esquerda e conteúdo em tamanho 10. A tabela abaixo tem 60 linhas para mostrar a quebra de
+página, a repetição do cabeçalho e as marcas de continuação; o rodapé (fonte, legenda e
+nota) aparece só no fim.
+
+\codexemplolongo{tabela-longa}{9}
 
 \section{Cabeçalho e rodapé das ilustrações}
 

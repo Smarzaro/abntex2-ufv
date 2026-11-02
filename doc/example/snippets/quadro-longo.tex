@@ -1,0 +1,31 @@
+\definecolor{fundocategoria}{HTML}{A6C4DC}  % no preâmbulo
+\begin{quadrolongo}{\caption[Códigos do projeto]{Códigos do projeto, por
+  categoria, com a função e a seção em que são usados (exemplo de quadro longo)}%
+  \label{qua:guia-longo}}%
+  {\elaboracaopropria\legenda{As faixas coloridas separam as categorias.}}%
+  {|l|>{\raggedright\arraybackslash}X|c|}
+  \hline
+  \textbf{Arquivo} & \textbf{Função} & \textbf{Seção} \\
+  \hline
+\cabecalhofim
+  \rowcolor{fundocategoria}\multicolumn{3}{|l|}{\textbf{Centrais}} \\*
+  \texttt{01\_preparo.py}     & Leitura dos parâmetros e preparação do ambiente     & 3.1 \\ \hline
+  \texttt{02\_download.py}    & Download das imagens e recorte pela área de estudo  & 3.2 \\ \hline
+  \texttt{03\_rotulos.py}     & Conversão dos rótulos vetoriais em máscaras          & 3.2 \\ \hline
+  \texttt{04\_blocos.py}      & Divisão da área em blocos espaciais                 & 3.3 \\ \hline
+  \texttt{05\_treino.py}      & Treinamento de uma configuração com a SMP           & 3.4 \\ \hline
+  \texttt{06\_limiar.py}      & Ajuste do limiar na validação                       & 3.4 \\ \hline
+  \texttt{07\_inferencia.py}  & Inferência bloco a bloco em janela deslizante       & 3.5 \\ \hline
+  \texttt{08\_posproc.py}     & Pós-processamento das máscaras previstas            & 3.5 \\ \hline
+  \rowcolor{fundocategoria}\multicolumn{3}{|l|}{\textbf{Dados e execução}} \\*
+  \texttt{config.yaml}        & Parâmetros de todas as etapas                       & 3.1 \\ \hline
+  \texttt{ambiente.yml}       & Dependências do ambiente conda                      & 3.1 \\ \hline
+  \texttt{executar.sh}        & Execução de todas as etapas em sequência            & 3.1 \\ \hline
+  \texttt{teste\_fumaca.py}   & Teste rápido em CPU com poucos blocos               & 3.6 \\ \hline
+  \rowcolor{fundocategoria}\multicolumn{3}{|l|}{\textbf{Análise e figuras}} \\*
+  \texttt{09\_metricas.py}    & Métricas por pixel, por objeto e por comprimento    & 4.1 \\ \hline
+  \texttt{10\_estatistica.py} & Testes de Wilcoxon com correção de Bonferroni       & 4.2 \\ \hline
+  \texttt{11\_bootstrap.py}   & Intervalos de confiança por bootstrap em blocos      & 4.2 \\ \hline
+  \texttt{12\_figuras.py}     & Gráficos e mapas dos resultados                     & 4.3 \\ \hline
+  \texttt{13\_tabelas.py}     & Tabelas de resultados em \LaTeX                      & 4.3 \\ \hline
+\end{quadrolongo}

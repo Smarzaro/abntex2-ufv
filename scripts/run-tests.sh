@@ -16,10 +16,10 @@ falhas=0
 if command -v timeout >/dev/null 2>&1; then limite="timeout 300"; else limite=""; fi
 for t in t*.tex; do
   nome="${t%.tex}"
-  # t7 em diante (listagens, ilustrações, fonte, apêndices) também compilam com LuaLaTeX e
+  # t7 em diante (listagens, ilustrações, fonte, apêndices, quadros longos) também compilam com LuaLaTeX e
   # não podem ter avisos da classe, do hyperref, de fontes nem Overfull (t9 deve ter Overfull)
   case "$nome" in
-    t7-*|t8-*|t9-*|t10-*|t11-*) motores="-pdf -lualatex"; estrito=1 ;;
+    t7-*|t8-*|t9-*|t10-*|t11-*|t12-*|t13-*) motores="-pdf -lualatex"; estrito=1 ;;
     *) motores="-pdf"; estrito=0 ;;
   esac
   for motor in $motores; do

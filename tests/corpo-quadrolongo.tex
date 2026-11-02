@@ -1,0 +1,450 @@
+% Corpo comum dos testes t12 e t13 (quadrolongo e tabelalonga). As linhas repetidas só
+% servem para encher páginas.
+\pretextual
+\listofquadros*
+\listoftables*
+\textual
+\chapter{Numeração e listas}\label{sec:a}
+
+O \autoref{qua:inventario} tem 120 linhas; o \autoref{qua:paisagem} é o mesmo em paisagem;
+a \autoref{tab:area} tem três páginas. Antes deles vêm o \autoref{qua:um}, o
+\autoref{qua:meio} e o \autoref{qua:tres}.
+
+\begin{quadro}[htbp]
+\begin{ilustracao}{\caption{Primeiro quadro comum}\label{qua:um}}{\elaboracaopropria}
+\begin{tabularx}{\linewidth}{|l|X|}\hline A & B \\\hline\end{tabularx}
+\end{ilustracao}
+\end{quadro}
+
+\begin{quadrolongo}{\caption{Quadro longo de meia página}\label{qua:meio}}{\elaboracaopropria}{|l|X|}
+\hline
+\textbf{Item} & \textbf{Descrição} \\
+\hline
+\cabecalhofim
+Item 1 & Descrição do item 1, que ocupa uma linha só \\
+\hline
+Item 2 & Descrição do item 2, que ocupa uma linha só \\
+\hline
+Item 3 & Descrição do item 3, que ocupa uma linha só \\
+\hline
+Item 4 & Descrição do item 4, que ocupa uma linha só \\
+\hline
+Item 5 & Descrição do item 5, que ocupa uma linha só \\
+\hline
+Item 6 & Descrição do item 6, que ocupa uma linha só \\
+\hline
+Item 7 & Descrição do item 7, que ocupa uma linha só \\
+\hline
+Item 8 & Descrição do item 8, que ocupa uma linha só \\
+\hline
+Item 9 & Descrição do item 9, que ocupa uma linha só \\
+\hline
+Item 10 & Descrição do item 10, que ocupa uma linha só \\
+\hline
+Item 11 & Descrição do item 11, que ocupa uma linha só \\
+\hline
+Item 12 & Descrição do item 12, que ocupa uma linha só \\
+\hline
+\end{quadrolongo}
+
+\begin{quadro}[htbp]
+\begin{ilustracao}{\caption{Terceiro quadro comum}\label{qua:tres}}{\elaboracaopropria}
+\begin{tabularx}{\linewidth}{|l|X|}\hline C & D \\\hline\end{tabularx}
+\end{ilustracao}
+\end{quadro}
+
+\chapter{Quadro longo em retrato}\label{sec:b}
+
+Texto antes do quadro. O inventário de códigos está no \autoref{qua:inventario}.
+
+\begin{quadrolongo}{\caption[Códigos do projeto]{Códigos do projeto, por categoria, com a
+  função e a seção em que são usados}\label{qua:inventario}}{\elaboracaopropria
+  \legenda{As faixas coloridas separam as categorias.}}{@{}l>{\raggedright\arraybackslash}Xc@{}}
+\hline
+\textbf{Arquivo} & \textbf{Função} & \textbf{Seção} \\
+\hline
+\cabecalhofim
+\rowcolor{fundocategoria}\multicolumn{3}{@{\hspace{3pt}}l}{\textbf{Centrais}} \\*
+\texttt{01\_modulo\_1.py} & Download das imagens e recorte pela área de estudo (linha 1) & \ref{sec:b} \\
+\texttt{02\_modulo\_2.py} & Treinamento de uma configuração com a SMP (linha 2) & \ref{sec:c} \\
+\texttt{03\_modulo\_3.py} & Inferência bloco a bloco em janela deslizante (linha 3) & \ref{sec:a} \\
+\texttt{04\_modulo\_4.py} & Cálculo das métricas por pixel e por objeto (linha 4) & \ref{sec:b} \\
+\texttt{05\_modulo\_5.py} & Testes estatísticos entre as arquiteturas (linha 5) & \ref{sec:c} \\
+\texttt{06\_modulo\_6.py} & Leitura dos parâmetros e preparação do ambiente (linha 6) & \ref{sec:a} \\
+\texttt{07\_modulo\_7.py} & Download das imagens e recorte pela área de estudo (linha 7) & \ref{sec:b} \\
+\texttt{08\_modulo\_8.py} & Treinamento de uma configuração com a SMP (linha 8) & \ref{sec:c} \\
+\texttt{09\_modulo\_9.py} & Inferência bloco a bloco em janela deslizante (linha 9) & \ref{sec:a} \\
+\texttt{10\_modulo\_10.py} & Cálculo das métricas por pixel e por objeto (linha 10) & \ref{sec:b} \\
+\texttt{11\_modulo\_11.py} & Testes estatísticos entre as arquiteturas (linha 11) & \ref{sec:c} \\
+\texttt{12\_modulo\_12.py} & Leitura dos parâmetros e preparação do ambiente (linha 12) & \ref{sec:a} \\
+\texttt{13\_modulo\_13.py} & Download das imagens e recorte pela área de estudo (linha 13) & \ref{sec:b} \\
+\texttt{14\_modulo\_14.py} & Treinamento de uma configuração com a SMP (linha 14) & \ref{sec:c} \\
+\texttt{15\_modulo\_15.py} & Inferência bloco a bloco em janela deslizante (linha 15) & \ref{sec:a} \\
+\texttt{16\_modulo\_16.py} & Cálculo das métricas por pixel e por objeto (linha 16) & \ref{sec:b} \\
+\texttt{17\_modulo\_17.py} & Testes estatísticos entre as arquiteturas (linha 17) & \ref{sec:c} \\
+\texttt{18\_modulo\_18.py} & Leitura dos parâmetros e preparação do ambiente (linha 18) & \ref{sec:a} \\
+\texttt{19\_modulo\_19.py} & Download das imagens e recorte pela área de estudo (linha 19) & \ref{sec:b} \\
+\texttt{20\_modulo\_20.py} & Treinamento de uma configuração com a SMP (linha 20) & \ref{sec:c} \\
+\texttt{21\_modulo\_21.py} & Inferência bloco a bloco em janela deslizante (linha 21) & \ref{sec:a} \\
+\texttt{22\_modulo\_22.py} & Cálculo das métricas por pixel e por objeto (linha 22) & \ref{sec:b} \\
+\texttt{23\_modulo\_23.py} & Testes estatísticos entre as arquiteturas (linha 23) & \ref{sec:c} \\
+\texttt{24\_modulo\_24.py} & Leitura dos parâmetros e preparação do ambiente (linha 24) & \ref{sec:a} \\
+\texttt{25\_modulo\_25.py} & Download das imagens e recorte pela área de estudo (linha 25) & \ref{sec:b} \\
+\texttt{26\_modulo\_26.py} & Treinamento de uma configuração com a SMP (linha 26) & \ref{sec:c} \\
+\texttt{27\_modulo\_27.py} & Inferência bloco a bloco em janela deslizante (linha 27) & \ref{sec:a} \\
+\texttt{28\_modulo\_28.py} & Cálculo das métricas por pixel e por objeto (linha 28) & \ref{sec:b} \\
+\texttt{29\_modulo\_29.py} & Testes estatísticos entre as arquiteturas (linha 29) & \ref{sec:c} \\
+\texttt{30\_modulo\_30.py} & Leitura dos parâmetros e preparação do ambiente (linha 30) & \ref{sec:a} \\
+\texttt{31\_modulo\_31.py} & Download das imagens e recorte pela área de estudo (linha 31) & \ref{sec:b} \\
+\texttt{32\_modulo\_32.py} & Treinamento de uma configuração com a SMP (linha 32) & \ref{sec:c} \\
+\texttt{33\_modulo\_33.py} & Inferência bloco a bloco em janela deslizante (linha 33) & \ref{sec:a} \\
+\texttt{34\_modulo\_34.py} & Cálculo das métricas por pixel e por objeto (linha 34) & \ref{sec:b} \\
+\texttt{35\_modulo\_35.py} & Testes estatísticos entre as arquiteturas (linha 35) & \ref{sec:c} \\
+\texttt{36\_modulo\_36.py} & Leitura dos parâmetros e preparação do ambiente (linha 36) & \ref{sec:a} \\
+\rowcolor{fundocategoria}\multicolumn{3}{@{\hspace{3pt}}l}{\textbf{Dados e execução}} \\*
+\texttt{37\_modulo\_37.py} & Download das imagens e recorte pela área de estudo (linha 37) & \ref{sec:b} \\
+\texttt{38\_modulo\_38.py} & Treinamento de uma configuração com a SMP (linha 38) & \ref{sec:c} \\
+\texttt{39\_modulo\_39.py} & Inferência bloco a bloco em janela deslizante (linha 39) & \ref{sec:a} \\
+\texttt{40\_modulo\_40.py} & Cálculo das métricas por pixel e por objeto (linha 40) & \ref{sec:b} \\
+\texttt{41\_modulo\_41.py} & Testes estatísticos entre as arquiteturas (linha 41) & \ref{sec:c} \\
+\texttt{42\_modulo\_42.py} & Leitura dos parâmetros e preparação do ambiente (linha 42) & \ref{sec:a} \\
+\texttt{43\_modulo\_43.py} & Download das imagens e recorte pela área de estudo (linha 43) & \ref{sec:b} \\
+\texttt{44\_modulo\_44.py} & Treinamento de uma configuração com a SMP (linha 44) & \ref{sec:c} \\
+\texttt{45\_modulo\_45.py} & Inferência bloco a bloco em janela deslizante (linha 45) & \ref{sec:a} \\
+\texttt{46\_modulo\_46.py} & Cálculo das métricas por pixel e por objeto (linha 46) & \ref{sec:b} \\
+\texttt{47\_modulo\_47.py} & Testes estatísticos entre as arquiteturas (linha 47) & \ref{sec:c} \\
+\texttt{48\_modulo\_48.py} & Leitura dos parâmetros e preparação do ambiente (linha 48) & \ref{sec:a} \\
+\texttt{49\_modulo\_49.py} & Download das imagens e recorte pela área de estudo (linha 49) & \ref{sec:b} \\
+\texttt{50\_modulo\_50.py} & Treinamento de uma configuração com a SMP (linha 50) & \ref{sec:c} \\
+\texttt{51\_modulo\_51.py} & Inferência bloco a bloco em janela deslizante (linha 51) & \ref{sec:a} \\
+\texttt{52\_modulo\_52.py} & Cálculo das métricas por pixel e por objeto (linha 52) & \ref{sec:b} \\
+\texttt{53\_modulo\_53.py} & Testes estatísticos entre as arquiteturas (linha 53) & \ref{sec:c} \\
+\texttt{54\_modulo\_54.py} & Leitura dos parâmetros e preparação do ambiente (linha 54) & \ref{sec:a} \\
+\texttt{55\_modulo\_55.py} & Download das imagens e recorte pela área de estudo (linha 55) & \ref{sec:b} \\
+\texttt{56\_modulo\_56.py} & Treinamento de uma configuração com a SMP (linha 56) & \ref{sec:c} \\
+\texttt{57\_modulo\_57.py} & Inferência bloco a bloco em janela deslizante (linha 57) & \ref{sec:a} \\
+\texttt{58\_modulo\_58.py} & Cálculo das métricas por pixel e por objeto (linha 58) & \ref{sec:b} \\
+\texttt{59\_modulo\_59.py} & Testes estatísticos entre as arquiteturas (linha 59) & \ref{sec:c} \\
+\texttt{60\_modulo\_60.py} & Leitura dos parâmetros e preparação do ambiente (linha 60) & \ref{sec:a} \\
+\texttt{61\_modulo\_61.py} & Download das imagens e recorte pela área de estudo (linha 61) & \ref{sec:b} \\
+\texttt{62\_modulo\_62.py} & Treinamento de uma configuração com a SMP (linha 62) & \ref{sec:c} \\
+\texttt{63\_modulo\_63.py} & Inferência bloco a bloco em janela deslizante (linha 63) & \ref{sec:a} \\
+\texttt{64\_modulo\_64.py} & Cálculo das métricas por pixel e por objeto (linha 64) & \ref{sec:b} \\
+\texttt{65\_modulo\_65.py} & Testes estatísticos entre as arquiteturas (linha 65) & \ref{sec:c} \\
+\texttt{66\_modulo\_66.py} & Leitura dos parâmetros e preparação do ambiente (linha 66) & \ref{sec:a} \\
+\texttt{67\_modulo\_67.py} & Download das imagens e recorte pela área de estudo (linha 67) & \ref{sec:b} \\
+\texttt{68\_modulo\_68.py} & Treinamento de uma configuração com a SMP (linha 68) & \ref{sec:c} \\
+\texttt{69\_modulo\_69.py} & Inferência bloco a bloco em janela deslizante (linha 69) & \ref{sec:a} \\
+\texttt{70\_modulo\_70.py} & Cálculo das métricas por pixel e por objeto (linha 70) & \ref{sec:b} \\
+\texttt{71\_modulo\_71.py} & Testes estatísticos entre as arquiteturas (linha 71) & \ref{sec:c} \\
+\texttt{72\_modulo\_72.py} & Leitura dos parâmetros e preparação do ambiente (linha 72) & \ref{sec:a} \\
+\texttt{73\_modulo\_73.py} & Download das imagens e recorte pela área de estudo (linha 73) & \ref{sec:b} \\
+\texttt{74\_modulo\_74.py} & Treinamento de uma configuração com a SMP (linha 74) & \ref{sec:c} \\
+\texttt{75\_modulo\_75.py} & Inferência bloco a bloco em janela deslizante (linha 75) & \ref{sec:a} \\
+\texttt{76\_modulo\_76.py} & Cálculo das métricas por pixel e por objeto (linha 76) & \ref{sec:b} \\
+\texttt{77\_modulo\_77.py} & Testes estatísticos entre as arquiteturas (linha 77) & \ref{sec:c} \\
+\texttt{78\_modulo\_78.py} & Leitura dos parâmetros e preparação do ambiente (linha 78) & \ref{sec:a} \\
+\texttt{79\_modulo\_79.py} & Download das imagens e recorte pela área de estudo (linha 79) & \ref{sec:b} \\
+\texttt{80\_modulo\_80.py} & Treinamento de uma configuração com a SMP (linha 80) & \ref{sec:c} \\
+\texttt{81\_modulo\_81.py} & Inferência bloco a bloco em janela deslizante (linha 81) & \ref{sec:a} \\
+\texttt{82\_modulo\_82.py} & Cálculo das métricas por pixel e por objeto (linha 82) & \ref{sec:b} \\
+\rowcolor{fundocategoria}\multicolumn{3}{@{\hspace{3pt}}l}{\textbf{Análise e figuras}} \\*
+\texttt{83\_modulo\_83.py} & Testes estatísticos entre as arquiteturas (linha 83) & \ref{sec:c} \\
+\texttt{84\_modulo\_84.py} & Leitura dos parâmetros e preparação do ambiente (linha 84) & \ref{sec:a} \\
+\texttt{85\_modulo\_85.py} & Download das imagens e recorte pela área de estudo (linha 85) & \ref{sec:b} \\
+\texttt{86\_modulo\_86.py} & Treinamento de uma configuração com a SMP (linha 86) & \ref{sec:c} \\
+\texttt{87\_modulo\_87.py} & Inferência bloco a bloco em janela deslizante (linha 87) & \ref{sec:a} \\
+\texttt{88\_modulo\_88.py} & Cálculo das métricas por pixel e por objeto (linha 88) & \ref{sec:b} \\
+\texttt{89\_modulo\_89.py} & Testes estatísticos entre as arquiteturas (linha 89) & \ref{sec:c} \\
+\texttt{90\_modulo\_90.py} & Leitura dos parâmetros e preparação do ambiente (linha 90) & \ref{sec:a} \\
+\texttt{91\_modulo\_91.py} & Download das imagens e recorte pela área de estudo (linha 91) & \ref{sec:b} \\
+\texttt{92\_modulo\_92.py} & Treinamento de uma configuração com a SMP (linha 92) & \ref{sec:c} \\
+\texttt{93\_modulo\_93.py} & Inferência bloco a bloco em janela deslizante (linha 93) & \ref{sec:a} \\
+\texttt{94\_modulo\_94.py} & Cálculo das métricas por pixel e por objeto (linha 94) & \ref{sec:b} \\
+\texttt{95\_modulo\_95.py} & Testes estatísticos entre as arquiteturas (linha 95) & \ref{sec:c} \\
+\texttt{96\_modulo\_96.py} & Leitura dos parâmetros e preparação do ambiente (linha 96) & \ref{sec:a} \\
+\texttt{97\_modulo\_97.py} & Download das imagens e recorte pela área de estudo (linha 97) & \ref{sec:b} \\
+\texttt{98\_modulo\_98.py} & Treinamento de uma configuração com a SMP (linha 98) & \ref{sec:c} \\
+\texttt{99\_modulo\_99.py} & Inferência bloco a bloco em janela deslizante (linha 99) & \ref{sec:a} \\
+\texttt{00\_modulo\_100.py} & Cálculo das métricas por pixel e por objeto (linha 100) & \ref{sec:b} \\
+\texttt{01\_modulo\_101.py} & Testes estatísticos entre as arquiteturas (linha 101) & \ref{sec:c} \\
+\texttt{02\_modulo\_102.py} & Leitura dos parâmetros e preparação do ambiente (linha 102) & \ref{sec:a} \\
+\texttt{03\_modulo\_103.py} & Download das imagens e recorte pela área de estudo (linha 103) & \ref{sec:b} \\
+\texttt{04\_modulo\_104.py} & Treinamento de uma configuração com a SMP (linha 104) & \ref{sec:c} \\
+\texttt{05\_modulo\_105.py} & Inferência bloco a bloco em janela deslizante (linha 105) & \ref{sec:a} \\
+\texttt{06\_modulo\_106.py} & Cálculo das métricas por pixel e por objeto (linha 106) & \ref{sec:b} \\
+\texttt{07\_modulo\_107.py} & Testes estatísticos entre as arquiteturas (linha 107) & \ref{sec:c} \\
+\texttt{08\_modulo\_108.py} & Leitura dos parâmetros e preparação do ambiente (linha 108) & \ref{sec:a} \\
+\texttt{09\_modulo\_109.py} & Download das imagens e recorte pela área de estudo (linha 109) & \ref{sec:b} \\
+\texttt{10\_modulo\_110.py} & Treinamento de uma configuração com a SMP (linha 110) & \ref{sec:c} \\
+\texttt{11\_modulo\_111.py} & Inferência bloco a bloco em janela deslizante (linha 111) & \ref{sec:a} \\
+\texttt{12\_modulo\_112.py} & Cálculo das métricas por pixel e por objeto (linha 112) & \ref{sec:b} \\
+\texttt{13\_modulo\_113.py} & Testes estatísticos entre as arquiteturas (linha 113) & \ref{sec:c} \\
+\texttt{14\_modulo\_114.py} & Leitura dos parâmetros e preparação do ambiente (linha 114) & \ref{sec:a} \\
+\texttt{15\_modulo\_115.py} & Download das imagens e recorte pela área de estudo (linha 115) & \ref{sec:b} \\
+\texttt{16\_modulo\_116.py} & Treinamento de uma configuração com a SMP (linha 116) & \ref{sec:c} \\
+\texttt{17\_modulo\_117.py} & Inferência bloco a bloco em janela deslizante (linha 117) & \ref{sec:a} \\
+\texttt{18\_modulo\_118.py} & Cálculo das métricas por pixel e por objeto (linha 118) & \ref{sec:b} \\
+\texttt{19\_modulo\_119.py} & Testes estatísticos entre as arquiteturas (linha 119) & \ref{sec:c} \\
+\texttt{20\_modulo\_120.py} & Leitura dos parâmetros e preparação do ambiente (linha 120) & \ref{sec:a} \\
+\hline
+\end{quadrolongo}
+
+Texto depois do quadro.
+
+\chapter{Quadro longo em paisagem}\label{sec:c}
+
+\begin{landscape}
+\begin{quadrolongo}{\caption[Códigos do projeto (paisagem)]{Códigos do projeto, por
+  categoria, em página de paisagem}\label{qua:paisagem}}{\elaboracaopropria}{@{}l>{\raggedright\arraybackslash}Xc@{}}
+\hline
+\textbf{Arquivo} & \textbf{Função} & \textbf{Seção} \\
+\hline
+\cabecalhofim
+\rowcolor{fundocategoria}\multicolumn{3}{@{\hspace{3pt}}l}{\textbf{Centrais}} \\*
+\texttt{01\_modulo\_1.py} & Download das imagens e recorte pela área de estudo (linha 1) & \ref{sec:b} \\
+\texttt{02\_modulo\_2.py} & Treinamento de uma configuração com a SMP (linha 2) & \ref{sec:c} \\
+\texttt{03\_modulo\_3.py} & Inferência bloco a bloco em janela deslizante (linha 3) & \ref{sec:a} \\
+\texttt{04\_modulo\_4.py} & Cálculo das métricas por pixel e por objeto (linha 4) & \ref{sec:b} \\
+\texttt{05\_modulo\_5.py} & Testes estatísticos entre as arquiteturas (linha 5) & \ref{sec:c} \\
+\texttt{06\_modulo\_6.py} & Leitura dos parâmetros e preparação do ambiente (linha 6) & \ref{sec:a} \\
+\texttt{07\_modulo\_7.py} & Download das imagens e recorte pela área de estudo (linha 7) & \ref{sec:b} \\
+\texttt{08\_modulo\_8.py} & Treinamento de uma configuração com a SMP (linha 8) & \ref{sec:c} \\
+\texttt{09\_modulo\_9.py} & Inferência bloco a bloco em janela deslizante (linha 9) & \ref{sec:a} \\
+\texttt{10\_modulo\_10.py} & Cálculo das métricas por pixel e por objeto (linha 10) & \ref{sec:b} \\
+\texttt{11\_modulo\_11.py} & Testes estatísticos entre as arquiteturas (linha 11) & \ref{sec:c} \\
+\texttt{12\_modulo\_12.py} & Leitura dos parâmetros e preparação do ambiente (linha 12) & \ref{sec:a} \\
+\texttt{13\_modulo\_13.py} & Download das imagens e recorte pela área de estudo (linha 13) & \ref{sec:b} \\
+\texttt{14\_modulo\_14.py} & Treinamento de uma configuração com a SMP (linha 14) & \ref{sec:c} \\
+\texttt{15\_modulo\_15.py} & Inferência bloco a bloco em janela deslizante (linha 15) & \ref{sec:a} \\
+\texttt{16\_modulo\_16.py} & Cálculo das métricas por pixel e por objeto (linha 16) & \ref{sec:b} \\
+\texttt{17\_modulo\_17.py} & Testes estatísticos entre as arquiteturas (linha 17) & \ref{sec:c} \\
+\texttt{18\_modulo\_18.py} & Leitura dos parâmetros e preparação do ambiente (linha 18) & \ref{sec:a} \\
+\texttt{19\_modulo\_19.py} & Download das imagens e recorte pela área de estudo (linha 19) & \ref{sec:b} \\
+\texttt{20\_modulo\_20.py} & Treinamento de uma configuração com a SMP (linha 20) & \ref{sec:c} \\
+\texttt{21\_modulo\_21.py} & Inferência bloco a bloco em janela deslizante (linha 21) & \ref{sec:a} \\
+\rowcolor{fundocategoria}\multicolumn{3}{@{\hspace{3pt}}l}{\textbf{Dados e execução}} \\*
+\texttt{22\_modulo\_22.py} & Cálculo das métricas por pixel e por objeto (linha 22) & \ref{sec:b} \\
+\texttt{23\_modulo\_23.py} & Testes estatísticos entre as arquiteturas (linha 23) & \ref{sec:c} \\
+\texttt{24\_modulo\_24.py} & Leitura dos parâmetros e preparação do ambiente (linha 24) & \ref{sec:a} \\
+\texttt{25\_modulo\_25.py} & Download das imagens e recorte pela área de estudo (linha 25) & \ref{sec:b} \\
+\texttt{26\_modulo\_26.py} & Treinamento de uma configuração com a SMP (linha 26) & \ref{sec:c} \\
+\texttt{27\_modulo\_27.py} & Inferência bloco a bloco em janela deslizante (linha 27) & \ref{sec:a} \\
+\texttt{28\_modulo\_28.py} & Cálculo das métricas por pixel e por objeto (linha 28) & \ref{sec:b} \\
+\texttt{29\_modulo\_29.py} & Testes estatísticos entre as arquiteturas (linha 29) & \ref{sec:c} \\
+\texttt{30\_modulo\_30.py} & Leitura dos parâmetros e preparação do ambiente (linha 30) & \ref{sec:a} \\
+\texttt{31\_modulo\_31.py} & Download das imagens e recorte pela área de estudo (linha 31) & \ref{sec:b} \\
+\texttt{32\_modulo\_32.py} & Treinamento de uma configuração com a SMP (linha 32) & \ref{sec:c} \\
+\texttt{33\_modulo\_33.py} & Inferência bloco a bloco em janela deslizante (linha 33) & \ref{sec:a} \\
+\texttt{34\_modulo\_34.py} & Cálculo das métricas por pixel e por objeto (linha 34) & \ref{sec:b} \\
+\texttt{35\_modulo\_35.py} & Testes estatísticos entre as arquiteturas (linha 35) & \ref{sec:c} \\
+\texttt{36\_modulo\_36.py} & Leitura dos parâmetros e preparação do ambiente (linha 36) & \ref{sec:a} \\
+\texttt{37\_modulo\_37.py} & Download das imagens e recorte pela área de estudo (linha 37) & \ref{sec:b} \\
+\texttt{38\_modulo\_38.py} & Treinamento de uma configuração com a SMP (linha 38) & \ref{sec:c} \\
+\texttt{39\_modulo\_39.py} & Inferência bloco a bloco em janela deslizante (linha 39) & \ref{sec:a} \\
+\texttt{40\_modulo\_40.py} & Cálculo das métricas por pixel e por objeto (linha 40) & \ref{sec:b} \\
+\texttt{41\_modulo\_41.py} & Testes estatísticos entre as arquiteturas (linha 41) & \ref{sec:c} \\
+\texttt{42\_modulo\_42.py} & Leitura dos parâmetros e preparação do ambiente (linha 42) & \ref{sec:a} \\
+\texttt{43\_modulo\_43.py} & Download das imagens e recorte pela área de estudo (linha 43) & \ref{sec:b} \\
+\texttt{44\_modulo\_44.py} & Treinamento de uma configuração com a SMP (linha 44) & \ref{sec:c} \\
+\texttt{45\_modulo\_45.py} & Inferência bloco a bloco em janela deslizante (linha 45) & \ref{sec:a} \\
+\texttt{46\_modulo\_46.py} & Cálculo das métricas por pixel e por objeto (linha 46) & \ref{sec:b} \\
+\texttt{47\_modulo\_47.py} & Testes estatísticos entre as arquiteturas (linha 47) & \ref{sec:c} \\
+\texttt{48\_modulo\_48.py} & Leitura dos parâmetros e preparação do ambiente (linha 48) & \ref{sec:a} \\
+\texttt{49\_modulo\_49.py} & Download das imagens e recorte pela área de estudo (linha 49) & \ref{sec:b} \\
+\texttt{50\_modulo\_50.py} & Treinamento de uma configuração com a SMP (linha 50) & \ref{sec:c} \\
+\rowcolor{fundocategoria}\multicolumn{3}{@{\hspace{3pt}}l}{\textbf{Análise e figuras}} \\*
+\texttt{51\_modulo\_51.py} & Inferência bloco a bloco em janela deslizante (linha 51) & \ref{sec:a} \\
+\texttt{52\_modulo\_52.py} & Cálculo das métricas por pixel e por objeto (linha 52) & \ref{sec:b} \\
+\texttt{53\_modulo\_53.py} & Testes estatísticos entre as arquiteturas (linha 53) & \ref{sec:c} \\
+\texttt{54\_modulo\_54.py} & Leitura dos parâmetros e preparação do ambiente (linha 54) & \ref{sec:a} \\
+\texttt{55\_modulo\_55.py} & Download das imagens e recorte pela área de estudo (linha 55) & \ref{sec:b} \\
+\texttt{56\_modulo\_56.py} & Treinamento de uma configuração com a SMP (linha 56) & \ref{sec:c} \\
+\texttt{57\_modulo\_57.py} & Inferência bloco a bloco em janela deslizante (linha 57) & \ref{sec:a} \\
+\texttt{58\_modulo\_58.py} & Cálculo das métricas por pixel e por objeto (linha 58) & \ref{sec:b} \\
+\texttt{59\_modulo\_59.py} & Testes estatísticos entre as arquiteturas (linha 59) & \ref{sec:c} \\
+\texttt{60\_modulo\_60.py} & Leitura dos parâmetros e preparação do ambiente (linha 60) & \ref{sec:a} \\
+\texttt{61\_modulo\_61.py} & Download das imagens e recorte pela área de estudo (linha 61) & \ref{sec:b} \\
+\texttt{62\_modulo\_62.py} & Treinamento de uma configuração com a SMP (linha 62) & \ref{sec:c} \\
+\texttt{63\_modulo\_63.py} & Inferência bloco a bloco em janela deslizante (linha 63) & \ref{sec:a} \\
+\texttt{64\_modulo\_64.py} & Cálculo das métricas por pixel e por objeto (linha 64) & \ref{sec:b} \\
+\texttt{65\_modulo\_65.py} & Testes estatísticos entre as arquiteturas (linha 65) & \ref{sec:c} \\
+\texttt{66\_modulo\_66.py} & Leitura dos parâmetros e preparação do ambiente (linha 66) & \ref{sec:a} \\
+\texttt{67\_modulo\_67.py} & Download das imagens e recorte pela área de estudo (linha 67) & \ref{sec:b} \\
+\texttt{68\_modulo\_68.py} & Treinamento de uma configuração com a SMP (linha 68) & \ref{sec:c} \\
+\texttt{69\_modulo\_69.py} & Inferência bloco a bloco em janela deslizante (linha 69) & \ref{sec:a} \\
+\texttt{70\_modulo\_70.py} & Cálculo das métricas por pixel e por objeto (linha 70) & \ref{sec:b} \\
+\texttt{71\_modulo\_71.py} & Testes estatísticos entre as arquiteturas (linha 71) & \ref{sec:c} \\
+\texttt{72\_modulo\_72.py} & Leitura dos parâmetros e preparação do ambiente (linha 72) & \ref{sec:a} \\
+\texttt{73\_modulo\_73.py} & Download das imagens e recorte pela área de estudo (linha 73) & \ref{sec:b} \\
+\texttt{74\_modulo\_74.py} & Treinamento de uma configuração com a SMP (linha 74) & \ref{sec:c} \\
+\texttt{75\_modulo\_75.py} & Inferência bloco a bloco em janela deslizante (linha 75) & \ref{sec:a} \\
+\hline
+\end{quadrolongo}
+\end{landscape}
+
+\chapter{Tabela longa}
+
+\begin{table}[htbp]
+\begin{tabela}[\linewidth]{\caption{Primeira tabela comum}\label{tab:um}}{\fonte{IBGE (2022)}}
+\begin{tabularx}{\linewidth}{Xr}\toprule A & 1 \\\bottomrule\end{tabularx}
+\end{tabela}
+\end{table}
+
+A \autoref{tab:area} vem a seguir.
+
+\begin{tabelalonga}{\caption{Área plantada por município, em hectares, nos anos de 2023 e
+  2024}\label{tab:area}}{\fonte{IBGE (2024)}\nota{Valores em hectares.}}{@{\extracolsep{\fill}}lrrr@{}}
+\toprule
+\textbf{Município} & \textbf{2023} & \textbf{2024} & \textbf{Variação (\%)} \\
+\midrule
+\cabecalhofim
+Carmo do Paranaíba 1 & 1.137 & 1.190 & 4,7 \\
+São Gotardo 2 & 1.274 & 1.380 & 8,3 \\
+Campos Altos 3 & 1.411 & 1.570 & 11,3 \\
+Ibiá 4 & 1.548 & 1.760 & 13,7 \\
+Patos de Minas 5 & 1.685 & 1.950 & 15,7 \\
+Serra do Salitre 6 & 1.822 & 2.140 & 17,5 \\
+Tiros 7 & 1.959 & 2.330 & 18,9 \\
+Matutina 8 & 2.096 & 2.520 & 20,2 \\
+Rio Paranaíba 9 & 2.233 & 2.710 & 21,4 \\
+Carmo do Paranaíba 10 & 2.370 & 2.900 & 22,4 \\
+São Gotardo 11 & 2.507 & 3.090 & 23,3 \\
+Campos Altos 12 & 2.644 & 3.280 & 24,1 \\
+Ibiá 13 & 2.781 & 3.470 & 24,8 \\
+Patos de Minas 14 & 2.918 & 2.960 & 1,4 \\
+Serra do Salitre 15 & 3.055 & 3.150 & 3,1 \\
+Tiros 16 & 3.192 & 3.340 & 4,6 \\
+Matutina 17 & 3.329 & 3.530 & 6,0 \\
+Rio Paranaíba 18 & 3.466 & 3.720 & 7,3 \\
+Carmo do Paranaíba 19 & 3.603 & 3.910 & 8,5 \\
+São Gotardo 20 & 3.740 & 4.100 & 9,6 \\
+Campos Altos 21 & 3.877 & 4.290 & 10,7 \\
+Ibiá 22 & 4.014 & 4.480 & 11,6 \\
+Patos de Minas 23 & 4.151 & 4.670 & 12,5 \\
+Serra do Salitre 24 & 4.288 & 4.860 & 13,3 \\
+Tiros 25 & 4.425 & 5.050 & 14,1 \\
+Matutina 26 & 4.562 & 5.240 & 14,9 \\
+Rio Paranaíba 27 & 4.699 & 4.730 & 0,7 \\
+Carmo do Paranaíba 28 & 4.836 & 4.920 & 1,7 \\
+São Gotardo 29 & 4.973 & 5.110 & 2,8 \\
+Campos Altos 30 & 5.110 & 5.300 & 3,7 \\
+Ibiá 31 & 5.247 & 5.490 & 4,6 \\
+Patos de Minas 32 & 5.384 & 5.680 & 5,5 \\
+Serra do Salitre 33 & 5.521 & 5.870 & 6,3 \\
+Tiros 34 & 5.658 & 6.060 & 7,1 \\
+Matutina 35 & 5.795 & 6.250 & 7,9 \\
+Rio Paranaíba 36 & 5.932 & 6.440 & 8,6 \\
+Carmo do Paranaíba 37 & 6.069 & 6.630 & 9,2 \\
+São Gotardo 38 & 6.206 & 6.820 & 9,9 \\
+Campos Altos 39 & 6.343 & 7.010 & 10,5 \\
+Ibiá 40 & 6.480 & 6.500 & 0,3 \\
+Patos de Minas 41 & 6.617 & 6.690 & 1,1 \\
+Serra do Salitre 42 & 6.754 & 6.880 & 1,9 \\
+Tiros 43 & 6.891 & 7.070 & 2,6 \\
+Matutina 44 & 7.028 & 7.260 & 3,3 \\
+Rio Paranaíba 45 & 7.165 & 7.450 & 4,0 \\
+Carmo do Paranaíba 46 & 7.302 & 7.640 & 4,6 \\
+São Gotardo 47 & 7.439 & 7.830 & 5,3 \\
+Campos Altos 48 & 7.576 & 8.020 & 5,9 \\
+Ibiá 49 & 7.713 & 8.210 & 6,4 \\
+Patos de Minas 50 & 7.850 & 8.400 & 7,0 \\
+Serra do Salitre 51 & 7.987 & 8.590 & 7,5 \\
+Tiros 52 & 8.124 & 8.780 & 8,1 \\
+Matutina 53 & 8.261 & 8.270 & 0,1 \\
+Rio Paranaíba 54 & 8.398 & 8.460 & 0,7 \\
+Carmo do Paranaíba 55 & 8.535 & 8.650 & 1,3 \\
+São Gotardo 56 & 8.672 & 8.840 & 1,9 \\
+Campos Altos 57 & 8.809 & 9.030 & 2,5 \\
+Ibiá 58 & 8.946 & 9.220 & 3,1 \\
+Patos de Minas 59 & 9.083 & 9.410 & 3,6 \\
+Serra do Salitre 60 & 9.220 & 9.600 & 4,1 \\
+Tiros 61 & 9.357 & 9.790 & 4,6 \\
+Matutina 62 & 9.494 & 9.980 & 5,1 \\
+Rio Paranaíba 63 & 9.631 & 10.170 & 5,6 \\
+Carmo do Paranaíba 64 & 9.768 & 10.360 & 6,1 \\
+São Gotardo 65 & 9.905 & 10.550 & 6,5 \\
+Campos Altos 66 & 1.042 & 1.740 & 67,0 \\
+Ibiá 67 & 1.179 & 1.230 & 4,3 \\
+Patos de Minas 68 & 1.316 & 1.420 & 7,9 \\
+Serra do Salitre 69 & 1.453 & 1.610 & 10,8 \\
+Tiros 70 & 1.590 & 1.800 & 13,2 \\
+Matutina 71 & 1.727 & 1.990 & 15,2 \\
+Rio Paranaíba 72 & 1.864 & 2.180 & 17,0 \\
+Carmo do Paranaíba 73 & 2.001 & 2.370 & 18,4 \\
+São Gotardo 74 & 2.138 & 2.560 & 19,7 \\
+Campos Altos 75 & 2.275 & 2.750 & 20,9 \\
+Ibiá 76 & 2.412 & 2.940 & 21,9 \\
+Patos de Minas 77 & 2.549 & 3.130 & 22,8 \\
+Serra do Salitre 78 & 2.686 & 3.320 & 23,6 \\
+Tiros 79 & 2.823 & 3.510 & 24,3 \\
+Matutina 80 & 2.960 & 3.000 & 1,4 \\
+Rio Paranaíba 81 & 3.097 & 3.190 & 3,0 \\
+Carmo do Paranaíba 82 & 3.234 & 3.380 & 4,5 \\
+São Gotardo 83 & 3.371 & 3.570 & 5,9 \\
+Campos Altos 84 & 3.508 & 3.760 & 7,2 \\
+Ibiá 85 & 3.645 & 3.950 & 8,4 \\
+Patos de Minas 86 & 3.782 & 4.140 & 9,5 \\
+Serra do Salitre 87 & 3.919 & 4.330 & 10,5 \\
+Tiros 88 & 4.056 & 4.520 & 11,4 \\
+Matutina 89 & 4.193 & 4.710 & 12,3 \\
+Rio Paranaíba 90 & 4.330 & 4.900 & 13,2 \\
+Carmo do Paranaíba 91 & 4.467 & 5.090 & 13,9 \\
+São Gotardo 92 & 4.604 & 5.280 & 14,7 \\
+Campos Altos 93 & 4.741 & 4.770 & 0,6 \\
+Ibiá 94 & 4.878 & 4.960 & 1,7 \\
+Patos de Minas 95 & 5.015 & 5.150 & 2,7 \\
+Serra do Salitre 96 & 5.152 & 5.340 & 3,6 \\
+Tiros 97 & 5.289 & 5.530 & 4,6 \\
+Matutina 98 & 5.426 & 5.720 & 5,4 \\
+Rio Paranaíba 99 & 5.563 & 5.910 & 6,2 \\
+Carmo do Paranaíba 100 & 5.700 & 6.100 & 7,0 \\
+São Gotardo 101 & 5.837 & 6.290 & 7,8 \\
+Campos Altos 102 & 5.974 & 6.480 & 8,5 \\
+Ibiá 103 & 6.111 & 6.670 & 9,1 \\
+Patos de Minas 104 & 6.248 & 6.860 & 9,8 \\
+Serra do Salitre 105 & 6.385 & 7.050 & 10,4 \\
+\bottomrule
+\end{tabelalonga}
+
+\begin{table}[htbp]
+\begin{tabela}[\linewidth]{\caption{Última tabela comum}\label{tab:tres}}{\fonte{IBGE (2022)}}
+\begin{tabularx}{\linewidth}{Xr}\toprule B & 2 \\\bottomrule\end{tabularx}
+\end{tabela}
+\end{table}
+
+\chapter{Comparação lado a lado}
+
+O mesmo quadro curto com \texttt{quadrolongo} (\autoref{qua:cmp-longo}) e com
+\texttt{quadro} + \texttt{ilustracao} (\autoref{qua:cmp-float}).
+
+\begin{quadrolongo}{\caption{Requisitos do sistema}\label{qua:cmp-longo}}{\elaboracaopropria
+  \nota{Prioridades definidas com o cliente.}}{|l|X|c|}
+\hline
+\textbf{Requisito} & \textbf{Descrição} & \textbf{Prioridade} \\
+\hline
+\cabecalhofim
+RF01 & O sistema deve permitir o cadastro de usuários com nome, e-mail e senha & Alta \\
+\hline
+RF02 & O sistema deve emitir relatórios mensais em PDF e em CSV & Média \\
+\hline
+RF03 & O administrador deve poder bloquear contas inativas há mais de um ano & Baixa \\
+\hline
+\end{quadrolongo}
+
+\begin{quadro}[h]
+\begin{ilustracao}{\caption{Requisitos do sistema}\label{qua:cmp-float}}{\elaboracaopropria
+  \nota{Prioridades definidas com o cliente.}}
+\begin{tabularx}{\linewidth}{|l|X|c|}
+\hline
+\textbf{Requisito} & \textbf{Descrição} & \textbf{Prioridade} \\
+\hline
+RF01 & O sistema deve permitir o cadastro de usuários com nome, e-mail e senha & Alta \\
+\hline
+RF02 & O sistema deve emitir relatórios mensais em PDF e em CSV & Média \\
+\hline
+RF03 & O administrador deve poder bloquear contas inativas há mais de um ano & Baixa \\
+\hline
+\end{tabularx}
+\end{ilustracao}
+\end{quadro}

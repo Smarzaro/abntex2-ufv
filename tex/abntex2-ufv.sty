@@ -24,7 +24,7 @@
 % INICIO DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DE VIÇOSA
 % ---
 \NeedsTeXFormat{LaTeX2e}[2022/06/01]
-\ProvidesPackage{abntex2-ufv}[2026/10/26 v1.7 abnTeX2-UFV (obsoleto: use a classe abntex2-ufv)]
+\ProvidesPackage{abntex2-ufv}[2026/11/02 v1.8 abnTeX2-UFV (obsoleto: use a classe abntex2-ufv)]
 
 % Este pacote só faz sentido sobre a classe abntex2
 \@ifclassloaded{abntex2}{}{%
@@ -411,8 +411,11 @@
   \end{minipage}\hfil\par}
 \newenvironment{ilustracao}[3][0pt]{%
   \begin{ufv@ilcaixa}{\ufv@ilestilocentro}{#1}{#2}{#3}}{\end{ufv@ilcaixa}}
+% (o \ignorespaces descarta a quebra de linha depois de \begin{tabela}{...}{...}: a caixa
+% está em modo horizontal e o espaço, depois do \ignorespaces do lrbox, deslocaria a tabela)
 \newenvironment{tabela}[3][0pt]{%
-  \begin{ufv@ilcaixa}{\ufv@ilestiloesquerda}{#1}{#2}{#3}\IBGEtabfontsize}{\end{ufv@ilcaixa}}
+  \begin{ufv@ilcaixa}{\ufv@ilestiloesquerda}{#1}{#2}{#3}\IBGEtabfontsize\ignorespaces}%
+  {\end{ufv@ilcaixa}}
 % O argumento opcional [<largura>] fixa a largura da ilustração: o conteúdo é composto
 % (em minipage) nessa largura, e o título e o rodapé ficam alinhados a ela. Use
 % \begin{ilustracao}[\linewidth] para códigos (lstinputlisting e lstlisting, que então
@@ -422,6 +425,147 @@
 
 % Fonte de ilustração produzida pelo próprio autor (manual UFV 4.9)
 \newcommand{\elaboracaopropria}{\fonte{Elaborado pelo pr\'oprio autor}}
+
+% ---
+% Quadros e tabelas que quebram entre páginas: quadrolongo e tabelalonga (fora de float).
+% Mesmos argumentos do ilustracao/tabela, mais a especificação das colunas:
+%   \begin{quadrolongo}{\caption[curto]{Título}\label{qua:x}}{\fonte{...}}{<colunas>}
+%     <cabeçalho> \\          (repetido no alto de cada página)
+%     \cabecalhofim
+%     <linhas do corpo>
+%   \end{quadrolongo}
+% O conteúdo é um xltabular (longtable com colunas X) na largura da linha; o documento
+% carrega \usepackage{xltabular}. O título é o \caption do memoir, como no ilustracao
+% (mesmo contador, mesma lista e mesmo formato); o rodapé sai só no fim da última página.
+% Marcas de continuação (normas de apresentação tabular do IBGE): "continua" no pé das
+% páginas que não são a última, "continuação" acima do cabeçalho repetido e "conclusão"
+% no fim da última página, todas à direita. \ufvmarcascontinuacao[quadros|tabelas]{sim|nao}
+% liga ou desliga as marcas (sem o opcional, nos dois ambientes).
+% ---
+\newcommand{\continuaname}{continua}
+\newcommand{\continuacaoname}{continua\c{c}\~ao}
+\newcommand{\conclusaoname}{conclus\~ao}
+\newcommand{\cabecalhofim}{\PackageError{abntex2-ufv}{\string\cabecalhofim\space fora de
+  quadrolongo ou tabelalonga}{Use \string\cabecalhofim\space so para separar o cabecalho
+  do corpo desses ambientes.}}
+\newif\ifufv@lt@marcasquadros \ufv@lt@marcasquadrostrue
+\newif\ifufv@lt@marcastabelas \ufv@lt@marcastabelastrue
+\newcommand{\ufvmarcascontinuacao}[2][]{%
+  \ifcsname ufv@lt@marcas@#2\endcsname\else
+    \PackageError{abntex2-ufv}{Valor desconhecido para \string\ufvmarcascontinuacao: #2}%
+      {Use sim ou nao.}\fi
+  \ifcsname ufv@lt@marcas@#2\endcsname
+    \ifstrempty{#1}{\csname ufv@lt@marcas@#2\endcsname{quadros}%
+      \csname ufv@lt@marcas@#2\endcsname{tabelas}}{%
+      \ifcsname ifufv@lt@marcas#1\endcsname\csname ufv@lt@marcas@#2\endcsname{#1}\else
+        \PackageError{abntex2-ufv}{Tipo desconhecido para \string\ufvmarcascontinuacao: #1}%
+          {Use [quadros] ou [tabelas], ou omita o argumento opcional.}\fi}%
+  \fi}
+\newcommand{\ufv@lt@marcas@sim}[1]{\csname ufv@lt@marcas#1true\endcsname}
+\newcommand{\ufv@lt@marcas@nao}[1]{\csname ufv@lt@marcas#1false\endcsname}
+
+% Pacotes: conferidos no início do documento; sem eles o ambiente dá erro explicando o que
+% acrescentar (a classe não os carrega).
+\newif\ifufv@lt@xltabular
+\newif\ifufv@lt@colortbl
+\AtBeginDocument{%
+  \@ifpackageloaded{xltabular}{\ufv@lt@xltabulartrue}{}%
+  \@ifpackageloaded{colortbl}{\ufv@lt@colortbltrue}{}}
+% (\rowcolor fica no início da linha, onde só cabe \noalign, como no próprio colortbl)
+% #1 comando, #2 o que vem depois de descartar os argumentos dele ([modelo]{cor})
+\newcommand{\ufv@lt@semcolortbl}[2]{\PackageError{abntex2-ufv}{\string#1 requer o pacote
+  colortbl}{Acrescente \string\usepackage{colortbl} ao preambulo do documento.}%
+  \@ifnextchar[{\ufv@lt@semcolortbl@{#2}}{\ufv@lt@semcolortbl@{#2}[]}}
+\def\ufv@lt@semcolortbl@#1[#2]#3{#1}
+
+% Cada ambiente grava no .aux a página em que começa e a em que termina (\@newl@bel: o
+% LaTeX avisa "Label(s) may have changed" se mudarem). Se forem iguais, a tabela coube
+% numa página e não leva "conclusão".
+\newcounter{ufv@lt}
+\newif\ifufv@lt@quebra
+\newcommand{\ufv@lt@registra}[1]{%
+  \protected@write\@auxout{}{\string\@newl@bel{ufvlt}{\the\c@ufv@lt @#1}{\thepage}}}
+
+% Partes compostas fora das células, com \noalign, numa caixa de largura nula que contém
+% uma minipage da largura da tabela (assim não alteram a largura medida pelo tabularx).
+% Na passada de teste do tabularx (\caption ainda não é o do longtable) não fazem nada.
+\newcommand{\ufv@lt@sefinal}[1]{\ifx\caption\LT@caption#1\fi}
+\newcommand{\ufv@lt@caixa}[1]{%
+  \hbox to\z@{\begin{minipage}[t]{\linewidth}\ufv@lt@fonte#1\end{minipage}\hss}}
+\newcommand{\ufv@lt@marca}[1]{%
+  \ufv@lt@caixa{\raggedleft\ABNTEXfontereduzida\strut#1\par}}
+% título: o mesmo código do ilustracao (\caption do memoir, sem contar com o do longtable)
+\newcommand{\ufv@lt@cabini}{\noalign{\ufv@lt@sefinal{%
+  \ufv@lt@registra{ini}%
+  \ufv@lt@caixa{\let\caption\ufv@lt@legenda\def\@captype{\ufv@lt@tipo}%
+    \begingroup\ufv@ilestilo
+    \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0.5\onelineskip}%
+    \ufv@iltitulo\par\endgroup
+    \kern\z@}% (sem \label, o \unskip do fim da minipage tiraria o \belowcaptionskip)
+  \nointerlineskip\vskip\ufv@lt@lineskip}}}
+\newcommand{\ufv@lt@cabcont}{\noalign{\ufv@lt@sefinal{%
+  \ifufv@lt@marcas\ufv@lt@marca{\continuacaoname}\nointerlineskip\vskip\ufv@lt@lineskip\fi}}}
+\newcommand{\ufv@lt@pecont}{\noalign{\ufv@lt@sefinal{%
+  \ifufv@lt@marcas\ufv@lt@marca{\continuaname}\fi}}}
+\newcommand{\ufv@lt@peultimo}{\noalign{\ufv@lt@sefinal{%
+  \ufv@lt@registra{fim}%
+  \ifufv@lt@marcas\ifufv@lt@quebra\ufv@lt@marca{\conclusaoname}\fi\fi
+  \nointerlineskip\vskip 0.3\onelineskip
+  \ufv@lt@caixa{\ufv@ilrodape}}}}
+
+% #1 tipo (quadro/table), #2 estilo do título, #3 fonte do conteúdo, #4 marcas (quadros ou
+% tabelas, ver \ufvmarcascontinuacao), #5 título, #6 rodapé, #7 colunas, #8 conteúdo
+\newcommand{\ufv@longo}[8]{%
+  \ifufv@lt@xltabular\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi{%
+    \stepcounter{ufv@lt}%
+    \expandafter\ifx\csname ufvlt@\the\c@ufv@lt @ini\expandafter\endcsname
+      \csname ufvlt@\the\c@ufv@lt @fim\endcsname\ufv@lt@quebrafalse\else\ufv@lt@quebratrue\fi
+    \def\ufv@lt@tipo{#1}\def\ufv@ilestilo{#2}%
+    \expandafter\let\expandafter\ifufv@lt@marcas\csname ifufv@lt@marcas#4\endcsname
+    \def\ufv@iltitulo{#5}\def\ufv@ilrodape{#6}%
+    \let\ufv@lt@legenda\caption
+    \ifufv@lt@colortbl\else
+      \def\rowcolor{\noalign\bgroup\ufv@lt@semcolortbl\rowcolor\egroup}%
+      \def\cellcolor{\ufv@lt@semcolortbl\cellcolor{}}%
+    \fi
+    % entre o título e o conteúdo, o \lineskip do texto, como no ilustracao (dentro do
+    % longtable ele vale 0)
+    \edef\ufv@lt@lineskip{\the\lineskip}%
+    \par\def\baselinestretch{1}\selectfont
+    % fonte de título, marcas e rodapé: a do texto (o conteúdo pode ser reduzido)
+    \edef\ufv@lt@fonte{\noexpand\fontsize{\f@size}{\f@baselineskip}\noexpand\selectfont}%
+    #3%
+    % o contador é avançado pelo \caption, não pelo longtable; com \LTcaptype vazio o
+    % longtable não avança o próprio contador (larguras no .aux e âncoras repetidas)
+    \def\LTcaptype{}\stepcounter{LT@tables}%
+    \setlength{\LTleft}{\z@}\setlength{\LTright}{\z@}%
+    \setlength{\LTpre}{\intextsep}\setlength{\LTpost}{\intextsep}%
+    \ufv@lt@separa{#7}#8\cabecalhofim\ufv@lt@fim}{%
+    \PackageError{abntex2-ufv}{O ambiente \@currenvir\space requer o pacote xltabular}{%
+      Acrescente \string\usepackage{xltabular} ao preambulo do documento (ele carrega
+      longtable e tabularx).}}}
+% separa cabeçalho e corpo em \cabecalhofim (o último \cabecalhofim é o acrescentado acima)
+\long\def\ufv@lt@separa#1#2\cabecalhofim#3\ufv@lt@fim{%
+  \ifblank{#3}{%
+    \PackageWarning{abntex2-ufv}{\@currenvir\space sem \string\cabecalhofim: a tabela nao
+      tem cabecalho repetido nas paginas seguintes}%
+    \ufv@lt@monta{#1}{}{#2}}{%
+    \ufv@lt@tiraultimo{#1}{#2}#3\ufv@lt@fim}}
+\long\def\ufv@lt@tiraultimo#1#2#3\cabecalhofim\ufv@lt@fim{\ufv@lt@monta{#1}{#2}{#3}}
+\long\def\ufv@lt@monta#1#2#3{%
+  \begin{xltabular}{\linewidth}{#1}%
+    \ufv@lt@cabini #2\endfirsthead
+    \ufv@lt@cabcont #2\endhead
+    \ufv@lt@pecont \endfoot
+    \ufv@lt@peultimo \endlastfoot
+    #3%
+  \end{xltabular}}
+
+\NewDocumentEnvironment{quadrolongo}{m m m +b}{%
+  \ufv@longo{quadro}{\ufv@ilestilocentro}{}{quadros}{#1}{#2}{#3}{#4}}{}
+\NewDocumentEnvironment{tabelalonga}{m m m +b}{%
+  \ufv@longo{table}{\ufv@ilestiloesquerda}{\IBGEtabfontsize}{tabelas}%
+    {#1}{#2}{#3}{#4}}{}
 
 % ---
 % O manual pede que o trabalho seja dividido em seções, não em capítulos:

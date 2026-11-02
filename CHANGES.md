@@ -29,6 +29,13 @@
   them is left to the advisor, according to the UFV library manual (section 4.9).
 - Group rows in the body (`\multicolumn` with optional `\rowcolor`) need nothing special:
   ending them with `\\*` keeps them from being left alone at the foot of a page.
+- Fix: in `tabela`, the line break after `\begin{tabela}{...}{...}` became a space
+  (2.5pt in the reduced font) before the table, because `\IBGEtabfontsize` came after the
+  `\ignorespaces` of the box. A table as wide as the text (`tabularx` with `\linewidth`)
+  overflowed the margin (Overfull `\hbox`); a table of natural width was shifted 2.5pt to
+  the right of its title and footer. The environment now ignores that space, so documents
+  no longer need a `%` at the end of the `\begin{tabela}` line. `ilustracao` was not
+  affected.
 - Tests: `t12` (numbering, lists, 120-row chart in portrait and in landscape, 3-page table,
   side-by-side comparison) and `t13` (the same body with `twoside`, `openany` and
   `fonte=arial`).

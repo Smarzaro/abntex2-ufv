@@ -286,7 +286,9 @@ Texto depois do quadro.
 \chapter{Tabela longa}
 
 \begin{table}[htbp]
-\begin{tabela}[\linewidth]{\caption{Primeira tabela comum}\label{tab:um}}{\fonte{IBGE (2022)}}
+% (sem % no fim da linha: a quebra de linha não pode deslocar a tabela; na 1.7 dava
+% Overfull \hbox de 2,5 pt)
+\begin{tabela}{\caption{Primeira tabela comum}\label{tab:um}}{\fonte{IBGE (2022)}}
 \begin{tabularx}{\linewidth}{Xr}\toprule A & 1 \\\bottomrule\end{tabularx}
 \end{tabela}
 \end{table}
@@ -408,7 +410,8 @@ Serra do Salitre 105 & 6.385 & 7.050 & 10,4 \\
 \end{tabelalonga}
 
 \begin{table}[htbp]
-\begin{tabela}[\linewidth]{\caption{Última tabela comum}\label{tab:tres}}{\fonte{IBGE (2022)}}
+\begin{tabela}{\caption{Última tabela comum}\label{tab:tres}}{\fonte{IBGE (2022)}}
+\small
 \begin{tabularx}{\linewidth}{Xr}\toprule B & 2 \\\bottomrule\end{tabularx}
 \end{tabela}
 \end{table}

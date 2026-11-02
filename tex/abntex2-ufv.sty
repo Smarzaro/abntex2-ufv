@@ -411,8 +411,11 @@
   \end{minipage}\hfil\par}
 \newenvironment{ilustracao}[3][0pt]{%
   \begin{ufv@ilcaixa}{\ufv@ilestilocentro}{#1}{#2}{#3}}{\end{ufv@ilcaixa}}
+% (o \ignorespaces descarta a quebra de linha depois de \begin{tabela}{...}{...}: a caixa
+% está em modo horizontal e o espaço, depois do \ignorespaces do lrbox, deslocaria a tabela)
 \newenvironment{tabela}[3][0pt]{%
-  \begin{ufv@ilcaixa}{\ufv@ilestiloesquerda}{#1}{#2}{#3}\IBGEtabfontsize}{\end{ufv@ilcaixa}}
+  \begin{ufv@ilcaixa}{\ufv@ilestiloesquerda}{#1}{#2}{#3}\IBGEtabfontsize\ignorespaces}%
+  {\end{ufv@ilcaixa}}
 % O argumento opcional [<largura>] fixa a largura da ilustração: o conteúdo é composto
 % (em minipage) nessa largura, e o título e o rodapé ficam alinhados a ela. Use
 % \begin{ilustracao}[\linewidth] para códigos (lstinputlisting e lstlisting, que então

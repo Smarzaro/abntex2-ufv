@@ -6,7 +6,7 @@
 [![CTAN](https://img.shields.io/ctan/v/abntex2-ufv)](https://ctan.org/pkg/abntex2-ufv)
 
 
-**Version 1.7** (2026-10-26)
+**Version 1.8** (2026-11-02)
 
 **Summary (English):** abntex2-ufv is a LaTeX class, built on top of the
 abnTeX2 class, for undergraduate final theses (TCC) of the Information
@@ -181,8 +181,8 @@ e atualize `version` e `date` para a versão que você usou):
   title        = {abntex2-ufv: classe {LaTeX} para trabalhos de conclusão de curso de
                   Sistemas de Informação da {UFV} ({Campus} Rio Paranaíba)},
   shorttitle   = {abntex2-ufv},
-  version      = {1.7},
-  date         = {2026-10-26},
+  version      = {1.8},
+  date         = {2026-11-02},
   year         = {2026},
   organization = {Universidade Federal de Viçosa},
   location     = {Rio Paranaíba},

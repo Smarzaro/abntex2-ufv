@@ -1,5 +1,38 @@
 # Changes
 
+## 1.8 (2026-11-02)
+
+- New environments `quadrolongo` and `tabelalonga` for charts (quadros) and tables that
+  break across pages. They take the same title and footer arguments as `ilustracao` and
+  `tabela`, plus the column specification, and are used outside a float:
+  `\begin{quadrolongo}{\caption[short]{Title}\label{...}}{\fonte{...}}{<columns>}`. The
+  header rows come first and `\cabecalhofim` separates them from the body; the header is
+  repeated on every page. The content is an `xltabular` (longtable with `X` columns) as wide
+  as the line, so the document must load `\usepackage{xltabular}`; without it, using the
+  environment gives an error that says what to add (likewise for `\rowcolor`/`\cellcolor`
+  without `colortbl`). The class itself still loads no table package.
+- The title is typeset by the same memoir caption code as in `ilustracao`: `quadrolongo`
+  uses the `quadro` counter and the List of charts, `tabelalonga` the `table` counter and
+  the List of tables, numbered in sequence with the floats, with the same list entries,
+  `[short]` titles, `\label`/`\autoref` and hyperref anchors at the title. Title style,
+  single spacing, caption skips and footer (`\fonte`, `\legenda`, `\nota`, at the end of the
+  last page only, flush left) are the same as in `ilustracao` (centered title) and `tabela`
+  (title flush left, content in `\IBGEtabfontsize`); a short chart typeset both ways looks
+  the same.
+- Continuation marks (IBGE tabular presentation rules, 1993): "continua" at the foot of
+  every page but the last, "continuação" above the repeated header and "conclusão" at the
+  end of the last page, all flush right; a table that fits on one page gets no mark. The
+  first and last pages are recorded in the `.aux` file (the usual "Label(s) may have
+  changed" rerun warning applies). The texts are `\continuaname`, `\continuacaoname` and
+  `\conclusaoname`; `\ufvmarcascontinuacao[quadros|tabelas]{sim|nao}` turns the marks on or
+  off. They are on by default in both environments; whether charts (quadros) should carry
+  them is left to the advisor, according to the UFV library manual (section 4.9).
+- Group rows in the body (`\multicolumn` with optional `\rowcolor`) need nothing special:
+  ending them with `\\*` keeps them from being left alone at the foot of a page.
+- Tests: `t12` (numbering, lists, 120-row chart in portrait and in landscape, 3-page table,
+  side-by-side comparison) and `t13` (the same body with `twoside`, `openany` and
+  `fonte=arial`).
+
 ## 1.7 (2026-10-26)
 
 - **Breaking for documents that relied on the class loading packages (1.5 and 1.6):** the

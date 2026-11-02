@@ -27,9 +27,9 @@
 %% abntex2-ufv.sty.
 %%
 \NeedsTeXFormat{LaTeX2e}[2022/06/01]
-\ProvidesClass{abntex2-ufv}[2026/10/26 v1.7 Classe abntex2-ufv (TCC SI UFV-CRP)]
+\ProvidesClass{abntex2-ufv}[2026/11/02 v1.8 Classe abntex2-ufv (TCC SI UFV-CRP)]
 
-\newcommand{\ufvversion}{1.7}
+\newcommand{\ufvversion}{1.8}
 
 % A classe abntex2 carrega o babel com o nome obsoleto "brazil"; o aviso é inofensivo
 \RequirePackage{silence}
